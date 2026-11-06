@@ -169,7 +169,7 @@ header {
   font-size: 1.05rem;
   outline: none;
   font-family: inherit;
-  transition: 0.2s;
+  transition: 0.3s ease;
 }
 .player-box input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(223, 172, 56, 0.25); }
 
@@ -308,14 +308,14 @@ header {
 }
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-/* MODAL / VENTANA DE CONFIRMACIÓN PERSONALIZADA */
+/* MODAL PERSONALIZADO */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   display: none;
   place-items: center;
@@ -462,7 +462,7 @@ footer {
 
   <!-- CAMPO ID DE JUGADOR -->
   <section class="wrap">
-    <div class="player-box">
+    <div class="player-box" id="playerBoxSection">
       <label for="playerId">🎮 Ingresa tu ID de Free Fire:</label>
       <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off">
     </div>
@@ -686,7 +686,7 @@ footer {
   </button>
 </div>
 
-<!-- MODAL PERSONALIZADO DE CONFIRMACIÓN (SIN DIÁLOGOS NATIVOS DE SAFARI) -->
+<!-- MODAL PERSONALIZADO DE CONFIRMACIÓN DE PAGO -->
 <div class="modal-overlay" id="customModal">
   <div class="modal-box">
     <div class="modal-icon">⚠️</div>
@@ -695,6 +695,18 @@ footer {
     <div class="modal-actions">
       <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
       <button class="btn-confirm" onclick="ejecutarEnvioWhatsApp()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PERSONALIZADO DE SELECCIÓN DE PRODUCTO -->
+<div class="modal-overlay" id="noProductModal">
+  <div class="modal-box">
+    <div class="modal-icon">💎</div>
+    <h3>Selecciona Paquetes</h3>
+    <p>Selecciona al menos un paquete de diamantes para completar tu pedido.</p>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="cerrarModalNoProduct()" style="width: 100%;">Aceptar</button>
     </div>
   </div>
 </div>
@@ -726,7 +738,7 @@ const productosPrecios = {
 };
 
 let carrito = {};
-let ofertaPendiente = null; // Para saber si se pide una oferta directa o carrito normal
+let ofertaPendiente = null;
 
 function cambiarCantidad(nombre, cambio) {
   if (!carrito[nombre]) {
@@ -749,15 +761,24 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${total} MXN`;
 }
 
+// Resalta la casilla del ID y sube la pantalla si falta el ID
+function resaltarIdInput() {
+  const inputIdElem = document.getElementById('playerId');
+  document.getElementById('playerBoxSection').scrollIntoView({ behavior: 'smooth' });
+  inputIdElem.focus();
+  inputIdElem.style.borderColor = "#ff4444";
+  inputIdElem.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.5)";
+  setTimeout(() => { 
+    inputIdElem.style.borderColor = "var(--line)"; 
+    inputIdElem.style.boxShadow = "none";
+  }, 2000);
+}
+
 function irAMetodosPago() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alertPersonalizado("Por favor, ingresa tu ID de Free Fire antes de continuar.");
-    const inputIdElem = document.getElementById('playerId');
-    inputIdElem.focus();
-    inputIdElem.style.borderColor = "#ff4444";
-    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    resaltarIdInput();
     return;
   }
 
@@ -769,20 +790,18 @@ function irAMetodosPago() {
   }
 
   if (total === 0) {
-    alertPersonalizado("Selecciona al menos un paquete de diamantes para completar tu pedido.");
+    document.getElementById('noProductModal').style.display = 'grid';
     return;
   }
 
   document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Muestra el cuadro de diálogo flotante propio
 function mostrarModalConfirmacion() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alertPersonalizado("Por favor, ingresa tu ID de Free Fire.");
-    document.getElementById('playerId').focus();
+    resaltarIdInput();
     return;
   }
 
@@ -794,11 +813,11 @@ function mostrarModalConfirmacion() {
   }
 
   if (total === 0) {
-    alertPersonalizado("Selecciona al menos un paquete de diamantes.");
+    document.getElementById('noProductModal').style.display = 'grid';
     return;
   }
 
-  ofertaPendiente = null; // Es compra normal del carrito
+  ofertaPendiente = null;
   document.getElementById('customModal').style.display = 'grid';
 }
 
@@ -806,15 +825,11 @@ function pedirDirecto(nombre, precio) {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alertPersonalizado("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
-    const inputIdElem = document.getElementById('playerId');
-    inputIdElem.focus();
-    inputIdElem.style.borderColor = "#ff4444";
-    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    resaltarIdInput();
     return;
   }
 
-  ofertaPendiente = { nombre, precio }; // Guardamos la oferta temporalmente
+  ofertaPendiente = { nombre, precio };
   document.getElementById('customModal').style.display = 'grid';
 }
 
@@ -823,7 +838,10 @@ function cerrarModal() {
   ofertaPendiente = null;
 }
 
-// Al dar clic en "Confirmar" dentro de la ventana flotante
+function cerrarModalNoProduct() {
+  document.getElementById('noProductModal').style.display = 'none';
+}
+
 function ejecutarEnvioWhatsApp() {
   const playerId = document.getElementById('playerId').value.trim();
   let mensaje = "";
@@ -847,11 +865,6 @@ function ejecutarEnvioWhatsApp() {
 
   cerrarModal();
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
-}
-
-// Alerta auxiliar estilizada sin usar las alertas nativas del navegador
-function alertPersonalizado(texto) {
-  alert(texto);
 }
 </script>
 
