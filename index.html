@@ -291,15 +291,15 @@ header {
 .cart-info b { color: var(--gold-light); font-size: 1.1rem; }
 .cart-total { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800; color: var(--gold); }
 .checkout-btn {
-  background: linear-gradient(135deg, #25d366, #128c7e);
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+  color: #000;
   border: none;
   border-radius: 12px;
   padding: 14px 26px;
   font-weight: 800;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 4px 20px rgba(223, 172, 56, 0.3);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -335,21 +335,6 @@ header {
 .faq summary { cursor: pointer; font-weight: 700; color: var(--gold-light); font-size: 1.02rem; }
 .faq details p { color: var(--muted); line-height: 1.7; margin-top: 10px; font-size: 0.95rem; }
 
-/* CALL TO ACTION */
-.cta {
-  margin: 48px 0;
-  padding: 38px;
-  border: 1px solid var(--line-strong);
-  border-radius: 24px;
-  background: linear-gradient(110deg, #1f1807, #0f0d06);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.cta h2 { margin: 0 0 8px; font-family: 'Cinzel', serif; color: var(--gold-light); }
-.cta p { margin: 0; color: var(--muted); }
-
 /* FOOTER */
 footer {
   border-top: 1px solid var(--line);
@@ -371,7 +356,6 @@ footer {
   .hero { grid-template-columns: 1fr; padding-top: 48px; }
   .products { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: 1fr; }
-  .cta { align-items: flex-start; flex-direction: column; }
   .floating-cart { flex-direction: column; align-items: stretch; text-align: center; gap: 10px; padding: 14px; }
   .checkout-btn { width: 100%; justify-content: center; }
 }
@@ -547,7 +531,7 @@ footer {
 
     </div>
 
-    <!-- PRIMERA RECARGA (SIN BOTONES DE + Y -) -->
+    <!-- PRIMERA RECARGA -->
     <div class="section-head" id="ofertas" style="margin-top:54px">
       <h2>🔥 Ofertas Primera Recarga</h2>
       <p>Aprovecha precios especiales en tu primera compra.</p>
@@ -581,20 +565,25 @@ footer {
     </div>
   </section>
 
-  <!-- MÉTODOS DE PAGO Y CLABE -->
+  <!-- MÉTODOS DE PAGO Y BOTÓN HACER PEDIDO -->
   <section class="section wrap" id="metodos-pago">
     <div class="section-head">
       <h2>Métodos de Pago y Datos</h2>
       <p>Realiza tu pago de forma segura antes de enviar tu comprobante.</p>
     </div>
-    <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 24px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 26px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
       <div style="font-size: 2.2rem; margin-bottom: 10px;">🏦</div>
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.2rem; margin: 0 0 10px;">CLABE Interbancaria / Transferencia</h3>
       <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 15px;">BBVA / Banco Azteca / BanCoppel</p>
       <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-family: monospace; font-size: 1.2rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 12px;">
         1234 5678 9012 3456 78
       </div>
-      <p style="color: var(--muted); font-size: 0.8rem; margin: 0;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
+      <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 20px;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
+      
+      <!-- BOTÓN HACER PEDIDO DENTRO DE PAGOS -->
+      <button class="btn" onclick="confirmarYEnviarPedido()" style="width: 100%; font-size: 1rem; padding: 16px;">
+        🛍️ Hacer Pedido por WhatsApp
+      </button>
     </div>
   </section>
 
@@ -644,18 +633,17 @@ footer {
         <p>Jamás solicitamos tu contraseña. Las recargas se procesan de forma segura utilizando únicamente tu ID de jugador.</p>
       </details>
     </div>
-  </details>
   </section>
 </main>
 
-<!-- BARRA FLOTANTE DE TOTAL Y WHATSAPP -->
+<!-- BARRA FLOTANTE (REDIRECCIONA A LA SECCIÓN DE PAGOS) -->
 <div class="floating-cart" id="floatingCart">
   <div class="cart-info">
     <div>Total estimado:</div>
     <div class="cart-total" id="totalPrice">$0 MXN</div>
   </div>
-  <button class="checkout-btn" onclick="enviarPedidoWhatsApp()">
-    📱 Enviar Pedido por WhatsApp
+  <button class="checkout-btn" onclick="irAMetodosPago()">
+    💳 Completar Pedido
   </button>
 </div>
 
@@ -709,12 +697,12 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${total} MXN`;
 }
 
-// Función para ofertas de primera recarga (compra directa de 1 en 1)
-function pedirDirecto(nombre, precio) {
+// Redirecciona suavemente a la sección de Métodos de Pago
+function irAMetodosPago() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alert("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
+    alert("Por favor, ingresa tu ID de Free Fire antes de continuar.");
     const inputIdElem = document.getElementById('playerId');
     inputIdElem.focus();
     inputIdElem.style.borderColor = "#ff4444";
@@ -722,20 +710,29 @@ function pedirDirecto(nombre, precio) {
     return;
   }
 
-  const mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${nombre}\n💰 *Total a pagar:* $${precio} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+  let total = 0;
+  for (let prod in carrito) {
+    if (carrito[prod] > 0) {
+      total += carrito[prod] * productosPrecios[prod];
+    }
+  }
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+  if (total === 0) {
+    alert("Selecciona al menos un paquete de diamantes para completar tu pedido.");
+    return;
+  }
+
+  // Desplazar pantalla a la sección de pagos
+  document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
 }
 
-function enviarPedidoWhatsApp() {
+// Función con advertencia antes de ir a WhatsApp
+function confirmarYEnviarPedido() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alert("Por favor, ingresa tu ID de Free Fire antes de enviar el pedido.");
-    const inputIdElem = document.getElementById('playerId');
-    inputIdElem.focus();
-    inputIdElem.style.borderColor = "#ff4444";
-    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    alert("Por favor, ingresa tu ID de Free Fire.");
+    document.getElementById('playerId').focus();
     return;
   }
 
@@ -751,13 +748,40 @@ function enviarPedidoWhatsApp() {
   }
 
   if (total === 0) {
-    alert("Selecciona al menos un paquete de diamantes para hacer tu pedido.");
+    alert("Selecciona al menos un paquete de diamantes.");
     return;
   }
 
-  const mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+  // ALERTA DE CONFIRMACIÓN DE PAGO
+  const confirmacion = confirm("⚠️ ¿Confirmas que realizaste tu pago correctamente?\n\nDe lo contrario, tu recarga no podrá ser procesada.");
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+  if (confirmacion) {
+    const mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+  }
+}
+
+// Ofertas directas de primera recarga
+function pedirDirecto(nombre, precio) {
+  const playerId = document.getElementById('playerId').value.trim();
+  
+  if (!playerId) {
+    alert("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
+    const inputIdElem = document.getElementById('playerId');
+    inputIdElem.focus();
+    inputIdElem.style.borderColor = "#ff4444";
+    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    return;
+  }
+
+  const confirmacion = confirm("⚠️ ¿Confirmas que realizaste tu pago correctamente?\n\nDe lo contrario, tu recarga no podrá ser procesada.");
+
+  if (confirmacion) {
+    const mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${nombre}\n💰 *Total a pagar:* $${precio} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+  }
 }
 </script>
 
