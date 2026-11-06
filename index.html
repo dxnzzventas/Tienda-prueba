@@ -308,6 +308,45 @@ header {
 }
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
+/* MODAL / VENTANA DE CONFIRMACIÓN PERSONALIZADA */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: none;
+  place-items: center;
+  z-index: 999;
+  padding: 20px;
+}
+.modal-box {
+  background: linear-gradient(145deg, #18140a, #111111);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: 30px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(223, 172, 56, 0.2);
+  animation: modalScale 0.25s ease;
+}
+@keyframes modalScale {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.modal-box h3 { font-family: 'Cinzel', serif; color: var(--gold-light); margin: 0 0 10px; font-size: 1.3rem; }
+.modal-box p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 24px; }
+.modal-actions { display: flex; gap: 12px; }
+.modal-actions button { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.9rem; text-transform: uppercase; }
+.btn-cancel { background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: var(--text); }
+.btn-cancel:hover { background: rgba(255,255,255,0.12); }
+.btn-confirm { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); border: none; color: #000; box-shadow: 0 4px 15px rgba(223, 172, 56, 0.3); }
+.btn-confirm:hover { filter: brightness(1.1); }
+
 /* PASOS Y PREGUNTAS */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .step {
@@ -581,7 +620,7 @@ footer {
       <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 20px;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
       
       <!-- BOTÓN HACER PEDIDO DENTRO DE PAGOS -->
-      <button class="btn" onclick="confirmarYEnviarPedido()" style="width: 100%; font-size: 1rem; padding: 16px;">
+      <button class="btn" onclick="mostrarModalConfirmacion()" style="width: 100%; font-size: 1rem; padding: 16px;">
         🛍️ Hacer Pedido por WhatsApp
       </button>
     </div>
@@ -636,7 +675,7 @@ footer {
   </section>
 </main>
 
-<!-- BARRA FLOTANTE (REDIRECCIONA A LA SECCIÓN DE PAGOS) -->
+<!-- BARRA FLOTANTE -->
 <div class="floating-cart" id="floatingCart">
   <div class="cart-info">
     <div>Total estimado:</div>
@@ -645,6 +684,19 @@ footer {
   <button class="checkout-btn" onclick="irAMetodosPago()">
     💳 Completar Pedido
   </button>
+</div>
+
+<!-- MODAL PERSONALIZADO DE CONFIRMACIÓN (SIN DIÁLOGOS NATIVOS DE SAFARI) -->
+<div class="modal-overlay" id="customModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3>Confirmar Pago</h3>
+    <p>¿Confirmas que realizaste tu pago correctamente? De lo contrario, tu recarga no podrá ser procesada.</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-confirm" onclick="ejecutarEnvioWhatsApp()">Confirmar</button>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -664,7 +716,6 @@ footer {
 const WHATSAPP_NUMBER = "522206413787";
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Base de datos de precios
 const productosPrecios = {
   "110 Diamantes": 16,
   "341 Diamantes": 49,
@@ -675,6 +726,7 @@ const productosPrecios = {
 };
 
 let carrito = {};
+let ofertaPendiente = null; // Para saber si se pide una oferta directa o carrito normal
 
 function cambiarCantidad(nombre, cambio) {
   if (!carrito[nombre]) {
@@ -697,12 +749,11 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${total} MXN`;
 }
 
-// Redirecciona suavemente a la sección de Métodos de Pago
 function irAMetodosPago() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alert("Por favor, ingresa tu ID de Free Fire antes de continuar.");
+    alertPersonalizado("Por favor, ingresa tu ID de Free Fire antes de continuar.");
     const inputIdElem = document.getElementById('playerId');
     inputIdElem.focus();
     inputIdElem.style.borderColor = "#ff4444";
@@ -718,56 +769,44 @@ function irAMetodosPago() {
   }
 
   if (total === 0) {
-    alert("Selecciona al menos un paquete de diamantes para completar tu pedido.");
+    alertPersonalizado("Selecciona al menos un paquete de diamantes para completar tu pedido.");
     return;
   }
 
-  // Desplazar pantalla a la sección de pagos
   document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Función con advertencia antes de ir a WhatsApp
-function confirmarYEnviarPedido() {
+// Muestra el cuadro de diálogo flotante propio
+function mostrarModalConfirmacion() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alert("Por favor, ingresa tu ID de Free Fire.");
+    alertPersonalizado("Por favor, ingresa tu ID de Free Fire.");
     document.getElementById('playerId').focus();
     return;
   }
 
-  let listaTexto = "";
   let total = 0;
-
   for (let prod in carrito) {
     if (carrito[prod] > 0) {
-      let subtotal = carrito[prod] * productosPrecios[prod];
-      listaTexto += `\n- ${carrito[prod]}x ${prod} ($${subtotal} MXN)`;
-      total += subtotal;
+      total += carrito[prod] * productosPrecios[prod];
     }
   }
 
   if (total === 0) {
-    alert("Selecciona al menos un paquete de diamantes.");
+    alertPersonalizado("Selecciona al menos un paquete de diamantes.");
     return;
   }
 
-  // ALERTA DE CONFIRMACIÓN DE PAGO
-  const confirmacion = confirm("⚠️ ¿Confirmas que realizaste tu pago correctamente?\n\nDe lo contrario, tu recarga no podrá ser procesada.");
-
-  if (confirmacion) {
-    const mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
-
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
-  }
+  ofertaPendiente = null; // Es compra normal del carrito
+  document.getElementById('customModal').style.display = 'grid';
 }
 
-// Ofertas directas de primera recarga
 function pedirDirecto(nombre, precio) {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
-    alert("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
+    alertPersonalizado("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
     const inputIdElem = document.getElementById('playerId');
     inputIdElem.focus();
     inputIdElem.style.borderColor = "#ff4444";
@@ -775,13 +814,44 @@ function pedirDirecto(nombre, precio) {
     return;
   }
 
-  const confirmacion = confirm("⚠️ ¿Confirmas que realizaste tu pago correctamente?\n\nDe lo contrario, tu recarga no podrá ser procesada.");
+  ofertaPendiente = { nombre, precio }; // Guardamos la oferta temporalmente
+  document.getElementById('customModal').style.display = 'grid';
+}
 
-  if (confirmacion) {
-    const mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${nombre}\n💰 *Total a pagar:* $${precio} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+function cerrarModal() {
+  document.getElementById('customModal').style.display = 'none';
+  ofertaPendiente = null;
+}
 
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+// Al dar clic en "Confirmar" dentro de la ventana flotante
+function ejecutarEnvioWhatsApp() {
+  const playerId = document.getElementById('playerId').value.trim();
+  let mensaje = "";
+
+  if (ofertaPendiente) {
+    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* $${ofertaPendiente.precio} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+  } else {
+    let listaTexto = "";
+    let total = 0;
+
+    for (let prod in carrito) {
+      if (carrito[prod] > 0) {
+        let subtotal = carrito[prod] * productosPrecios[prod];
+        listaTexto += `\n- ${carrito[prod]}x ${prod} ($${subtotal} MXN)`;
+        total += subtotal;
+      }
+    }
+
+    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
   }
+
+  cerrarModal();
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+}
+
+// Alerta auxiliar estilizada sin usar las alertas nativas del navegador
+function alertPersonalizado(texto) {
+  alert(texto);
 }
 </script>
 
