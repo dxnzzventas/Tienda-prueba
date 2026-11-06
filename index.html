@@ -419,4 +419,347 @@ footer {
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px;">
         <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
             <span style="color: #dfac38; font-size: 1.1rem;">🛡️</span>
-            <span style="color:
+            <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">100% SEGURO</span>
+        </div>
+        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #dfac38; font-size: 1.1rem;">⚡</span>
+            <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">ENTREGA EN MENOS DE 10 MIN.</span>
+        </div>
+        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #dfac38; font-size: 1.1rem;">👨‍💻</span>
+            <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">SOPORTE 24/7</span>
+        </div>
+        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #dfac38; font-size: 1.1rem;">💳</span>
+            <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">PAGO CON TARJETA</span>
+        </div>
+    </div>
+</div>
+  </section>
+
+  <!-- CAMPO ID DE JUGADOR -->
+  <section class="wrap">
+    <div class="player-box">
+      <label for="playerId">🎮 Ingresa tu ID de Free Fire:</label>
+      <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off">
+    </div>
+  </section>
+
+  <!-- PAQUETES REGULARES -->
+  <section class="section wrap" id="paquetes">
+    <div class="section-head">
+      <h2>Paquetes de Diamantes</h2>
+      <p>Usa los botones (+) y (-) para armar tu pedido.</p>
+    </div>
+  
+    <div class="products">
+      
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Inicial</h3>
+          <div class="qty">110 Diamantes</div>
+          <div class="price">$16 <small>MXN</small></div>
+          <p class="note">Recarga rápida de 110 diamantes.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('110 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-110 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('110 Diamantes', 1)">+</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Básico</h3>
+          <div class="qty">341 Diamantes</div>
+          <div class="price">$49 <small>MXN</small></div>
+          <p class="note">Recarga de 341 diamantes.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('341 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-341 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('341 Diamantes', 1)">+</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Popular</h3>
+          <div class="qty">572 Diamantes</div>
+          <div class="price">$85 <small>MXN</small></div>
+          <p class="note">Recarga de 572 diamantes.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('572 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-572 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('572 Diamantes', 1)">+</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Experto</h3>
+          <div class="qty">1,166 Diamantes</div>
+          <div class="price">$159 <small>MXN</small></div>
+          <p class="note">Precio de recarga regular.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('1,166 Diamantes (Regular)', -1)">-</button>
+          <span class="qty-num" id="qty-1,166 Diamantes (Regular)">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('1,166 Diamantes (Regular)', 1)">+</button>
+        </div>
+      </article>
+
+      <article class="product featured">
+        <span class="tag">🔥 MÁS POPULAR</span>
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Maestro</h3>
+          <div class="qty">2,398 Diamantes</div>
+          <div class="price">$309 <small>MXN</small></div>
+          <p class="note">Precio de recarga regular.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('2,398 Diamantes (Regular)', -1)">-</button>
+          <span class="qty-num" id="qty-2,398 Diamantes (Regular)">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('2,398 Diamantes (Regular)', 1)">+</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Máximo</h3>
+          <div class="qty">6,160 Diamantes</div>
+          <div class="price">$789 <small>MXN</small></div>
+          <p class="note">Recarga completa de 6,160 diamantes.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('6,160 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-6,160 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('6,160 Diamantes', 1)">+</button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- PRIMERA RECARGA (SIN BOTONES DE + Y -) -->
+    <div class="section-head" id="ofertas" style="margin-top:54px">
+      <h2>🔥 Ofertas Primera Recarga</h2>
+      <p>Aprovecha precios especiales en tu primera compra.</p>
+    </div>
+    <div class="products" style="max-width:760px;margin:0 auto">
+      
+      <article class="product featured">
+        <span class="tag">OFERTA</span>
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Primera Recarga</h3>
+          <div class="qty">1,166 Diamantes</div>
+          <div class="price">$145 <small>MXN</small></div>
+          <p class="note">Precio especial exclusivo para primera recarga.</p>
+        </div>
+        <button class="btn" onclick="pedirDirecto('Primera Recarga — 1,166 Diamantes', 145)">Solicitar Oferta</button>
+      </article>
+
+      <article class="product featured">
+        <span class="tag">MEJOR PRECIO</span>
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Primera Recarga</h3>
+          <div class="qty">2,398 Diamantes</div>
+          <div class="price">$279 <small>MXN</small></div>
+          <p class="note">Precio especial exclusivo para primera recarga.</p>
+        </div>
+        <button class="btn" onclick="pedirDirecto('Primera Recarga — 2,398 Diamantes', 279)">Solicitar Oferta</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- MÉTODOS DE PAGO Y CLABE -->
+  <section class="section wrap" id="metodos-pago">
+    <div class="section-head">
+      <h2>Métodos de Pago y Datos</h2>
+      <p>Realiza tu pago de forma segura antes de enviar tu comprobante.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 24px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+      <div style="font-size: 2.2rem; margin-bottom: 10px;">🏦</div>
+      <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.2rem; margin: 0 0 10px;">CLABE Interbancaria / Transferencia</h3>
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 15px;">BBVA / Banco Azteca / BanCoppel</p>
+      <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-family: monospace; font-size: 1.2rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 12px;">
+        1234 5678 9012 3456 78
+      </div>
+      <p style="color: var(--muted); font-size: 0.8rem; margin: 0;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section wrap" id="como-funciona">
+    <div class="section-head">
+      <h2>Comprar es muy sencillo</h2>
+      <p>Proceso seguro y personalizado directo en WhatsApp.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <b>01</b>
+        <h3>Ingresa tu ID</h3>
+        <p>Escribe tu ID de Free Fire en la casilla superior de la página.</p>
+      </div>
+      <div class="step">
+        <b>02</b>
+        <h3>Selecciona paquetes</h3>
+        <p>Elige la cantidad de diamantes que requieres con los botones (+).</p>
+      </div>
+      <div class="step">
+        <b>03</b>
+        <h3>Realiza tu pago</h3>
+        <p>Transfiere o deposita usando nuestra CLABE o en OXXO.</p>
+      </div>
+      <div class="step">
+        <b>04</b>
+        <h3>Envía tu comprobante</h3>
+        <p>Al finalizar tu pago, coloca tu comprobante o documento de pago en el mensaje predeterminado de WhatsApp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section class="section wrap" id="preguntas">
+    <div class="section-head">
+      <h2>Preguntas Frecuentes</h2>
+      <p>Aclara tus dudas antes de ordenar.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>¿Cómo realizo el pago?</summary>
+        <p>Puedes transferir a nuestra CLABE interbancaria o hacer un depósito en efectivo en cualquier OXXO.</p>
+      </details>
+      <details>
+        <summary>¿Necesitan mi contraseña?</summary>
+        <p>Jamás solicitamos tu contraseña. Las recargas se procesan de forma segura utilizando únicamente tu ID de jugador.</p>
+      </details>
+    </div>
+  </details>
+  </section>
+</main>
+
+<!-- BARRA FLOTANTE DE TOTAL Y WHATSAPP -->
+<div class="floating-cart" id="floatingCart">
+  <div class="cart-info">
+    <div>Total estimado:</div>
+    <div class="cart-total" id="totalPrice">$0 MXN</div>
+  </div>
+  <button class="checkout-btn" onclick="enviarPedidoWhatsApp()">
+    📱 Enviar Pedido por WhatsApp
+  </button>
+</div>
+
+<footer>
+  <div class="wrap footerrow">
+    <div>
+      <a class="brand" href="#inicio">💎 DXNZZ <span>VENTAS</span></a>
+      <div>Recargas de Free Fire · Pagos por transferencia y efectivo.</div>
+    </div>
+    <div class="disclaimer">
+      Free Fire es una marca registrada de Garena. Dxnzz ventas es una tienda independiente de ventas y servicios de recarga.
+    </div>
+    <div>© <span id="year"></span> Dxnzz ventas</div>
+  </div>
+</footer>
+
+<script>
+const WHATSAPP_NUMBER = "522206413787";
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Base de datos de precios
+const productosPrecios = {
+  "110 Diamantes": 16,
+  "341 Diamantes": 49,
+  "572 Diamantes": 85,
+  "1,166 Diamantes (Regular)": 159,
+  "2,398 Diamantes (Regular)": 309,
+  "6,160 Diamantes": 789
+};
+
+let carrito = {};
+
+function cambiarCantidad(nombre, cambio) {
+  if (!carrito[nombre]) {
+    carrito[nombre] = 0;
+  }
+  carrito[nombre] += cambio;
+  if (carrito[nombre] < 0) {
+    carrito[nombre] = 0;
+  }
+  
+  document.getElementById(`qty-${nombre}`).textContent = carrito[nombre];
+  calcularTotal();
+}
+
+function calcularTotal() {
+  let total = 0;
+  for (let prod in carrito) {
+    total += carrito[prod] * (productosPrecios[prod] || 0);
+  }
+  document.getElementById('totalPrice').textContent = `$${total} MXN`;
+}
+
+// Función para ofertas de primera recarga (compra directa de 1 en 1)
+function pedirDirecto(nombre, precio) {
+  const playerId = document.getElementById('playerId').value.trim();
+  
+  if (!playerId) {
+    alert("Por favor, ingresa tu ID de Free Fire antes de solicitar tu oferta.");
+    const inputIdElem = document.getElementById('playerId');
+    inputIdElem.focus();
+    inputIdElem.style.borderColor = "#ff4444";
+    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    return;
+  }
+
+  const mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${nombre}\n💰 *Total a pagar:* $${precio} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+}
+
+function enviarPedidoWhatsApp() {
+  const playerId = document.getElementById('playerId').value.trim();
+  
+  if (!playerId) {
+    alert("Por favor, ingresa tu ID de Free Fire antes de enviar el pedido.");
+    const inputIdElem = document.getElementById('playerId');
+    inputIdElem.focus();
+    inputIdElem.style.borderColor = "#ff4444";
+    setTimeout(() => { inputIdElem.style.borderColor = "var(--line)"; }, 2000);
+    return;
+  }
+
+  let listaTexto = "";
+  let total = 0;
+
+  for (let prod in carrito) {
+    if (carrito[prod] > 0) {
+      let subtotal = carrito[prod] * productosPrecios[prod];
+      listaTexto += `\n- ${carrito[prod]}x ${prod} ($${subtotal} MXN)`;
+      total += subtotal;
+    }
+  }
+
+  if (total === 0) {
+    alert("Selecciona al menos un paquete de diamantes para hacer tu pedido.");
+    return;
+  }
+
+  const mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n📄 *Comprobante / Referencia de pago:* [Adjunta aquí tu comprobante o escribe tu número de referencia]`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+}
+</script>
+
+</body>
+</html>
