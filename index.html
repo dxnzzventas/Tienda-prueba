@@ -608,7 +608,7 @@ footer {
   <section class="section wrap" id="metodos-pago">
     <div class="section-head">
       <h2>Métodos de Pago y Datos</h2>
-      <p>Realiza tu pago de forma segura antes de enviar tu comprobante.</p>
+      <p>Realiza tu pago de forma segura antes de terminar tu pedido.</p>
     </div>
     <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 26px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
       <div style="font-size: 2.2rem; margin-bottom: 10px;">🏦</div>
@@ -619,12 +619,6 @@ footer {
       </div>
       <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 20px;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
       
-      <!-- SUBIR COMPROBANTE FOTO -->
-      <div style="margin-bottom: 20px; text-align: left; background: #0a0a0a; border: 1px solid var(--line); border-radius: 14px; padding: 16px;">
-        <label for="comprobanteFoto" style="display: block; color: var(--gold-light); font-weight: 600; font-size: 0.88rem; margin-bottom: 8px;">📷 Adjunta la foto de tu comprobante de pago:</label>
-        <input type="file" id="comprobanteFoto" accept="image/*" style="width: 100%; color: var(--muted); font-size: 0.85rem;">
-      </div>
-
       <!-- BOTÓN TERMINAR PEDIDO -->
       <button class="btn" onclick="mostrarModalConfirmacion()" style="width: 100%; font-size: 1rem; padding: 16px; margin-bottom: 20px;">
         🛍️ Terminar Pedido
@@ -665,7 +659,7 @@ footer {
       <div class="step">
         <b>04</b>
         <h3>Envía tu comprobante</h3>
-        <p>Al finalizar tu pago, coloca tu comprobante o documento de pago en el mensaje predeterminado de WhatsApp.</p>
+        <p>Al finalizar tu pago, envía la foto de tu comprobante directamente aquí en el chat de WhatsApp.</p>
       </div>
     </div>
   </section>
@@ -858,17 +852,11 @@ function cerrarModalNoProduct() {
 
 function ejecutarEnvioWhatsApp() {
   const playerId = document.getElementById('playerId').value.trim();
-  const inputFoto = document.getElementById('comprobanteFoto');
-  let estadoComprobante = "📄 *Comprobante de pago:* [Adjuntado desde la página web - por favor envíalo en el chat de WhatsApp]";
-  
-  if (inputFoto.files && inputFoto.files.length > 0) {
-    estadoComprobante = `📄 *Comprobante de pago:* [Imagen adjuntada: ${inputFoto.files[0].name}]`;
-  }
-
+  const instruccionComprobante = "📄 *Comprobante de pago:* [Adjuntaré la foto de mi comprobante aquí en el chat]";
   let mensaje = "";
 
   if (ofertaPendiente) {
-    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* $${ofertaPendiente.precio} MXN\n\n${estadoComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* $${ofertaPendiente.precio} MXN\n\n${instruccionComprobante}`;
   } else {
     let listaTexto = "";
     let total = 0;
@@ -881,7 +869,7 @@ function ejecutarEnvioWhatsApp() {
       }
     }
 
-    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n${estadoComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n${instruccionComprobante}`;
   }
 
   cerrarModal();
