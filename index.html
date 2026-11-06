@@ -838,8 +838,10 @@ function cerrarModal() {
   ofertaPendiente = null;
 }
 
+// Cierra la advertencia y dirige al usuario a la sección de paquetes
 function cerrarModalNoProduct() {
   document.getElementById('noProductModal').style.display = 'none';
+  document.getElementById('paquetes').scrollIntoView({ behavior: 'smooth' });
 }
 
 function ejecutarEnvioWhatsApp() {
