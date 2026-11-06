@@ -620,9 +620,17 @@ footer {
       <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 20px;">También puedes realizar depósitos en efectivo en cualquier tienda <b>OXXO</b>.</p>
       
       <!-- BOTÓN HACER PEDIDO DENTRO DE PAGOS -->
-      <button class="btn" onclick="mostrarModalConfirmacion()" style="width: 100%; font-size: 1rem; padding: 16px;">
+      <button class="btn" onclick="mostrarModalConfirmacion()" style="width: 100%; font-size: 1rem; padding: 16px; margin-bottom: 20px;">
         🛍️ Hacer Pedido por WhatsApp
       </button>
+
+      <!-- NUEVA SECCIÓN: ¿QUÉ HAGO DESPUÉS DE HACER MI PAGO? -->
+      <div style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 10px;">
+        <p style="color: var(--text); font-weight: 600; font-size: 0.92rem; margin-bottom: 10px;">¿Qué hago después de hacer mi pago?</p>
+        <a href="#como-funciona" class="btn secondary" style="font-size: 0.8rem; padding: 10px 16px;">
+          📄 Ver cómo enviar tu comprobante ↗
+        </a>
+      </div>
     </div>
   </section>
 
@@ -761,7 +769,6 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${total} MXN`;
 }
 
-// Resalta la casilla del ID y sube la pantalla si falta el ID
 function resaltarIdInput() {
   const inputIdElem = document.getElementById('playerId');
   document.getElementById('playerBoxSection').scrollIntoView({ behavior: 'smooth' });
@@ -838,7 +845,6 @@ function cerrarModal() {
   ofertaPendiente = null;
 }
 
-// Cierra la advertencia y dirige al usuario a la sección de paquetes
 function cerrarModalNoProduct() {
   document.getElementById('noProductModal').style.display = 'none';
   document.getElementById('paquetes').scrollIntoView({ behavior: 'smooth' });
