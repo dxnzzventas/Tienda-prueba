@@ -302,7 +302,7 @@ header {
 .qty-btn:hover { background: var(--gold); color: #000; }
 .qty-num { font-weight: 700; font-size: 1.1rem; color: #fff; }
 
-/* BARRA FLOTANTE DE COMPRA */
+/* BARRA FLOTANTE DE COMPRA (OCULTA POR DEFECTO HASTA LLEGAR A PAQUETES) */
 .floating-cart {
   position: fixed;
   bottom: 0;
@@ -314,10 +314,11 @@ header {
   padding: 16px 24px;
   z-index: 100;
   box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
-  display: flex;
+  display: none; /* Oculto inicialmente */
   align-items: center;
   justify-content: space-between;
   gap: 15px;
+  transition: opacity 0.3s ease;
 }
 .cart-info { font-size: 0.9rem; color: var(--muted); }
 .cart-info b { color: var(--gold-light); font-size: 1.1rem; }
@@ -871,7 +872,6 @@ function extraerDiamantes(nombre) {
   return 0;
 }
 
-// CÁLCULO DE CANTIDAD TOTAL DE PAQUETES REGULARES SELECCIONADOS (Límite 10)
 function obtenerTotalPaquetesRegulares() {
   let suma = 0;
   for (let prod in carrito) {
@@ -887,17 +887,14 @@ function cambiarCantidad(nombre, cambio) {
     carrito[nombre] = 0;
   }
 
-  // SI SE INTENTA AÑADIR (+1)
   if (cambio > 0) {
     if (nombre.includes("Paquete Titán")) {
-      // Límite de Paquete Titán: Máximo 1
       if (carrito[nombre] >= 1) {
         document.getElementById('limiteTextoMensaje').textContent = "El Paquete Titán está limitado a un máximo de 1 unidad por pedido.";
         document.getElementById('limiteModal').style.display = 'grid';
         return;
       }
     } else {
-      // Límite General de 10 paquetes en total entre todos los regulares
       let totalRegularesActuales = obtenerTotalPaquetesRegulares();
       if (totalRegularesActuales >= 10) {
         document.getElementById('limiteTextoMensaje').textContent = "Has alcanzado el límite máximo de 10 paquetes seleccionados en total para este pedido.";
@@ -950,7 +947,6 @@ function calcularTotal() {
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 }
 
-// VALIDACIÓN DE ID: MÍNIMO 8 DÍGITOS
 function validarPlayerId() {
   const inputIdElem = document.getElementById('playerId');
   const playerId = inputIdElem.value.trim();
@@ -1022,12 +1018,25 @@ function cerrarModalLimite() {
   document.getElementById('limiteModal').style.display = 'none';
 }
 
+// SCRIPT PARA MOSTRAR/OCULTAR LA BARRA FLOTANTE Y CAMBIAR TEXTO SEGÚN LA SECCIÓN
 window.addEventListener('scroll', function() {
+  const seccionPaquetes = document.getElementById('paquetes');
   const seccionPagos = document.getElementById('metodos-pago');
-  const rect = seccionPagos.getBoundingClientRect();
+  const floatingCart = document.getElementById('floatingCart');
   const btnFlotante = document.getElementById('floatingActionBtn');
   
-  if (rect.top <= window.innerHeight - 100 && rect.bottom >= 0) {
+  const rectPaquetes = seccionPaquetes.getBoundingClientRect();
+  const rectPagos = seccionPagos.getBoundingClientRect();
+
+  // Si ya llegó o pasó la sección de paquetes y aún no pasa del footer / fin de pagos
+  if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
+    floatingCart.style.display = 'flex';
+  } else {
+    floatingCart.style.display = 'none';
+  }
+
+  // Cambio de texto del botón dependiendo si está en la zona de pagos o arriba
+  if (rectPagos.top <= window.innerHeight - 100 && rectPagos.bottom >= 0) {
     btnFlotante.innerHTML = "🛍️ Terminar Pedido";
   } else {
     btnFlotante.innerHTML = "💳 Ver Métodos de Pago";
