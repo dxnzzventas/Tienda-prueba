@@ -472,7 +472,7 @@ footer {
   <section class="section wrap" id="paquetes">
     <div class="section-head">
       <h2>Paquetes de Diamantes</h2>
-      <p>Usa los botones (+) y (-) para armar tu pedido.</p>
+      <p>Usa los botones (+) y (-) para armar tu pedido (máximo 15 por paquete).</p>
     </div>
   
     <div class="products">
@@ -669,7 +669,7 @@ footer {
       <div class="step">
         <b>02</b>
         <h3>Selecciona paquetes</h3>
-        <p>Elige la cantidad de diamantes que requieres con los botones (+).</p>
+        <p>Elige hasta 15 paquetes de diamantes que requieres con los botones (+).</p>
       </div>
       <div class="step">
         <b>03</b>
@@ -774,7 +774,6 @@ let carrito = {};
 let ofertaPendiente = null;
 
 function extraerDiamantes(nombre) {
-  // Extrae la cantidad numérica del nombre del producto (ej: "110 Diamantes" -> 110)
   let match = nombre.match(/[\d,]+/);
   if (match) {
     return parseInt(match[0].replace(/,/g, '')) || 0;
@@ -786,9 +785,15 @@ function cambiarCantidad(nombre, cambio) {
   if (!carrito[nombre]) {
     carrito[nombre] = 0;
   }
+  
   carrito[nombre] += cambio;
+  
+  // Limitar entre 0 y 15
   if (carrito[nombre] < 0) {
     carrito[nombre] = 0;
+  }
+  if (carrito[nombre] > 15) {
+    carrito[nombre] = 15;
   }
   
   document.getElementById(`qty-${nombre}`).textContent = carrito[nombre];
