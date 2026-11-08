@@ -362,23 +362,16 @@ header {
   font-size: 0.95rem;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(223, 172, 56, 0.3);
-  display: flex;
+  display: none; /* Oculto por completo con display: none para que no deje espacio */
   align-items: center;
   gap: 8px;
   text-transform: uppercase;
   transition: 0.2s;
-  
-  /* Inicialmente invisible hasta seleccionar un paquete */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 
-/* Clase para mostrar el botón cuando hay selección */
+/* Clase para mostrar el botón cuando hay selección con display flex */
 .checkout-btn.show-btn {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+  display: inline-flex;
 }
 
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
@@ -1005,7 +998,7 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${totalFinal} ${simboloMoneda}`;
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 
-  // Control de visibilidad del botón de acción según si hay selección
+  // Control estricto de visibilidad sin dejar espacio vacío
   const btnFlotante = document.getElementById('floatingActionBtn');
   if (haySeleccion) {
     btnFlotante.classList.add('show-btn');
