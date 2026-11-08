@@ -998,7 +998,7 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${totalFinal} ${simboloMoneda}`;
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 
-  // Control estricto de visibilidad sin dejar espacio vacío
+  // Control de visibilidad del botón de acción según si hay selección
   const btnFlotante = document.getElementById('floatingActionBtn');
   if (haySeleccion) {
     btnFlotante.classList.add('show-btn');
@@ -1007,17 +1007,28 @@ function calcularTotal() {
   }
 }
 
-// VERIFICACIÓN DE ID EN TIEMPO REAL Y AL VALIDAR
+// VERIFICACIÓN DE ID EN TIEMPO REAL CON MARCO VERDE / ROJO
 function verificarIdEnTiempoReal() {
   const inputIdElem = document.getElementById('playerId');
   const errorMsg = document.getElementById('playerIdError');
   const playerId = inputIdElem.value.trim();
 
   if (playerId.length >= 8) {
+    // Si tiene 8 o más dígitos: marco verde y sin error
+    inputIdElem.style.borderColor = "#2ecc71";
+    inputIdElem.style.boxShadow = "0 0 12px rgba(46, 204, 113, 0.25)";
+    errorMsg.style.display = "none";
+    return true;
+  } else if (playerId.length > 0) {
+    // Si está escribiendo pero tiene menos de 8 dígitos
     inputIdElem.style.borderColor = "var(--line)";
     inputIdElem.style.boxShadow = "none";
     errorMsg.style.display = "none";
-    return true;
+  } else {
+    // Si está vacío
+    inputIdElem.style.borderColor = "var(--line)";
+    inputIdElem.style.boxShadow = "none";
+    errorMsg.style.display = "none";
   }
   return false;
 }
@@ -1036,8 +1047,8 @@ function validarPlayerId() {
     return false;
   }
   
-  inputIdElem.style.borderColor = "var(--line)";
-  inputIdElem.style.boxShadow = "none";
+  inputIdElem.style.borderColor = "#2ecc71";
+  inputIdElem.style.boxShadow = "0 0 12px rgba(46, 204, 113, 0.25)";
   errorMsg.style.display = "none";
   return true;
 }
