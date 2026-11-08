@@ -615,7 +615,7 @@ footer {
       
       <!-- CLABE LOCAL -->
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">CLABE Interbancaria Local</h3>
-      <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">BBVA / Banco Azteca / BanCoppel / etc.</p>
+      <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">BBVA / Banco Azteca / BanCoppel</p>
       <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
         1234 5678 9012 3456 78
       </div>
@@ -711,7 +711,7 @@ footer {
 <!-- BARRA FLOTANTE -->
 <div class="floating-cart" id="floatingCart">
   <div class="cart-info">
-    <div>Total estimado:</div>
+    <div id="totalDiamondsText">Total estimado: 0 Diamantes</div>
     <div class="cart-total" id="totalPrice">$0 MXN</div>
   </div>
   <button class="checkout-btn" onclick="irAMetodosPago()">
@@ -773,6 +773,15 @@ const productosPrecios = {
 let carrito = {};
 let ofertaPendiente = null;
 
+function extraerDiamantes(nombre) {
+  // Extrae la cantidad numérica del nombre del producto (ej: "110 Diamantes" -> 110)
+  let match = nombre.match(/[\d,]+/);
+  if (match) {
+    return parseInt(match[0].replace(/,/g, '')) || 0;
+  }
+  return 0;
+}
+
 function cambiarCantidad(nombre, cambio) {
   if (!carrito[nombre]) {
     carrito[nombre] = 0;
@@ -787,11 +796,18 @@ function cambiarCantidad(nombre, cambio) {
 }
 
 function calcularTotal() {
-  let total = 0;
+  let totalMxn = 0;
+  let totalDiamantes = 0;
+
   for (let prod in carrito) {
-    total += carrito[prod] * (productosPrecios[prod] || 0);
+    if (carrito[prod] > 0) {
+      totalMxn += carrito[prod] * (productosPrecios[prod] || 0);
+      totalDiamantes += carrito[prod] * extraerDiamantes(prod);
+    }
   }
-  document.getElementById('totalPrice').textContent = `$${total} MXN`;
+
+  document.getElementById('totalPrice').textContent = `$${totalMxn} MXN`;
+  document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 }
 
 function resaltarIdInput() {
