@@ -68,6 +68,31 @@ header {
 }
 .navlinks a:hover { color: var(--gold-light); }
 
+/* SELECTOR DE MONEDA */
+.currency-selector {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px;
+}
+.curr-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.curr-btn.active {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+  color: #000;
+}
+
 /* BOTONES */
 .btn {
   display: inline-flex;
@@ -416,7 +441,14 @@ footer {
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a class="btn" href="#paquetes">Ver paquetes ↗</a>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <!-- SELECTOR DE MONEDA EN EL HEADER -->
+      <div class="currency-selector">
+        <button class="curr-btn active" id="btn-MXN" onclick="cambiarMoneda('MXN')">MXN</button>
+        <button class="curr-btn" id="btn-USD" onclick="cambiarMoneda('USD')">USD</button>
+      </div>
+      <a class="btn" href="#paquetes" style="padding: 10px 16px; font-size: 0.8rem;">Ver paquetes ↗</a>
+    </div>
   </div>
 </header>
 
@@ -482,7 +514,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Inicial</h3>
           <div class="qty">110 Diamantes</div>
-          <div class="price">$16 <small>MXN</small></div>
+          <div class="price" data-mxn="16">$16 <small>MXN</small></div>
           <p class="note">Recarga rápida de 110 diamantes.</p>
         </div>
         <div class="qty-controls">
@@ -497,7 +529,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Básico</h3>
           <div class="qty">341 Diamantes</div>
-          <div class="price">$49 <small>MXN</small></div>
+          <div class="price" data-mxn="49">$49 <small>MXN</small></div>
           <p class="note">Recarga de 341 diamantes.</p>
         </div>
         <div class="qty-controls">
@@ -512,7 +544,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Popular</h3>
           <div class="qty">572 Diamantes</div>
-          <div class="price">$85 <small>MXN</small></div>
+          <div class="price" data-mxn="85">$85 <small>MXN</small></div>
           <p class="note">Recarga de 572 diamantes.</p>
         </div>
         <div class="qty-controls">
@@ -527,7 +559,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Experto</h3>
           <div class="qty">1,166 Diamantes</div>
-          <div class="price">$159 <small>MXN</small></div>
+          <div class="price" data-mxn="159">$159 <small>MXN</small></div>
           <p class="note">Precio de recarga regular.</p>
         </div>
         <div class="qty-controls">
@@ -543,7 +575,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Maestro</h3>
           <div class="qty">2,398 Diamantes</div>
-          <div class="price">$309 <small>MXN</small></div>
+          <div class="price" data-mxn="309">$309 <small>MXN</small></div>
           <p class="note">Precio de recarga regular.</p>
         </div>
         <div class="qty-controls">
@@ -558,7 +590,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Paquete Máximo</h3>
           <div class="qty">6,160 Diamantes</div>
-          <div class="price">$789 <small>MXN</small></div>
+          <div class="price" data-mxn="789">$789 <small>MXN</small></div>
           <p class="note">Recarga completa de 6,160 diamantes.</p>
         </div>
         <div class="qty-controls">
@@ -583,7 +615,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Primera Recarga</h3>
           <div class="qty">1,166 Diamantes</div>
-          <div class="price">$145 <small>MXN</small></div>
+          <div class="price" data-mxn="145">$145 <small>MXN</small></div>
           <p class="note">Precio especial exclusivo para primera recarga.</p>
         </div>
         <button class="btn" onclick="pedirDirecto('Primera Recarga — 1,166 Diamantes', 145)">Solicitar Oferta</button>
@@ -595,7 +627,7 @@ footer {
           <div class="diamond">💎</div>
           <h3>Primera Recarga</h3>
           <div class="qty">2,398 Diamantes</div>
-          <div class="price">$279 <small>MXN</small></div>
+          <div class="price" data-mxn="279">$279 <small>MXN</small></div>
           <p class="note">Precio especial exclusivo para primera recarga.</p>
         </div>
         <button class="btn" onclick="pedirDirecto('Primera Recarga — 2,398 Diamantes', 279)">Solicitar Oferta</button>
@@ -761,17 +793,48 @@ footer {
 const WHATSAPP_NUMBER = "522206413787";
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Tasa de cambio de MXN a USD (puedes ajustarla si cambia el valor del dólar)
+const TASA_USD = 20.0; // 20 pesos mexicanos por cada 1 dólar (ejemplo)
+
+let monedaActual = 'MXN';
+
 const productosPrecios = {
   "110 Diamantes": 16,
   "341 Diamantes": 49,
   "572 Diamantes": 85,
   "1,166 Diamantes (Regular)": 159,
   "2,398 Diamantes (Regular)": 309,
-  "6,160 Diamantes": 789
+  "6,160 Diamantes": 789,
+  "Primera Recarga — 1,166 Diamantes": 145,
+  "Primera Recarga — 2,398 Diamantes": 279
 };
 
 let carrito = {};
 let ofertaPendiente = null;
+
+function cambiarMoneda(moneda) {
+  monedaActual = moneda;
+  
+  // Cambiar estilos de los botones del selector
+  document.getElementById('btn-MXN').classList.remove('active');
+  document.getElementById('btn-USD').classList.remove('active');
+  document.getElementById(`btn-${moneda}`).classList.add('active');
+
+  // Actualizar precios en las tarjetas de productos
+  const preciosElements = document.querySelectorAll('.price[data-mxn]');
+  preciosElements.forEach(el => {
+    let precioMxn = parseFloat(el.getAttribute('data-mxn'));
+    if (moneda === 'USD') {
+      let precioUsd = (precioMxn / TASA_USD).toFixed(2);
+      el.innerHTML = `$${precioUsd} <small>USD</small>`;
+    } else {
+      el.innerHTML = `$${precioMxn} <small>MXN</small>`;
+    }
+  });
+
+  // Recalcular el total inferior
+  calcularTotal();
+}
 
 function extraerDiamantes(nombre) {
   let match = nombre.match(/[\d,]+/);
@@ -788,7 +851,6 @@ function cambiarCantidad(nombre, cambio) {
   
   carrito[nombre] += cambio;
   
-  // Limitar entre 0 y 15
   if (carrito[nombre] < 0) {
     carrito[nombre] = 0;
   }
@@ -811,7 +873,21 @@ function calcularTotal() {
     }
   }
 
-  document.getElementById('totalPrice').textContent = `$${totalMxn} MXN`;
+  // Si hay oferta directa seleccionada en el modal o flujo temporal
+  if (ofertaPendiente) {
+    totalMxn = ofertaPendiente.precio;
+    totalDiamantes = extraerDiamantes(ofertaPendiente.nombre);
+  }
+
+  let totalFinal = totalMxn;
+  let simboloMoneda = 'MXN';
+
+  if (monedaActual === 'USD') {
+    totalFinal = (totalMxn / TASA_USD).toFixed(2);
+    simboloMoneda = 'USD';
+  }
+
+  document.getElementById('totalPrice').textContent = `$${totalFinal} ${simboloMoneda}`;
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 }
 
@@ -883,12 +959,14 @@ function pedirDirecto(nombre, precio) {
   }
 
   ofertaPendiente = { nombre, precio };
+  calcularTotal();
   document.getElementById('customModal').style.display = 'grid';
 }
 
 function cerrarModal() {
   document.getElementById('customModal').style.display = 'none';
   ofertaPendiente = null;
+  calcularTotal();
 }
 
 function cerrarModalNoProduct() {
@@ -901,21 +979,44 @@ function ejecutarEnvioWhatsApp() {
   const instruccionComprobante = "📄 *Comprobante de pago:* [Adjuntaré la foto de mi comprobante aquí en el chat]";
   let mensaje = "";
 
+  let totalMxnCalc = 0;
+  for (let prod in carrito) {
+    if (carrito[prod] > 0) {
+      totalMxnCalc += carrito[prod] * productosPrecios[prod];
+    }
+  }
+
+  let precioFinalTexto = "";
   if (ofertaPendiente) {
-    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* $${ofertaPendiente.precio} MXN\n\n${instruccionComprobante}`;
+    let precioMxn = ofertaPendiente.precio;
+    if (monedaActual === 'USD') {
+      let precioUsd = (precioMxn / TASA_USD).toFixed(2);
+      precioFinalTexto = `$${precioUsd} USD (aprox. $${precioMxn} MXN)`;
+    } else {
+      precioFinalTexto = `$${precioMxn} MXN`;
+    }
+  } else {
+    if (monedaActual === 'USD') {
+      let totalUsd = (totalMxnCalc / TASA_USD).toFixed(2);
+      precioFinalTexto = `$${totalUsd} USD (aprox. $${totalMxnCalc} MXN)`;
+    } else {
+      precioFinalTexto = `$${totalMxnCalc} MXN`;
+    }
+  }
+
+  if (ofertaPendiente) {
+    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
   } else {
     let listaTexto = "";
-    let total = 0;
-
     for (let prod in carrito) {
       if (carrito[prod] > 0) {
-        let subtotal = carrito[prod] * productosPrecios[prod];
-        listaTexto += `\n- ${carrito[prod]}x ${prod} ($${subtotal} MXN)`;
-        total += subtotal;
+        let subtotalMxn = carrito[prod] * productosPrecios[prod];
+        let subtotalTexto = monedaActual === 'USD' ? `$${(subtotalMxn / TASA_USD).toFixed(2)} USD` : `$${subtotalMxn} MXN`;
+        listaTexto += `\n- ${carrito[prod]}x ${prod} (${subtotalTexto})`;
       }
     }
 
-    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* $${total} MXN\n\n${instruccionComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
   }
 
   cerrarModal();
