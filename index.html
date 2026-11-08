@@ -511,7 +511,7 @@ footer {
   <section class="section wrap" id="paquetes">
     <div class="section-head">
       <h2>Paquetes de Diamantes</h2>
-      <p>Usa los botones (+) y (-) para armar tu pedido (máximo 15 paquetes en total).</p>
+      <p>Usa los botones (+) y (-) para armar tu pedido (máximo 10 paquetes en total).</p>
     </div>
   
     <div class="products">
@@ -720,7 +720,7 @@ footer {
       <div class="step">
         <b>02</b>
         <h3>Selecciona paquetes</h3>
-        <p>Elige hasta 15 paquetes de diamantes en total con los botones (+).</p>
+        <p>Elige hasta 10 paquetes de diamantes en total con los botones (+).</p>
       </div>
       <div class="step">
         <b>03</b>
@@ -871,7 +871,7 @@ function extraerDiamantes(nombre) {
   return 0;
 }
 
-// CÁLCULO DE CANTIDAD TOTAL DE PAQUETES REGULARES SELECCIONADOS
+// CÁLCULO DE CANTIDAD TOTAL DE PAQUETES REGULARES SELECCIONADOS (Límite 10)
 function obtenerTotalPaquetesRegulares() {
   let suma = 0;
   for (let prod in carrito) {
@@ -897,10 +897,10 @@ function cambiarCantidad(nombre, cambio) {
         return;
       }
     } else {
-      // Límite General de 15 paquetes en total entre todos los regulares
+      // Límite General de 10 paquetes en total entre todos los regulares
       let totalRegularesActuales = obtenerTotalPaquetesRegulares();
-      if (totalRegularesActuales >= 15) {
-        document.getElementById('limiteTextoMensaje').textContent = "Has alcanzado el límite máximo de 15 paquetes seleccionados en total para este pedido.";
+      if (totalRegularesActuales >= 10) {
+        document.getElementById('limiteTextoMensaje').textContent = "Has alcanzado el límite máximo de 10 paquetes seleccionados en total para este pedido.";
         document.getElementById('limiteModal').style.display = 'grid';
         return;
       }
