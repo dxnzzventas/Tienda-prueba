@@ -205,6 +205,20 @@ header {
 }
 .player-box input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(223, 172, 56, 0.25); }
 
+/* ERROR ID TEXTO */
+.error-msg {
+  color: #ff4444;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 8px;
+  display: none;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* SECCIONES */
 .section { padding: 40px 0; }
 .section-head { text-align: center; margin-bottom: 32px; }
@@ -519,7 +533,8 @@ footer {
   <section class="wrap">
     <div class="player-box" id="playerBoxSection">
       <label for="playerId">🎮 Ingresa tu ID de Free Fire (Mín. 8 dígitos):</label>
-      <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off">
+      <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off" oninput="verificarIdEnTiempoReal()">
+      <div id="playerIdError" class="error-msg">ID inválido o incorrecto</div>
     </div>
   </section>
 
@@ -975,8 +990,25 @@ function calcularTotal() {
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 }
 
+// VERIFICACIÓN DE ID EN TIEMPO REAL Y AL VALIDAR
+function verificarIdEnTiempoReal() {
+  const inputIdElem = document.getElementById('playerId');
+  const errorMsg = document.getElementById('playerIdError');
+  const playerId = inputIdElem.value.trim();
+
+  if (playerId.length >= 8) {
+    // Si ya tiene 8 o más dígitos, quitar errores al instante
+    inputIdElem.style.borderColor = "var(--line)";
+    inputIdElem.style.boxShadow = "none";
+    errorMsg.style.display = "none";
+    return true;
+  }
+  return false;
+}
+
 function validarPlayerId() {
   const inputIdElem = document.getElementById('playerId');
+  const errorMsg = document.getElementById('playerIdError');
   const playerId = inputIdElem.value.trim();
   
   if (!playerId || playerId.length < 8) {
@@ -984,12 +1016,14 @@ function validarPlayerId() {
     inputIdElem.focus();
     inputIdElem.style.borderColor = "#ff4444";
     inputIdElem.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.5)";
-    setTimeout(() => { 
-      inputIdElem.style.borderColor = "var(--line)"; 
-      inputIdElem.style.boxShadow = "none";
-    }, 2000);
+    errorMsg.style.display = "block";
     return false;
   }
+  
+  // Limpiar si es correcto
+  inputIdElem.style.borderColor = "var(--line)";
+  inputIdElem.style.boxShadow = "none";
+  errorMsg.style.display = "none";
   return true;
 }
 
@@ -1063,7 +1097,7 @@ window.addEventListener('scroll', function() {
     floatingCart.classList.remove('visible');
   }
 
-  // Cambio de texto del botón según la zona (Limpio de guiones)
+  // Cambio de texto del botón según la zona
   if (rectPagos.top <= window.innerHeight - 100 && rectPagos.bottom >= 0) {
     btnFlotante.innerHTML = "🛍️ Terminar Pedido";
   } else {
