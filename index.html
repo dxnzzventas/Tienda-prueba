@@ -511,7 +511,7 @@ footer {
   <section class="section wrap" id="paquetes">
     <div class="section-head">
       <h2>Paquetes de Diamantes</h2>
-      <p>Usa los botones (+) y (-) para armar tu pedido (máximo 15 por paquete).</p>
+      <p>Usa los botones (+) y (-) para armar tu pedido.</p>
     </div>
   
     <div class="products">
@@ -604,6 +604,23 @@ footer {
           <button class="qty-btn" onclick="cambiarCantidad('6,160 Diamantes', -1)">-</button>
           <span class="qty-num" id="qty-6,160 Diamantes">0</span>
           <button class="qty-btn" onclick="cambiarCantidad('6,160 Diamantes', 1)">+</button>
+        </div>
+      </article>
+
+      <!-- NUEVO PAQUETE HÍPER / TITÁN -->
+      <article class="product featured" style="grid-column: 1 / -1; background: linear-gradient(160deg, #2b1f05, #141414); border: 2px solid var(--gold);">
+        <span class="tag" style="background: linear-gradient(45deg, #ff4500, var(--gold-light)); color: #000;">⚡ MÁXIMO PODER</span>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px;">
+          <div class="diamond" style="font-size: 2.8rem; width: 80px; height: 80px;">👑</div>
+          <h3>Paquete Titán</h3>
+          <div class="qty" style="font-size: 1.1rem; margin-top: 4px;">30,800 Diamantes</div>
+          <div class="price" data-mxn="3699" style="font-size: 2.5rem; margin: 10px 0;">$3,699 <small>MXN</small></div>
+          <p class="note" style="max-width: 500px; margin-bottom: 16px;">El paquete más colosal e incomparable para verdaderos maestros de Free Fire. (Limitado a 1 por pedido).</p>
+        </div>
+        <div class="qty-controls" style="max-width: 250px; margin: 0 auto; width: 100%;">
+          <button class="qty-btn" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-Paquete Titán — 30,800 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', 1)">+</button>
         </div>
       </article>
 
@@ -778,6 +795,18 @@ footer {
   </div>
 </div>
 
+<!-- MODAL DE ADVERTENCIA DE LÍMITE ALCANZADO -->
+<div class="modal-overlay" id="limiteModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3>Límite Alcanzado</h3>
+    <p id="limiteTextoMensaje">Ya has seleccionado el número máximo permitido para este paquete por pedido.</p>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="cerrarModalLimite()" style="width: 100%;">Entendido</button>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footerrow">
     <div>
@@ -805,6 +834,7 @@ const productosPrecios = {
   "1,166 Diamantes (Regular)": 149,
   "2,398 Diamantes (Regular)": 319,
   "6,160 Diamantes": 779,
+  "Paquete Titán — 30,800 Diamantes": 3699,
   "Primera Recarga — 1,166 Diamantes": 135,
   "Primera Recarga — 2,398 Diamantes": 275
 };
@@ -846,16 +876,31 @@ function cambiarCantidad(nombre, cambio) {
     carrito[nombre] = 0;
   }
   
-  carrito[nombre] += cambio;
+  let nuevoValor = carrito[nombre] + cambio;
   
-  if (carrito[nombre] < 0) {
-    carrito[nombre] = 0;
-  }
-  if (carrito[nombre] > 15) {
-    carrito[nombre] = 15;
+  // Definir límites específicos (Paquete Titán limitado a 1, los demás a 15)
+  let limiteMaximo = (nombre.includes("Paquete Titán")) ? 1 : 15;
+
+  if (nuevoValor > limiteMaximo) {
+    // Mostrar la advertencia de límite alcanzado
+    document.getElementById('limiteTextoMensaje').textContent = limiteMaximo === 1 
+      ? "El Paquete Titán está limitado a un máximo de 1 unidad por pedido." 
+      : "Has alcanzado el límite máximo de 15 unidades para este paquete por pedido.";
+    document.getElementById('limiteModal').style.display = 'grid';
+    return;
   }
   
-  document.getElementById(`qty-${nombre}`).textContent = carrito[nombre];
+  if (nuevoValor < 0) {
+    nuevoValor = 0;
+  }
+  
+  carrito[nombre] = nuevoValor;
+  
+  const spanQty = document.getElementById(`qty-${nombre}`);
+  if (spanQty) {
+    spanQty.textContent = carrito[nombre];
+  }
+  
   calcularTotal();
 }
 
@@ -899,7 +944,6 @@ function resaltarIdInput() {
   }, 2000);
 }
 
-// NUEVA FUNCIÓN INTELIGENTE PARA EL BOTÓN INFERIOR FLOTANTE
 function accionFlotantePrincipal() {
   const playerId = document.getElementById('playerId').value.trim();
   
@@ -920,16 +964,13 @@ function accionFlotantePrincipal() {
     return;
   }
 
-  // Verificamos si ya estamos cerca de la sección de pagos para cambiar a "Terminar Pedido"
   const seccionPagos = document.getElementById('metodos-pago');
   const rect = seccionPagos.getBoundingClientRect();
   const estaEnSeccionPagos = rect.top <= window.innerHeight && rect.bottom >= 0;
 
   if (!estaEnSeccionPagos && window.scrollY < seccionPagos.offsetTop - 300) {
-    // Si está arriba eligiendo paquetes, lo mandamos a los métodos de pago
     seccionPagos.scrollIntoView({ behavior: 'smooth' });
   } else {
-    // Si ya está en la sección de pagos, mostramos el modal de advertencia para ir a WhatsApp
     document.getElementById('customModal').style.display = 'grid';
   }
 }
@@ -944,7 +985,6 @@ function pedirDirecto(nombre, precio) {
 
   ofertaPendiente = { nombre, precio };
   calcularTotal();
-  // Al elegir oferta directa, los llevamos directo a la sección de pagos y cambiamos el botón
   document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -959,13 +999,15 @@ function cerrarModalNoProduct() {
   document.getElementById('paquetes').scrollIntoView({ behavior: 'smooth' });
 }
 
-// SCRIPT PARA DETECTAR EL SCROLL Y CAMBIAR EL TEXTO DEL BOTÓN FLOTANTE
+function cerrarModalLimite() {
+  document.getElementById('limiteModal').style.display = 'none';
+}
+
 window.addEventListener('scroll', function() {
   const seccionPagos = document.getElementById('metodos-pago');
   const rect = seccionPagos.getBoundingClientRect();
   const btnFlotante = document.getElementById('floatingActionBtn');
   
-  // Si la sección de pagos ya es visible en pantalla
   if (rect.top <= window.innerHeight - 100 && rect.bottom >= 0) {
     btnFlotante.innerHTML = "🛍️ Terminar Pedido";
   } else {
