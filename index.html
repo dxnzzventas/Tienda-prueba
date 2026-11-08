@@ -678,11 +678,6 @@ footer {
         📸 Nota: No olvides tomar captura de pantalla a tu comprobante de pago para enviarla al chatear con nosotros.
       </div>
       
-      <!-- BOTÓN TERMINAR PEDIDO -->
-      <button class="btn" onclick="mostrarModalConfirmacion()" style="width: 100%; font-size: 1rem; padding: 16px; margin-bottom: 20px;">
-        🛍️ Terminar Pedido
-      </button>
-
       <!-- SECCIÓN ¿QUÉ HAGO DESPUÉS DE HACER MI PAGO? -->
       <div style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 10px;">
         <p style="color: var(--text); font-weight: 600; font-size: 0.92rem; margin-bottom: 10px;">¿Qué hago después de hacer mi pago?</p>
@@ -753,8 +748,8 @@ footer {
     <div id="totalDiamondsText">Total estimado: 0 Diamantes</div>
     <div class="cart-total" id="totalPrice">$0 MXN</div>
   </div>
-  <button class="checkout-btn" onclick="irAMetodosPago()">
-    💳 Completar Pedido
+  <button class="checkout-btn" id="floatingActionBtn" onclick="accionFlotantePrincipal()">
+    💳 Ver Métodos de Pago
   </button>
 </div>
 
@@ -904,7 +899,8 @@ function resaltarIdInput() {
   }, 2000);
 }
 
-function irAMetodosPago() {
+// NUEVA FUNCIÓN INTELIGENTE PARA EL BOTÓN INFERIOR FLOTANTE
+function accionFlotantePrincipal() {
   const playerId = document.getElementById('playerId').value.trim();
   
   if (!playerId) {
@@ -919,36 +915,23 @@ function irAMetodosPago() {
     }
   }
 
-  if (total === 0) {
+  if (total === 0 && !ofertaPendiente) {
     document.getElementById('noProductModal').style.display = 'grid';
     return;
   }
 
-  document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
-}
+  // Verificamos si ya estamos cerca de la sección de pagos para cambiar a "Terminar Pedido"
+  const seccionPagos = document.getElementById('metodos-pago');
+  const rect = seccionPagos.getBoundingClientRect();
+  const estaEnSeccionPagos = rect.top <= window.innerHeight && rect.bottom >= 0;
 
-function mostrarModalConfirmacion() {
-  const playerId = document.getElementById('playerId').value.trim();
-  
-  if (!playerId) {
-    resaltarIdInput();
-    return;
+  if (!estaEnSeccionPagos && window.scrollY < seccionPagos.offsetTop - 300) {
+    // Si está arriba eligiendo paquetes, lo mandamos a los métodos de pago
+    seccionPagos.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    // Si ya está en la sección de pagos, mostramos el modal de advertencia para ir a WhatsApp
+    document.getElementById('customModal').style.display = 'grid';
   }
-
-  let total = 0;
-  for (let prod in carrito) {
-    if (carrito[prod] > 0) {
-      total += carrito[prod] * productosPrecios[prod];
-    }
-  }
-
-  if (total === 0) {
-    document.getElementById('noProductModal').style.display = 'grid';
-    return;
-  }
-
-  ofertaPendiente = null;
-  document.getElementById('customModal').style.display = 'grid';
 }
 
 function pedirDirecto(nombre, precio) {
@@ -961,7 +944,8 @@ function pedirDirecto(nombre, precio) {
 
   ofertaPendiente = { nombre, precio };
   calcularTotal();
-  document.getElementById('customModal').style.display = 'grid';
+  // Al elegir oferta directa, los llevamos directo a la sección de pagos y cambiamos el botón
+  document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
 }
 
 function cerrarModal() {
@@ -974,6 +958,20 @@ function cerrarModalNoProduct() {
   document.getElementById('noProductModal').style.display = 'none';
   document.getElementById('paquetes').scrollIntoView({ behavior: 'smooth' });
 }
+
+// SCRIPT PARA DETECTAR EL SCROLL Y CAMBIAR EL TEXTO DEL BOTÓN FLOTANTE
+window.addEventListener('scroll', function() {
+  const seccionPagos = document.getElementById('metodos-pago');
+  const rect = seccionPagos.getBoundingClientRect();
+  const btnFlotante = document.getElementById('floatingActionBtn');
+  
+  // Si la sección de pagos ya es visible en pantalla
+  if (rect.top <= window.innerHeight - 100 && rect.bottom >= 0) {
+    btnFlotante.innerHTML = "🛍️ Terminar Pedido";
+  } else {
+    btnFlotante.innerHTML = "💳 Ver Métodos de Pago";
+  }
+});
 
 function ejecutarEnvioWhatsApp() {
   const playerId = document.getElementById('playerId').value.trim();
