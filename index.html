@@ -502,7 +502,7 @@ footer {
   <!-- CAMPO ID DE JUGADOR -->
   <section class="wrap">
     <div class="player-box" id="playerBoxSection">
-      <label for="playerId">🎮 Ingresa tu ID de Free Fire:</label>
+      <label for="playerId">🎮 Ingresa tu ID de Free Fire (Mín. 8 dígitos):</label>
       <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off">
     </div>
   </section>
@@ -511,7 +511,7 @@ footer {
   <section class="section wrap" id="paquetes">
     <div class="section-head">
       <h2>Paquetes de Diamantes</h2>
-      <p>Usa los botones (+) y (-) para armar tu pedido.</p>
+      <p>Usa los botones (+) y (-) para armar tu pedido (máximo 15 paquetes en total).</p>
     </div>
   
     <div class="products">
@@ -607,7 +607,7 @@ footer {
         </div>
       </article>
 
-      <!-- NUEVO PAQUETE HÍPER / TITÁN -->
+      <!-- PAQUETES TITÁN (EXCEPCIÓN DE LÍMITE GENERAL) -->
       <article class="product featured" style="grid-column: 1 / -1; background: linear-gradient(160deg, #2b1f05, #141414); border: 2px solid var(--gold);">
         <span class="tag" style="background: linear-gradient(45deg, #ff4500, var(--gold-light)); color: #000;">⚡ MÁXIMO PODER</span>
         <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px;">
@@ -715,12 +715,12 @@ footer {
       <div class="step">
         <b>01</b>
         <h3>Ingresa tu ID</h3>
-        <p>Escribe tu ID de Free Fire en la casilla superior de la página.</p>
+        <p>Escribe tu ID de Free Fire (mínimo 8 dígitos) en la casilla superior de la página.</p>
       </div>
       <div class="step">
         <b>02</b>
         <h3>Selecciona paquetes</h3>
-        <p>Elige hasta 15 paquetes de diamantes que requieres con los botones (+).</p>
+        <p>Elige hasta 15 paquetes de diamantes en total con los botones (+).</p>
       </div>
       <div class="step">
         <b>03</b>
@@ -800,7 +800,7 @@ footer {
   <div class="modal-box">
     <div class="modal-icon">⚠️</div>
     <h3>Límite Alcanzado</h3>
-    <p id="limiteTextoMensaje">Ya has seleccionado el número máximo permitido para este paquete por pedido.</p>
+    <p id="limiteTextoMensaje">Has alcanzado el límite máximo de paquetes para este pedido.</p>
     <div class="modal-actions">
       <button class="btn-confirm" onclick="cerrarModalLimite()" style="width: 100%;">Entendido</button>
     </div>
@@ -871,25 +871,43 @@ function extraerDiamantes(nombre) {
   return 0;
 }
 
+// CÁLCULO DE CANTIDAD TOTAL DE PAQUETES REGULARES SELECCIONADOS
+function obtenerTotalPaquetesRegulares() {
+  let suma = 0;
+  for (let prod in carrito) {
+    if (prod !== "Paquete Titán — 30,800 Diamantes" && carrito[prod] > 0) {
+      suma += carrito[prod];
+    }
+  }
+  return suma;
+}
+
 function cambiarCantidad(nombre, cambio) {
   if (!carrito[nombre]) {
     carrito[nombre] = 0;
   }
-  
-  let nuevoValor = carrito[nombre] + cambio;
-  
-  // Definir límites específicos (Paquete Titán limitado a 1, los demás a 15)
-  let limiteMaximo = (nombre.includes("Paquete Titán")) ? 1 : 15;
 
-  if (nuevoValor > limiteMaximo) {
-    // Mostrar la advertencia de límite alcanzado
-    document.getElementById('limiteTextoMensaje').textContent = limiteMaximo === 1 
-      ? "El Paquete Titán está limitado a un máximo de 1 unidad por pedido." 
-      : "Has alcanzado el límite máximo de 15 unidades para este paquete por pedido.";
-    document.getElementById('limiteModal').style.display = 'grid';
-    return;
+  // SI SE INTENTA AÑADIR (+1)
+  if (cambio > 0) {
+    if (nombre.includes("Paquete Titán")) {
+      // Límite de Paquete Titán: Máximo 1
+      if (carrito[nombre] >= 1) {
+        document.getElementById('limiteTextoMensaje').textContent = "El Paquete Titán está limitado a un máximo de 1 unidad por pedido.";
+        document.getElementById('limiteModal').style.display = 'grid';
+        return;
+      }
+    } else {
+      // Límite General de 15 paquetes en total entre todos los regulares
+      let totalRegularesActuales = obtenerTotalPaquetesRegulares();
+      if (totalRegularesActuales >= 15) {
+        document.getElementById('limiteTextoMensaje').textContent = "Has alcanzado el límite máximo de 15 paquetes seleccionados en total para este pedido.";
+        document.getElementById('limiteModal').style.display = 'grid';
+        return;
+      }
+    }
   }
-  
+
+  let nuevoValor = carrito[nombre] + cambio;
   if (nuevoValor < 0) {
     nuevoValor = 0;
   }
@@ -932,23 +950,27 @@ function calcularTotal() {
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 }
 
-function resaltarIdInput() {
+// VALIDACIÓN DE ID: MÍNIMO 8 DÍGITOS
+function validarPlayerId() {
   const inputIdElem = document.getElementById('playerId');
-  document.getElementById('playerBoxSection').scrollIntoView({ behavior: 'smooth' });
-  inputIdElem.focus();
-  inputIdElem.style.borderColor = "#ff4444";
-  inputIdElem.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.5)";
-  setTimeout(() => { 
-    inputIdElem.style.borderColor = "var(--line)"; 
-    inputIdElem.style.boxShadow = "none";
-  }, 2000);
+  const playerId = inputIdElem.value.trim();
+  
+  if (!playerId || playerId.length < 8) {
+    document.getElementById('playerBoxSection').scrollIntoView({ behavior: 'smooth' });
+    inputIdElem.focus();
+    inputIdElem.style.borderColor = "#ff4444";
+    inputIdElem.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.5)";
+    setTimeout(() => { 
+      inputIdElem.style.borderColor = "var(--line)"; 
+      inputIdElem.style.boxShadow = "none";
+    }, 2000);
+    return false;
+  }
+  return true;
 }
 
 function accionFlotantePrincipal() {
-  const playerId = document.getElementById('playerId').value.trim();
-  
-  if (!playerId) {
-    resaltarIdInput();
+  if (!validarPlayerId()) {
     return;
   }
 
@@ -976,10 +998,7 @@ function accionFlotantePrincipal() {
 }
 
 function pedirDirecto(nombre, precio) {
-  const playerId = document.getElementById('playerId').value.trim();
-  
-  if (!playerId) {
-    resaltarIdInput();
+  if (!validarPlayerId()) {
     return;
   }
 
