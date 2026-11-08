@@ -302,7 +302,7 @@ header {
 .qty-btn:hover { background: var(--gold); color: #000; }
 .qty-num { font-weight: 700; font-size: 1.1rem; color: #fff; }
 
-/* BARRA FLOTANTE DE COMPRA (OCULTA POR DEFECTO HASTA LLEGAR A PAQUETES) */
+/* BARRA FLOTANTE DE COMPRA CON TRANSICIÓN ELEGANTE Y LENTA */
 .floating-cart {
   position: fixed;
   bottom: 0;
@@ -314,12 +314,27 @@ header {
   padding: 16px 24px;
   z-index: 100;
   box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
-  display: none; /* Oculto inicialmente */
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  transition: opacity 0.3s ease;
+  
+  /* Estados iniciales para la transición lenta y fluida */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.6s;
 }
+
+/* Clase que activa la barra con animación suave */
+.floating-cart.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .cart-info { font-size: 0.9rem; color: var(--muted); }
 .cart-info b { color: var(--gold-light); font-size: 1.1rem; }
 .cart-total { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800; color: var(--gold); }
@@ -750,7 +765,7 @@ footer {
     <div class="faq">
       <details>
         <summary>¿Cómo realizo el pago?</summary>
-        <p>Puedes transferir a nuestra CLABE interbancaria local, internacional o código BIC/SWIFT.</p>
+        <p>Puedes transferir a nossa CLABE interbancaria local, internacional o código BIC/SWIFT.</p>
       </details>
       <details>
         <summary>¿Necesitan mi contraseña?</summary>
@@ -1018,7 +1033,7 @@ function cerrarModalLimite() {
   document.getElementById('limiteModal').style.display = 'none';
 }
 
-// SCRIPT PARA MOSTRAR/OCULTAR LA BARRA FLOTANTE Y CAMBIAR TEXTO SEGÚN LA SECCIÓN
+// SCRIPT PARA APLICAR LA CLASE DE TRANSICIÓN SUAVE DE LA BARRA FLOTANTE
 window.addEventListener('scroll', function() {
   const seccionPaquetes = document.getElementById('paquetes');
   const seccionPagos = document.getElementById('metodos-pago');
@@ -1028,14 +1043,14 @@ window.addEventListener('scroll', function() {
   const rectPaquetes = seccionPaquetes.getBoundingClientRect();
   const rectPagos = seccionPagos.getBoundingClientRect();
 
-  // Si ya llegó o pasó la sección de paquetes y aún no pasa del footer / fin de pagos
+  // Control suave de aparición mediante la clase .visible
   if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
-    floatingCart.style.display = 'flex';
+    floatingCart.classList.add('visible');
   } else {
-    floatingCart.style.display = 'none';
+    floatingCart.classList.remove('visible');
   }
 
-  // Cambio de texto del botón dependiendo si está en la zona de pagos o arriba
+  // Cambio de texto del botón según la zona
   if (rectPagos.top <= window.innerHeight - 100 && rectPagos.bottom >= 0) {
     btnFlotante.innerHTML = "🛍️ Terminar Pedido";
   } else {
