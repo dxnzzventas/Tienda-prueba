@@ -367,7 +367,20 @@ header {
   gap: 8px;
   text-transform: uppercase;
   transition: 0.2s;
+  
+  /* Inicialmente invisible hasta seleccionar un paquete */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
+
+/* Clase para mostrar el botón cuando hay selección */
+.checkout-btn.show-btn {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
 /* MODAL PERSONALIZADO */
@@ -965,17 +978,20 @@ function cambiarCantidad(nombre, cambio) {
 function calcularTotal() {
   let totalMxn = 0;
   let totalDiamantes = 0;
+  let haySeleccion = false;
 
   for (let prod in carrito) {
     if (carrito[prod] > 0) {
       totalMxn += carrito[prod] * (productosPrecios[prod] || 0);
       totalDiamantes += carrito[prod] * extraerDiamantes(prod);
+      haySeleccion = true;
     }
   }
 
   if (ofertaPendiente) {
     totalMxn = ofertaPendiente.precio;
     totalDiamantes = extraerDiamantes(ofertaPendiente.nombre);
+    haySeleccion = true;
   }
 
   let totalFinal = totalMxn;
@@ -988,6 +1004,14 @@ function calcularTotal() {
 
   document.getElementById('totalPrice').textContent = `$${totalFinal} ${simboloMoneda}`;
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
+
+  // Control de visibilidad del botón de acción según si hay selección
+  const btnFlotante = document.getElementById('floatingActionBtn');
+  if (haySeleccion) {
+    btnFlotante.classList.add('show-btn');
+  } else {
+    btnFlotante.classList.remove('show-btn');
+  }
 }
 
 // VERIFICACIÓN DE ID EN TIEMPO REAL Y AL VALIDAR
@@ -997,7 +1021,6 @@ function verificarIdEnTiempoReal() {
   const playerId = inputIdElem.value.trim();
 
   if (playerId.length >= 8) {
-    // Si ya tiene 8 o más dígitos, quitar errores al instante
     inputIdElem.style.borderColor = "var(--line)";
     inputIdElem.style.boxShadow = "none";
     errorMsg.style.display = "none";
@@ -1020,7 +1043,6 @@ function validarPlayerId() {
     return false;
   }
   
-  // Limpiar si es correcto
   inputIdElem.style.borderColor = "var(--line)";
   inputIdElem.style.boxShadow = "none";
   errorMsg.style.display = "none";
@@ -1090,14 +1112,12 @@ window.addEventListener('scroll', function() {
   const rectPaquetes = seccionPaquetes.getBoundingClientRect();
   const rectPagos = seccionPagos.getBoundingClientRect();
 
-  // Control suave de aparición mediante la clase .visible
   if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
     floatingCart.classList.add('visible');
   } else {
     floatingCart.classList.remove('visible');
   }
 
-  // Cambio de texto del botón según la zona
   if (rectPagos.top <= window.innerHeight - 100 && rectPagos.bottom >= 0) {
     btnFlotante.innerHTML = "🛍️ Terminar Pedido";
   } else {
