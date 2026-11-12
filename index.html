@@ -721,14 +721,14 @@ footer {
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">CLABE Interbancaria Local</h3>
       <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">BBVA / Banco Azteca / BanCoppel, etc.</p>
       <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
-        1234 5678 9012 3456 78
+        170180016433075336
       </div>
 
       <!-- CLABE INTERNACIONAL -->
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">CLABE Internacional (países fuera de México)</h3>
       <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">Transferencias Internacionales / SWIFT</p>
       <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 12px;">
-        9876 5432 1098 7654 32
+        170002404093481270
       </div>
 
       <!-- CÓDIGO BIC O SWIFT -->
@@ -1065,7 +1065,7 @@ function accionFlotantePrincipal() {
     return;
   }
 
-  const seccionPagos = document.getElementById('metodos-type') || document.getElementById('metodos-pago');
+  const seccionPagos = document.getElementById('metodos-pago');
   const rect = seccionPagos.getBoundingClientRect();
   const estaEnSeccionPagos = rect.top <= window.innerHeight && rect.bottom >= 0;
 
@@ -1117,11 +1117,9 @@ window.addEventListener('scroll', function() {
   }
   if (ofertaPendiente) haySeleccionada = true;
 
-  // Si ya hay un paquete seleccionado, la barra se queda fija y visible sin desaparecer al hacer scroll
   if (haySeleccionada) {
     floatingCart.classList.add('visible');
   } else {
-    // Si no hay nada seleccionado, se oculta si pasa de la sección de paquetes/pagos
     if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
       floatingCart.classList.add('visible');
     } else {
