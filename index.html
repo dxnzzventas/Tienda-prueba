@@ -316,7 +316,7 @@ header {
 .qty-btn:hover { background: var(--gold); color: #000; }
 .qty-num { font-weight: 700; font-size: 1.1rem; color: #fff; }
 
-/* BARRA FLOTANTE DE COMPRA CON TRANSICIÓN ELEGANTE Y LENTA */
+/* BARRA FLOTANTE DE COMPRA CON TRANSICIÓN LENTA (0.9s) */
 .floating-cart {
   position: fixed;
   bottom: 0;
@@ -333,13 +333,13 @@ header {
   justify-content: space-between;
   gap: 15px;
   
-  /* Estados iniciales para la transición lenta y fluida */
+  /* Transición más lenta y fluida (0.9 segundos) */
   opacity: 0;
   visibility: hidden;
   transform: translateY(100%);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              visibility 0.6s;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.9s;
 }
 
 /* Clase que activa la barra con animación suave */
@@ -362,14 +362,13 @@ header {
   font-size: 0.95rem;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(223, 172, 56, 0.3);
-  display: none; /* Oculto por completo con display: none para que no deje espacio */
+  display: none; /* Oculto inicialmente por completo */
   align-items: center;
   gap: 8px;
   text-transform: uppercase;
   transition: 0.2s;
 }
 
-/* Clase para mostrar el botón cuando hay selección con display flex */
 .checkout-btn.show-btn {
   display: inline-flex;
 }
@@ -998,7 +997,6 @@ function calcularTotal() {
   document.getElementById('totalPrice').textContent = `$${totalFinal} ${simboloMoneda}`;
   document.getElementById('totalDiamondsText').textContent = `Total estimado: ${totalDiamantes.toLocaleString()} Diamantes`;
 
-  // Control de visibilidad del botón de acción según si hay selección
   const btnFlotante = document.getElementById('floatingActionBtn');
   if (haySeleccion) {
     btnFlotante.classList.add('show-btn');
@@ -1014,18 +1012,15 @@ function verificarIdEnTiempoReal() {
   const playerId = inputIdElem.value.trim();
 
   if (playerId.length >= 8) {
-    // Si tiene 8 o más dígitos: marco verde y sin error
     inputIdElem.style.borderColor = "#2ecc71";
     inputIdElem.style.boxShadow = "0 0 12px rgba(46, 204, 113, 0.25)";
     errorMsg.style.display = "none";
     return true;
   } else if (playerId.length > 0) {
-    // Si está escribiendo pero tiene menos de 8 dígitos
     inputIdElem.style.borderColor = "var(--line)";
     inputIdElem.style.boxShadow = "none";
     errorMsg.style.display = "none";
   } else {
-    // Si está vacío
     inputIdElem.style.borderColor = "var(--line)";
     inputIdElem.style.boxShadow = "none";
     errorMsg.style.display = "none";
@@ -1070,7 +1065,7 @@ function accionFlotantePrincipal() {
     return;
   }
 
-  const seccionPagos = document.getElementById('metodos-pago');
+  const seccionPagos = document.getElementById('metodos-type') || document.getElementById('metodos-pago');
   const rect = seccionPagos.getBoundingClientRect();
   const estaEnSeccionPagos = rect.top <= window.innerHeight && rect.bottom >= 0;
 
@@ -1106,7 +1101,7 @@ function cerrarModalLimite() {
   document.getElementById('limiteModal').style.display = 'none';
 }
 
-// SCRIPT PARA APLICAR LA CLASE DE TRANSICIÓN SUAVE DE LA BARRA FLOTANTE
+// SCRIPT DE VISIBILIDAD DE LA BARRA FLOTANTE
 window.addEventListener('scroll', function() {
   const seccionPaquetes = document.getElementById('paquetes');
   const seccionPagos = document.getElementById('metodos-pago');
@@ -1116,10 +1111,22 @@ window.addEventListener('scroll', function() {
   const rectPaquetes = seccionPaquetes.getBoundingClientRect();
   const rectPagos = seccionPagos.getBoundingClientRect();
 
-  if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
+  let haySeleccionada = false;
+  for (let prod in carrito) {
+    if (carrito[prod] > 0) haySeleccionada = true;
+  }
+  if (ofertaPendiente) haySeleccionada = true;
+
+  // Si ya hay un paquete seleccionado, la barra se queda fija y visible sin desaparecer al hacer scroll
+  if (haySeleccionada) {
     floatingCart.classList.add('visible');
   } else {
-    floatingCart.classList.remove('visible');
+    // Si no hay nada seleccionado, se oculta si pasa de la sección de paquetes/pagos
+    if (rectPaquetes.top <= window.innerHeight - 50 && rectPagos.bottom >= -100) {
+      floatingCart.classList.add('visible');
+    } else {
+      floatingCart.classList.remove('visible');
+    }
   }
 
   if (rectPagos.top <= window.innerHeight - 100 && rectPagos.bottom >= 0) {
