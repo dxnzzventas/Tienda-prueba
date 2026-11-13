@@ -1197,6 +1197,18 @@ footer {
   </div>
 </div>
 
+<!-- MODAL DE ALERTA GENERAL (CORREO INVÁLIDO, ETC.) -->
+<div class="modal-overlay" id="alertaGeneralModal">
+  <div class="modal-box">
+    <div class="modal-icon" id="alertaGeneralIcon">⚠️</div>
+    <h3 id="alertaGeneralTitulo">Atención</h3>
+    <p id="alertaGeneralTexto">Por favor ingresa un correo electrónico válido.</p>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="cerrarAlertaGeneral()" style="width: 100%;">Aceptar</button>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footerrow">
     <div>
@@ -1238,6 +1250,17 @@ let calificacionSeleccionada = 5;
 // SISTEMA DE PUNTOS VIP (10 puntos por cada $15 MXN)
 let usuarioActual = JSON.parse(localStorage.getItem('dxnzz_user_session')) || null;
 
+function mostrarAlertaPersonalizada(titulo, mensaje, icono = "⚠️") {
+  document.getElementById('alertaGeneralTitulo').textContent = titulo;
+  document.getElementById('alertaGeneralTexto').textContent = mensaje;
+  document.getElementById('alertaGeneralIcon').textContent = icono;
+  document.getElementById('alertaGeneralModal').style.display = 'grid';
+}
+
+function cerrarAlertaGeneral() {
+  document.getElementById('alertaGeneralModal').style.display = 'none';
+}
+
 function actualizarSesionUI() {
   const cardNoAuth = document.getElementById('cardNoAuth');
   const cardAuth = document.getElementById('cardAuth');
@@ -1256,16 +1279,16 @@ function actualizarSesionUI() {
 function registrarUsuario() {
   const emailInput = document.getElementById('userEmailInput').value.trim();
   if(!emailInput || !emailInput.includes('@')) {
-    alert("Por favor ingresa un correo electrónico válido.");
+    mostrarAlertaPersonalizada("Correo inválido", "Por favor ingresa un correo electrónico válido.", "✉️");
     return;
   }
   
   let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
   if (!usuariosDB[emailInput]) {
     usuariosDB[emailInput] = { email: emailInput, puntos: 50 };
-    alert("¡Registro exitoso! Te hemos regalado 50 puntos de bienvenida 🎉");
+    mostrarAlertaPersonalizada("¡Registro exitoso!", "¡Te hemos regalado 50 puntos de bienvenida!", "🎉");
   } else {
-    alert("¡Bienvenido de vuelta!");
+    mostrarAlertaPersonalizada("¡Bienvenido de vuelta!", `Hola de nuevo, ${emailInput}.`, "🌟");
   }
   
   usuarioActual = usuariosDB[emailInput];
@@ -1283,7 +1306,6 @@ function cerrarSesion() {
 
 function sumarPuntosPorCompra(montoMxn) {
   if (!usuarioActual) return;
-  // 10 puntos por cada 15 pesos
   let puntosGanados = Math.floor(montoMxn / 15) * 10;
   if(puntosGanados <= 0) puntosGanados = 10;
   
@@ -1301,7 +1323,7 @@ function sumarPuntosPorCompra(montoMxn) {
 function canjearRecompensa(nombreRecompensa, costoPuntos) {
   if (!validarPlayerId()) return;
   if (!usuarioActual) {
-    alert("Por favor, inicia sesión en la sección de Puntos VIP al final de la página para poder canjear recompensas.");
+    mostrarAlertaPersonalizada("Inicia sesión", "Por favor, inicia sesión en la sección de Puntos VIP al final de la página para poder canjear recompensas.", "🔑");
     document.getElementById('puntos-section').scrollIntoView({ behavior: 'smooth' });
     return;
   }
