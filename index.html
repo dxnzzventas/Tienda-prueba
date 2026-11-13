@@ -411,7 +411,7 @@ header {
   text-align: center;
 }
 
-/* ESTILOS PARA RESEÑAS */
+/* ESTILOS PARA RESEÑAS REALES */
 .reviews-container {
   max-width: 750px;
   margin: 0 auto;
@@ -514,6 +514,15 @@ header {
   color: #777;
   margin-top: 8px;
 }
+.no-reviews {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  padding: 20px;
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
 
 /* MODAL PERSONALIZADO */
 .modal-overlay {
@@ -554,7 +563,7 @@ header {
 .btn-confirm { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); border: none; color: #000; box-shadow: 0 4px 15px rgba(223, 172, 56, 0.3); }
 .btn-confirm:hover { filter: brightness(1.1); }
 
-/* PASOS Y PREGUNTAS */
+/* PASOS Y PREGUNTAS FRECUENTES */
 .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 .step {
   padding: 18px;
@@ -576,10 +585,48 @@ header {
 .step h3 { margin: 0 0 6px; font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 0.9rem; }
 .step p { color: var(--muted); line-height: 1.4; margin: 0; font-size: 0.8rem; }
 
+/* ESTILOS UNIFORMES PARA PREGUNTAS FRECUENTES */
 .faq { max-width: 800px; margin: auto; }
-.faq details { border-bottom: 1px solid var(--line); padding: 18px 4px; }
-.faq summary { cursor: pointer; font-weight: 700; color: var(--gold-light); font-size: 1.02rem; }
-.faq details p { color: var(--muted); line-height: 1.7; margin-top: 10px; font-size: 0.95rem; }
+.faq details {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s ease;
+}
+.faq details[open] {
+  border-color: var(--gold);
+  box-shadow: 0 5px 20px rgba(223, 172, 56, 0.15);
+}
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--gold-light);
+  font-size: 1.02rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq summary::after {
+  content: "+";
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-weight: 800;
+}
+.faq details[open] summary::after {
+  content: "-";
+}
+.faq details p {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
 
 /* FOOTER */
 footer {
@@ -958,7 +1005,7 @@ footer {
     </div>
   </section>
 
-  <!-- SECCIÓN DE RESEÑAS FUNCIONAL -->
+  <!-- SECCIÓN DE RESEÑAS REALES -->
   <section class="section wrap" id="reseñas">
     <div class="section-head">
       <h2>Reseñas de Clientes</h2>
@@ -992,9 +1039,9 @@ footer {
         </form>
       </div>
 
-      <!-- Lista de Reseñas -->
+      <!-- Lista de Reseñas Reales -->
       <div class="reviews-list" id="reviewsList">
-        <!-- Las reseñas se cargan aquí dinámicamente -->
+        <!-- Las reseñas reales ingresadas por los usuarios se cargan aquí -->
       </div>
     </div>
   </section>
@@ -1037,17 +1084,29 @@ footer {
   <!-- PREGUNTAS FRECUENTES -->
   <section class="section wrap" id="preguntas">
     <div class="section-head">
-      <h2>Preguntas Frecuentes</h2>
+      <h2>Antes de volver al juego.</h2>
       <p>Aclara tus dudas antes de ordenar.</p>
     </div>
     <div class="faq">
       <details>
-        <summary>¿Cómo realizo el pago?</summary>
-        <p>Puedes transferir a nuestra CLABE interbancaria local, internacional o código BIC/SWIFT.</p>
+        <summary>¿Necesito dar mi contraseña?</summary>
+        <p>Jamás solicitamos tu contraseña. Las recargas se procesan de forma segura utilizando únicamente tu ID de jugador.</p>
       </details>
       <details>
-        <summary>¿Necesitan mi contraseña?</summary>
-        <p>Jamás solicitamos tu contraseña. Las recargas se procesan de forma segura utilizando únicamente tu ID de jugador.</p>
+        <summary>¿Cuánto tarda en llegar la recarga?</summary>
+        <p>Las recargas se procesan y se entregan por lo regular en menos de 10 minutos después de confirmar tu comprobante de pago.</p>
+      </details>
+      <details>
+        <summary>¿Puedo comprar varios paquetes a la vez?</summary>
+        <p>Sí, puedes seleccionar hasta 10 paquetes regulares en total utilizando los botones (+) y (-) de la tienda antes de proceder a pagar.</p>
+      </details>
+      <details>
+        <summary>¿Cómo funcionan los puntos?</summary>
+        <p>Inicia sesión con tu correo en la sección de Puntos VIP. Cada compra te otorga puntos automáticamente que puedes canjear por diamantes gratis.</p>
+      </details>
+      <details>
+        <summary>¿Cómo obtengo ayuda con mi pedido?</summary>
+        <p>Al terminar tu selección y confirmar tu pago, serás redirigido directamente a nuestro WhatsApp oficial de atención 24/7 con tu cotización lista.</p>
       </details>
     </div>
   </section>
@@ -1178,7 +1237,7 @@ function registrarUsuario() {
   
   let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
   if (!usuariosDB[emailInput]) {
-    usuariosDB[emailInput] = { email: emailInput, puntos: 50 }; // 50 puntos de bienvenida por registrarse
+    usuariosDB[emailInput] = { email: emailInput, puntos: 50 };
     alert("¡Registro exitoso! Te hemos regalado 50 puntos de bienvenida 🎉");
   } else {
     alert("¡Bienvenido de vuelta!");
@@ -1199,7 +1258,7 @@ function cerrarSesion() {
 
 function sumarPuntosPorCompra(montoMxn) {
   if (!usuarioActual) return;
-  let puntosGanados = Math.floor(montoMxn / 10) * 10; // 10 puntos por cada $10 MXN
+  let puntosGanados = Math.floor(montoMxn / 10) * 10;
   if(puntosGanados <= 0) puntosGanados = 10;
   
   usuarioActual.puntos += puntosGanados;
@@ -1227,7 +1286,6 @@ function canjearRecompensa(nombreRecompensa, costoPuntos) {
     return;
   }
 
-  // Descontar puntos
   usuarioActual.puntos -= costoPuntos;
   localStorage.setItem('dxnzz_user_session', JSON.stringify(usuarioActual));
   let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
@@ -1356,7 +1414,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS
+// SISTEMA DE RESEÑAS REALES (VACÍO POR DEFECTO HASTA QUE LOS CLIENTES ESCRIBAN)
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1372,11 +1430,14 @@ function seleccionarEstrellas(estrellas) {
 
 function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_v2')) || [
-    { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
-  ];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_reales')) || [];
 
   lista.innerHTML = "";
+  if (reseñasGuardadas.length === 0) {
+    lista.innerHTML = `<div class="no-reviews">Aún no hay reseñas registradas. ¡Sé el primero en dejarnos tu opinión!</div>`;
+    return;
+  }
+
   reseñasGuardadas.forEach(rev => {
     let estrellasHtml = '★'.repeat(rev.estrellas) + '☆'.repeat(5 - rev.estrellas);
     let item = document.createElement('div');
@@ -1407,12 +1468,10 @@ function enviarReseña(event) {
     fecha: "Justo ahora"
   };
 
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_v2')) || [
-    { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
-  ];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_reales')) || [];
 
   reseñasGuardadas.unshift(nuevaReseña);
-  localStorage.setItem('dxnzz_reviews_v2', JSON.stringify(reseñasGuardadas));
+  localStorage.setItem('dxnzz_reviews_reales', JSON.stringify(reseñasGuardadas));
 
   document.getElementById('reviewForm').reset();
   seleccionarEstrellas(5);
@@ -1502,7 +1561,6 @@ function pedirDirecto(nombre, precio) {
 function cerrarModal() {
   document.getElementById('customModal').style.display = 'none';
   
-  // Sumar puntos al concretar pedido
   let montoCalculado = 0;
   for (let prod in carrito) {
     if (carrito[prod] > 0) montoCalculado += carrito[prod] * productosPrecios[prod];
