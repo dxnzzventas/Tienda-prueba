@@ -373,18 +373,34 @@ header {
 
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-/* ESTILOS VIP & PUNTOS */
-.points-card {
+/* SECCIÓN VIP ULTRA COMPACTA (ARRIBA) */
+.vip-mini-bar {
+  background: linear-gradient(135deg, #1f1807, var(--panel));
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 14px 20px;
+  max-width: 620px;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.vip-mini-bar span { font-size: 0.88rem; color: var(--gold-light); font-weight: 600; }
+
+/* SECCIÓN DE RECOMPENSAS VIP ( ABAJO ) */
+.points-full-card {
   background: linear-gradient(135deg, #1f1807, var(--panel));
   border: 1px solid var(--gold);
   border-radius: 20px;
   padding: 26px;
   max-width: 750px;
-  margin: 0 auto 40px;
+  margin: 0 auto 30px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   text-align: center;
 }
-.points-card h3 {
+.points-full-card h3 {
   font-family: 'Cinzel', serif;
   color: var(--gold-light);
   margin-top: 0;
@@ -411,7 +427,7 @@ header {
   text-align: center;
 }
 
-/* ESTILOS PARA RESEÑAS (REDUCIDAS, NOMBRE ARRIBA, TEXTO BLANCO Y CANTIDAD DE ESTRELLAS) */
+/* ESTILOS PARA RESEÑAS COMPACTAS (NOMBRE ARRIBA, ESTRELLAS EN NÚMERO Y COMENTARIO BLANCO) */
 .reviews-container {
   max-width: 750px;
   margin: 0 auto;
@@ -648,6 +664,7 @@ footer {
   .steps { grid-template-columns: 1fr; }
   .floating-cart { flex-direction: column; align-items: stretch; text-align: center; gap: 10px; padding: 14px; }
   .checkout-btn { width: 100%; justify-content: center; }
+  .vip-mini-bar { flex-direction: column; text-align: center; }
 }
 @media(max-width:480px){
   .products { grid-template-columns: 1fr; }
@@ -729,66 +746,11 @@ footer {
     </div>
   </section>
 
-  <!-- SECCIÓN DE PUNTOS VIP / RECOMPENSAS -->
-  <section class="section wrap" id="puntos-section">
-    <div class="section-head">
-      <h2>⭐ Sistema de Puntos VIP</h2>
-      <p>Regístrate con tu correo, acumula puntos con cada compra y canjea diamantes gratis.</p>
-    </div>
-
-    <div class="points-card" id="cardNoAuth">
-      <h3>🔑 Inicia sesión para acumular puntos</h3>
-      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 16px;">Guarda tu progreso de compras y obtén recompensas exclusivas.</p>
-      <div class="auth-box">
-        <input type="email" id="userEmailInput" placeholder="Tu correo electrónico" autocomplete="email">
-        <br>
-        <button class="btn" onclick="registrarUsuario()">Entrar / Registrarme</button>
-      </div>
-    </div>
-
-    <div class="points-card" id="cardAuth" style="display: none;">
-      <h3>🌟 ¡Bienvenido, <span id="lblUserEmail" style="color: var(--text);"></span>!</h3>
-      <p style="color: var(--muted); font-size: 0.9rem; margin: 5px 0;">Tus Puntos Acumulados:</p>
-      <div class="points-display" id="lblUserPoints">0 Pts</div>
-      <p style="font-size: 0.82rem; color: var(--gold-light);">Ganas 10 puntos por cada $10 MXN de compra.</p>
-      <button class="btn secondary" onclick="cerrarSesion()" style="margin-top: 10px; font-size: 0.7rem;">Cerrar Sesión</button>
-    </div>
-
-    <!-- Catálogo de Recompensas por Puntos -->
-    <div class="products" style="margin-top: 30px;">
-      <article class="product">
-        <div>
-          <div class="diamond">🎁</div>
-          <h3>Recompensa Inicial</h3>
-          <div class="qty">50 Diamantes Gratis</div>
-          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">150 <small>Puntos</small></div>
-          <p class="note">Canjea tus puntos acumulados por un paquete de 50 diamantes.</p>
-        </div>
-        <button class="btn" onclick="canjearRecompensa('50 Diamantes Gratis', 150)">Canjear Recompensa</button>
-      </article>
-
-      <article class="product featured">
-        <span class="tag">POPULAR</span>
-        <div>
-          <div class="diamond">🎁</div>
-          <h3>Recompensa VIP</h3>
-          <div class="qty">110 Diamantes Gratis</div>
-          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">300 <small>Puntos</small></div>
-          <p class="note">Canjea tus puntos acumulados por un Paquete Inicial de 110 diamantes.</p>
-        </div>
-        <button class="btn" onclick="canjearRecompensa('110 Diamantes Gratis', 300)">Canjear Recompensa</button>
-      </article>
-
-      <article class="product">
-        <div>
-          <div class="diamond">🎁</div>
-          <h3>Recompensa Épica</h3>
-          <div class="qty">341 Diamantes Gratis</div>
-          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">800 <small>Puntos</small></div>
-          <p class="note">Canjea tus puntos acumulados por un Paquete Básico completo.</p>
-        </div>
-        <button class="btn" onclick="canjearRecompensa('341 Diamantes Gratis', 800)">Canjear Recompensa</button>
-      </article>
+  <!-- BARRA VIP MINI (ARRIBA) -->
+  <section class="wrap">
+    <div class="vip-mini-bar">
+      <span>⭐ ¿Tienes puntos acumulados o quieres canjearlos?</span>
+      <a class="btn" href="#puntos-section" style="padding: 8px 14px; font-size: 0.7rem;">Canjear puntos ↗</a>
     </div>
   </section>
 
@@ -1036,10 +998,73 @@ footer {
         </form>
       </div>
 
-      <!-- Lista de Reseñas Compactas con Nombre Arriba y Estrellas en Número -->
+      <!-- Lista de Reseñas Compactas -->
       <div class="reviews-grid" id="reviewsList">
         <!-- Se cargan dinámicamente -->
       </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PUNTOS VIP / RECOMPENSAS (CASI ABAJO) -->
+  <section class="section wrap" id="puntos-section">
+    <div class="section-head">
+      <h2>⭐ Sistema de Puntos VIP</h2>
+      <p>Inicia sesión con tu correo, acumula 10 puntos por cada $15 MXN de compra y canjea diamantes gratis.</p>
+    </div>
+
+    <div class="points-full-card" id="cardNoAuth">
+      <h3>🔑 Inicia sesión para acumular puntos</h3>
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 16px;">Guarda tu progreso de compras y obtén recompensas exclusivas.</p>
+      <div class="auth-box">
+        <input type="email" id="userEmailInput" placeholder="Tu correo electrónico" autocomplete="email">
+        <br>
+        <button class="btn" onclick="registrarUsuario()">Entrar / Registrarme</button>
+      </div>
+    </div>
+
+    <div class="points-full-card" id="cardAuth" style="display: none;">
+      <h3>🌟 ¡Bienvenido, <span id="lblUserEmail" style="color: var(--text);"></span>!</h3>
+      <p style="color: var(--muted); font-size: 0.9rem; margin: 5px 0;">Tus Puntos Acumulados:</p>
+      <div class="points-display" id="lblUserPoints">0 Pts</div>
+      <p style="font-size: 0.82rem; color: var(--gold-light);">Ganas 10 puntos por cada $15 MXN de compra.</p>
+      <button class="btn secondary" onclick="cerrarSesion()" style="margin-top: 10px; font-size: 0.7rem;">Cerrar Sesión</button>
+    </div>
+
+    <!-- Catálogo de Recompensas por Puntos Actualizado -->
+    <div class="products" style="margin-top: 30px;">
+      <article class="product">
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Canje Inicial</h3>
+          <div class="qty">110 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">500 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un paquete de 110 diamantes.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('110 Diamantes Gratis', 500)">Canjear Recompensa</button>
+      </article>
+
+      <article class="product featured">
+        <span class="tag">POPULAR</span>
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Canje Básico</h3>
+          <div class="qty">341 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">1,000 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un paquete de 341 diamantes.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('341 Diamantes Gratis', 1000)">Canjear Recompensa</button>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Canje Popular</h3>
+          <div class="qty">572 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">3,000 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un paquete de 572 diamantes.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('572 Diamantes Gratis', 3000)">Canjear Recompensa</button>
+      </article>
     </div>
   </section>
 
@@ -1099,7 +1124,7 @@ footer {
       </details>
       <details>
         <summary>¿Cómo funcionan los puntos?</summary>
-        <p>Inicia sesión con tu correo en la sección de Puntos VIP. Cada compra te otorga puntos automáticamente que puedes canjear por diamantes gratis.</p>
+        <p>Inicia sesión con tu correo en la sección de Puntos VIP (al final de la página). Cada compra te otorga 10 puntos por cada $15 MXN gastados que puedes canjear por diamantes gratis.</p>
       </details>
       <details>
         <summary>¿Cómo obtengo ayuda con mi pedido?</summary>
@@ -1207,7 +1232,7 @@ let ofertaPendiente = null;
 let recompensaCanjeada = null;
 let calificacionSeleccionada = 5;
 
-// SISTEMA DE PUNTOS VIP
+// SISTEMA DE PUNTOS VIP (10 puntos por cada $15 MXN)
 let usuarioActual = JSON.parse(localStorage.getItem('dxnzz_user_session')) || null;
 
 function actualizarSesionUI() {
@@ -1255,7 +1280,8 @@ function cerrarSesion() {
 
 function sumarPuntosPorCompra(montoMxn) {
   if (!usuarioActual) return;
-  let puntosGanados = Math.floor(montoMxn / 10) * 10;
+  // 10 puntos por cada 15 pesos
+  let puntosGanados = Math.floor(montoMxn / 15) * 10;
   if(puntosGanados <= 0) puntosGanados = 10;
   
   usuarioActual.puntos += puntosGanados;
@@ -1272,7 +1298,7 @@ function sumarPuntosPorCompra(montoMxn) {
 function canjearRecompensa(nombreRecompensa, costoPuntos) {
   if (!validarPlayerId()) return;
   if (!usuarioActual) {
-    alert("Por favor, inicia sesión en la sección de Puntos VIP de arriba para poder canjear recompensas.");
+    alert("Por favor, inicia sesión en la sección de Puntos VIP al final de la página para poder canjear recompensas.");
     document.getElementById('puntos-section').scrollIntoView({ behavior: 'smooth' });
     return;
   }
