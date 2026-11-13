@@ -411,7 +411,7 @@ header {
   text-align: center;
 }
 
-/* ESTILOS PARA RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO) */
+/* ESTILOS PARA RESEÑAS (REDUCIDAS, NOMBRE ARRIBA, TEXTO BLANCO Y CANTIDAD DE ESTRELLAS) */
 .reviews-container {
   max-width: 750px;
   margin: 0 auto;
@@ -479,31 +479,36 @@ header {
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
 }
 
-.review-card-clean {
+.review-card-compact {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 16px 18px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
-.review-text-clean {
+.review-author-compact {
   color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 400;
-  line-height: 1.4;
+  font-size: 0.8rem;
+  font-weight: 700;
   margin: 0;
 }
-.review-author-clean {
+.review-stars-compact {
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.review-text-compact {
   color: #ffffff;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 400;
+  line-height: 1.35;
   margin: 0;
 }
 .no-reviews {
@@ -997,7 +1002,7 @@ footer {
     </div>
   </section>
 
-  <!-- SECCIÓN DE RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO) -->
+  <!-- SECCIÓN DE RESEÑAS -->
   <section class="section wrap" id="reseñas">
     <div class="section-head">
       <h2>Reseñas de Clientes</h2>
@@ -1031,7 +1036,7 @@ footer {
         </form>
       </div>
 
-      <!-- Lista de Reseñas (Solo Texto Blanco y Reducido) -->
+      <!-- Lista de Reseñas Compactas con Nombre Arriba y Estrellas en Número -->
       <div class="reviews-grid" id="reviewsList">
         <!-- Se cargan dinámicamente -->
       </div>
@@ -1076,7 +1081,7 @@ footer {
   <!-- PREGUNTAS FRECUENTES -->
   <section class="section wrap" id="preguntas">
     <div class="section-head">
-      <h2>Antes de volver al juego.</h2>
+      <h2>Preguntas frecuentes</h2>
       <p>Aclara tus dudas antes de ordenar.</p>
     </div>
     <div class="faq">
@@ -1406,7 +1411,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO)
+// SISTEMA DE RESEÑAS COMPACTAS (NOMBRE ARRIBA, ESTRELLAS EN NÚMERO Y COMENTARIO BLANCO)
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1422,7 +1427,7 @@ function seleccionarEstrellas(estrellas) {
 
 function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_clean_v1')) || [];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1')) || [];
 
   lista.innerHTML = "";
   if (reseñasGuardadas.length === 0) {
@@ -1432,10 +1437,11 @@ function cargarReseñas() {
 
   reseñasGuardadas.forEach(rev => {
     let item = document.createElement('div');
-    item.className = 'review-card-clean';
+    item.className = 'review-card-compact';
     item.innerHTML = `
-      <p class="review-text-clean">${rev.comentario}</p>
-      <p class="review-author-clean">${rev.nombre}</p>
+      <p class="review-author-compact">${rev.nombre}</p>
+      <div class="review-stars-compact">${rev.estrellas} ⭐️</div>
+      <p class="review-text-compact">${rev.comentario}</p>
     `;
     lista.appendChild(item);
   });
@@ -1450,13 +1456,14 @@ function enviarReseña(event) {
 
   let nuevaReseña = {
     nombre: nombre,
+    estrellas: calificacionSeleccionada,
     comentario: comentario
   };
 
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_clean_v1')) || [];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1')) || [];
 
   reseñasGuardadas.unshift(nuevaReseña);
-  localStorage.setItem('dxnzz_reviews_clean_v1', JSON.stringify(reseñasGuardadas));
+  localStorage.setItem('dxnzz_reviews_compact_v1', JSON.stringify(reseñasGuardadas));
 
   document.getElementById('reviewForm').reset();
   seleccionarEstrellas(5);
