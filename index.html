@@ -411,7 +411,7 @@ header {
   text-align: center;
 }
 
-/* ESTILOS PARA RESEÑAS REALES */
+/* ESTILOS PARA RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO) */
 .reviews-container {
   max-width: 750px;
   margin: 0 auto;
@@ -477,42 +477,34 @@ header {
   color: var(--gold);
 }
 
-.reviews-list {
+.reviews-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 16px;
 }
-.review-item {
+
+.review-card-clean {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 20px;
+  padding: 16px 18px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-.review-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  flex-direction: column;
+  gap: 8px;
 }
-.review-author {
-  font-weight: 700;
-  color: var(--text);
-  font-size: 1rem;
-}
-.review-stars {
-  color: var(--gold);
-  font-size: 1rem;
-}
-.review-comment {
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
+.review-text-clean {
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.4;
   margin: 0;
 }
-.review-date {
-  font-size: 0.75rem;
-  color: #777;
-  margin-top: 8px;
+.review-author-clean {
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0;
 }
 .no-reviews {
   text-align: center;
@@ -1005,7 +997,7 @@ footer {
     </div>
   </section>
 
-  <!-- SECCIÓN DE RESEÑAS REALES -->
+  <!-- SECCIÓN DE RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO) -->
   <section class="section wrap" id="reseñas">
     <div class="section-head">
       <h2>Reseñas de Clientes</h2>
@@ -1039,9 +1031,9 @@ footer {
         </form>
       </div>
 
-      <!-- Lista de Reseñas Reales -->
-      <div class="reviews-list" id="reviewsList">
-        <!-- Las reseñas reales ingresadas por los usuarios se cargan aquí -->
+      <!-- Lista de Reseñas (Solo Texto Blanco y Reducido) -->
+      <div class="reviews-grid" id="reviewsList">
+        <!-- Se cargan dinámicamente -->
       </div>
     </div>
   </section>
@@ -1414,7 +1406,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS REALES (VACÍO POR DEFECTO HASTA QUE LOS CLIENTES ESCRIBAN)
+// SISTEMA DE RESEÑAS (SOLO TEXTO BLANCO Y REDUCIDO)
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1430,25 +1422,20 @@ function seleccionarEstrellas(estrellas) {
 
 function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_reales')) || [];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_clean_v1')) || [];
 
   lista.innerHTML = "";
   if (reseñasGuardadas.length === 0) {
-    lista.innerHTML = `<div class="no-reviews">Aún no hay reseñas registradas. ¡Sé el primero en dejarnos tu opinión!</div>`;
+    lista.innerHTML = `<div class="no-reviews" style="grid-column: 1 / -1;">Aún no hay reseñas registradas. ¡Sé el primero en dejarnos tu opinión!</div>`;
     return;
   }
 
   reseñasGuardadas.forEach(rev => {
-    let estrellasHtml = '★'.repeat(rev.estrellas) + '☆'.repeat(5 - rev.estrellas);
     let item = document.createElement('div');
-    item.className = 'review-item';
+    item.className = 'review-card-clean';
     item.innerHTML = `
-      <div class="review-header">
-        <span class="review-author">${rev.nombre}</span>
-        <span class="review-stars">${estrellasHtml}</span>
-      </div>
-      <p class="review-comment">${rev.comentario}</p>
-      <div class="review-date">${rev.fecha}</div>
+      <p class="review-text-clean">${rev.comentario}</p>
+      <p class="review-author-clean">${rev.nombre}</p>
     `;
     lista.appendChild(item);
   });
@@ -1463,15 +1450,13 @@ function enviarReseña(event) {
 
   let nuevaReseña = {
     nombre: nombre,
-    estrellas: calificacionSeleccionada,
-    comentario: comentario,
-    fecha: "Justo ahora"
+    comentario: comentario
   };
 
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_reales')) || [];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_clean_v1')) || [];
 
   reseñasGuardadas.unshift(nuevaReseña);
-  localStorage.setItem('dxnzz_reviews_reales', JSON.stringify(reseñasGuardadas));
+  localStorage.setItem('dxnzz_reviews_clean_v1', JSON.stringify(reseñasGuardadas));
 
   document.getElementById('reviewForm').reset();
   seleccionarEstrellas(5);
