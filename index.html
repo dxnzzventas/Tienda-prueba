@@ -230,7 +230,7 @@ header {
 }
 .section-head p { color: var(--muted); margin: 0; }
 
-/* PRODUCTOS */
+/* PRODUCTOS Y RECOMPENSAS */
 .products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -373,6 +373,44 @@ header {
 
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
+/* ESTILOS VIP & PUNTOS */
+.points-card {
+  background: linear-gradient(135deg, #1f1807, var(--panel));
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: 26px;
+  max-width: 750px;
+  margin: 0 auto 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  text-align: center;
+}
+.points-card h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+.points-display {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  margin: 10px 0;
+}
+.auth-box input {
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 14px;
+  background: #0a0a0a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 /* ESTILOS PARA RESEÑAS */
 .reviews-container {
   max-width: 750px;
@@ -425,23 +463,18 @@ header {
   gap: 8px;
   font-size: 1.8rem;
   cursor: pointer;
+  direction: rtl;
+  justify-content: flex-end;
 }
 .star-rating-select span {
   color: #444;
   transition: color 0.2s;
+  direction: ltr;
 }
 .star-rating-select span.selected,
 .star-rating-select span:hover,
 .star-rating-select span:hover ~ span {
   color: var(--gold);
-}
-/* Invertir orden de hover para estrella única izquierda a derecha */
-.star-rating-select {
-  direction: rtl;
-  justify-content: flex-end;
-}
-.star-rating-select span {
-  direction: ltr;
 }
 
 .reviews-list {
@@ -585,6 +618,7 @@ footer {
     <nav class="navlinks">
       <a href="#paquetes">Paquetes</a>
       <a href="#ofertas">Primera Recarga</a>
+      <a href="#puntos-section">Puntos VIP</a>
       <a href="#metodos-pago">Pagos</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#reseñas">Reseñas</a>
@@ -648,6 +682,69 @@ footer {
       <label for="playerId">🎮 Ingresa tu ID de Free Fire (Mín. 8 dígitos):</label>
       <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off" oninput="verificarIdEnTiempoReal()">
       <div id="playerIdError" class="error-msg">ID inválido o incorrecto</div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PUNTOS VIP / RECOMPENSAS -->
+  <section class="section wrap" id="puntos-section">
+    <div class="section-head">
+      <h2>⭐ Sistema de Puntos VIP</h2>
+      <p>Regístrate con tu correo, acumula puntos con cada compra y canjea diamantes gratis.</p>
+    </div>
+
+    <div class="points-card" id="cardNoAuth">
+      <h3>🔑 Inicia sesión para acumular puntos</h3>
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 16px;">Guarda tu progreso de compras y obtén recompensas exclusivas.</p>
+      <div class="auth-box">
+        <input type="email" id="userEmailInput" placeholder="Tu correo electrónico" autocomplete="email">
+        <br>
+        <button class="btn" onclick="registrarUsuario()">Entrar / Registrarme</button>
+      </div>
+    </div>
+
+    <div class="points-card" id="cardAuth" style="display: none;">
+      <h3>🌟 ¡Bienvenido, <span id="lblUserEmail" style="color: var(--text);"></span>!</h3>
+      <p style="color: var(--muted); font-size: 0.9rem; margin: 5px 0;">Tus Puntos Acumulados:</p>
+      <div class="points-display" id="lblUserPoints">0 Pts</div>
+      <p style="font-size: 0.82rem; color: var(--gold-light);">Ganas 10 puntos por cada $10 MXN de compra.</p>
+      <button class="btn secondary" onclick="cerrarSesion()" style="margin-top: 10px; font-size: 0.7rem;">Cerrar Sesión</button>
+    </div>
+
+    <!-- Catálogo de Recompensas por Puntos -->
+    <div class="products" style="margin-top: 30px;">
+      <article class="product">
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Recompensa Inicial</h3>
+          <div class="qty">50 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">150 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un paquete de 50 diamantes.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('50 Diamantes Gratis', 150)">Canjear Recompensa</button>
+      </article>
+
+      <article class="product featured">
+        <span class="tag">POPULAR</span>
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Recompensa VIP</h3>
+          <div class="qty">110 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">300 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un Paquete Inicial de 110 diamantes.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('110 Diamantes Gratis', 300)">Canjear Recompensa</button>
+      </article>
+
+      <article class="product">
+        <div>
+          <div class="diamond">🎁</div>
+          <h3>Recompensa Épica</h3>
+          <div class="qty">341 Diamantes Gratis</div>
+          <div class="price" style="font-size: 1.5rem; color: var(--gold-light);">800 <small>Puntos</small></div>
+          <p class="note">Canjea tus puntos acumulados por un Paquete Básico completo.</p>
+        </div>
+        <button class="btn" onclick="canjearRecompensa('341 Diamantes Gratis', 800)">Canjear Recompensa</button>
+      </article>
     </div>
   </section>
 
@@ -992,6 +1089,18 @@ footer {
   </div>
 </div>
 
+<!-- MODAL DE PUNTOS INSUFICIENTES -->
+<div class="modal-overlay" id="noPointsModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3>Puntos Insuficientes</h3>
+    <p id="noPointsText">No tienes suficientes puntos para canjear esta recompensa. ¡Sigue comprando para acumular más!</p>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="cerrarModalNoPoints()" style="width: 100%;">Entendido</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL DE ADVERTENCIA DE LÍMITE ALCANZADO -->
 <div class="modal-overlay" id="limiteModal">
   <div class="modal-box">
@@ -1039,11 +1148,105 @@ const productosPrecios = {
 
 let carrito = {};
 let ofertaPendiente = null;
+let recompensaCanjeada = null;
 let calificacionSeleccionada = 5;
+
+// SISTEMA DE PUNTOS VIP
+let usuarioActual = JSON.parse(localStorage.getItem('dxnzz_user_session')) || null;
+
+function actualizarSesionUI() {
+  const cardNoAuth = document.getElementById('cardNoAuth');
+  const cardAuth = document.getElementById('cardAuth');
+  
+  if (usuarioActual) {
+    cardNoAuth.style.display = 'none';
+    cardAuth.style.display = 'block';
+    document.getElementById('lblUserEmail').textContent = usuarioActual.email;
+    document.getElementById('lblUserPoints').textContent = usuarioActual.puntos + " Pts";
+  } else {
+    cardNoAuth.style.display = 'block';
+    cardAuth.style.display = 'none';
+  }
+}
+
+function registrarUsuario() {
+  const emailInput = document.getElementById('userEmailInput').value.trim();
+  if(!emailInput || !emailInput.includes('@')) {
+    alert("Por favor ingresa un correo electrónico válido.");
+    return;
+  }
+  
+  let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
+  if (!usuariosDB[emailInput]) {
+    usuariosDB[emailInput] = { email: emailInput, puntos: 50 }; // 50 puntos de bienvenida por registrarse
+    alert("¡Registro exitoso! Te hemos regalado 50 puntos de bienvenida 🎉");
+  } else {
+    alert("¡Bienvenido de vuelta!");
+  }
+  
+  usuarioActual = usuariosDB[emailInput];
+  localStorage.setItem('dxnzz_user_session', JSON.stringify(usuarioActual));
+  localStorage.setItem('dxnzz_users_db', JSON.stringify(usuariosDB));
+  document.getElementById('userEmailInput').value = '';
+  actualizarSesionUI();
+}
+
+function cerrarSesion() {
+  usuarioActual = null;
+  localStorage.removeItem('dxnzz_user_session');
+  actualizarSesionUI();
+}
+
+function sumarPuntosPorCompra(montoMxn) {
+  if (!usuarioActual) return;
+  let puntosGanados = Math.floor(montoMxn / 10) * 10; // 10 puntos por cada $10 MXN
+  if(puntosGanados <= 0) puntosGanados = 10;
+  
+  usuarioActual.puntos += puntosGanados;
+  localStorage.setItem('dxnzz_user_session', JSON.stringify(usuarioActual));
+  
+  let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
+  if(usuariosDB[usuarioActual.email]) {
+    usuariosDB[usuarioActual.email].puntos = usuarioActual.puntos;
+    localStorage.setItem('dxnzz_users_db', JSON.stringify(usuariosDB));
+  }
+  actualizarSesionUI();
+}
+
+function canjearRecompensa(nombreRecompensa, costoPuntos) {
+  if (!validarPlayerId()) return;
+  if (!usuarioActual) {
+    alert("Por favor, inicia sesión en la sección de Puntos VIP de arriba para poder canjear recompensas.");
+    document.getElementById('puntos-section').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  if (usuarioActual.puntos < costoPuntos) {
+    document.getElementById('noPointsText').textContent = `Necesitas ${costoPuntos} puntos para canjear "${nombreRecompensa}". Actualmente tienes ${usuarioActual.puntos} puntos.`;
+    document.getElementById('noPointsModal').style.display = 'grid';
+    return;
+  }
+
+  // Descontar puntos
+  usuarioActual.puntos -= costoPuntos;
+  localStorage.setItem('dxnzz_user_session', JSON.stringify(usuarioActual));
+  let usuariosDB = JSON.parse(localStorage.getItem('dxnzz_users_db')) || {};
+  if(usuariosDB[usuarioActual.email]) {
+    usuariosDB[usuarioActual.email].puntos = usuarioActual.puntos;
+    localStorage.setItem('dxnzz_users_db', JSON.stringify(usuariosDB));
+  }
+  actualizarSesionUI();
+
+  recompensaCanjeada = { nombre: nombreRecompensa, costo: costoPuntos };
+  document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cerrarModalNoPoints() {
+  document.getElementById('noPointsModal').style.display = 'none';
+}
 
 function cambiarMoneda(moneda) {
   monedaActual = moneda;
-  
   document.getElementById('btn-MXN').classList.remove('active');
   document.getElementById('btn-USD').classList.remove('active');
   document.getElementById(`btn-${moneda}`).classList.add('active');
@@ -1058,7 +1261,6 @@ function cambiarMoneda(moneda) {
       el.innerHTML = `$${precioMxn} <small>MXN</small>`;
     }
   });
-
   calcularTotal();
 }
 
@@ -1103,16 +1305,11 @@ function cambiarCantidad(nombre, cambio) {
   }
 
   let nuevoValor = carrito[nombre] + cambio;
-  if (nuevoValor < 0) {
-    nuevoValor = 0;
-  }
-  
+  if (nuevoValor < 0) nuevoValor = 0;
   carrito[nombre] = nuevoValor;
   
   const spanQty = document.getElementById(`qty-${nombre}`);
-  if (spanQty) {
-    spanQty.textContent = carrito[nombre];
-  }
+  if (spanQty) spanQty.textContent = carrito[nombre];
   
   calcularTotal();
 }
@@ -1136,6 +1333,10 @@ function calcularTotal() {
     haySeleccion = true;
   }
 
+  if (recompensaCanjeada) {
+    haySeleccion = true;
+  }
+
   let totalFinal = totalMxn;
   let simboloMoneda = 'MXN';
 
@@ -1155,7 +1356,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS CON LOCALSTORAGE (SOLO DIANA R. POR DEFECTO)
+// SISTEMA DE RESEÑAS
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1221,6 +1422,7 @@ function enviarReseña(event) {
 window.addEventListener('DOMContentLoaded', () => {
   cargarReseñas();
   seleccionarEstrellas(5);
+  actualizarSesionUI();
 });
 
 // VERIFICACIÓN DE ID EN TIEMPO REAL CON MARCO VERDE / ROJO
@@ -1267,18 +1469,14 @@ function validarPlayerId() {
 }
 
 function accionFlotantePrincipal() {
-  if (!validarPlayerId()) {
-    return;
-  }
+  if (!validarPlayerId()) return;
 
   let total = 0;
   for (let prod in carrito) {
-    if (carrito[prod] > 0) {
-      total += carrito[prod] * productosPrecios[prod];
-    }
+    if (carrito[prod] > 0) total += carrito[prod] * productosPrecios[prod];
   }
 
-  if (total === 0 && !ofertaPendiente) {
+  if (total === 0 && !ofertaPendiente && !recompensaCanjeada) {
     document.getElementById('noProductModal').style.display = 'grid';
     return;
   }
@@ -1295,10 +1493,7 @@ function accionFlotantePrincipal() {
 }
 
 function pedirDirecto(nombre, precio) {
-  if (!validarPlayerId()) {
-    return;
-  }
-
+  if (!validarPlayerId()) return;
   ofertaPendiente = { nombre, precio };
   calcularTotal();
   document.getElementById('metodos-pago').scrollIntoView({ behavior: 'smooth' });
@@ -1306,7 +1501,19 @@ function pedirDirecto(nombre, precio) {
 
 function cerrarModal() {
   document.getElementById('customModal').style.display = 'none';
+  
+  // Sumar puntos al concretar pedido
+  let montoCalculado = 0;
+  for (let prod in carrito) {
+    if (carrito[prod] > 0) montoCalculado += carrito[prod] * productosPrecios[prod];
+  }
+  if (ofertaPendiente) montoCalculado = ofertaPendiente.precio;
+  if (montoCalculado > 0) {
+    sumarPuntosPorCompra(montoCalculado);
+  }
+
   ofertaPendiente = null;
+  recompensaCanjeada = null;
   calcularTotal();
 }
 
@@ -1333,7 +1540,7 @@ window.addEventListener('scroll', function() {
   for (let prod in carrito) {
     if (carrito[prod] > 0) haySeleccionada = true;
   }
-  if (ofertaPendiente) haySeleccionada = true;
+  if (ofertaPendiente || recompensaCanjeada) haySeleccionada = true;
 
   if (haySeleccionada) {
     floatingCart.classList.add('visible');
@@ -1367,23 +1574,17 @@ function ejecutarEnvioWhatsApp() {
   let precioFinalTexto = "";
   if (ofertaPendiente) {
     let precioMxn = ofertaPendiente.precio;
-    if (monedaActual === 'USD') {
-      let precioUsd = (precioMxn / TASA_USD).toFixed(2);
-      precioFinalTexto = `$${precioUsd} USD (aprox. $${precioMxn} MXN)`;
-    } else {
-      precioFinalTexto = `$${precioMxn} MXN`;
-    }
+    precioFinalTexto = monedaActual === 'USD' ? `$${(precioMxn / TASA_USD).toFixed(2)} USD` : `$${precioMxn} MXN`;
+  } else if (recompensaCanjeada) {
+    precioFinalTexto = "CANJEADO CON PUNTOS VIP 🎁";
   } else {
-    if (monedaActual === 'USD') {
-      let totalUsd = (totalMxnCalc / TASA_USD).toFixed(2);
-      precioFinalTexto = `$${totalUsd} USD (aprox. $${totalMxnCalc} MXN)`;
-    } else {
-      precioFinalTexto = `$${totalMxnCalc} MXN`;
-    }
+    precioFinalTexto = monedaActual === 'USD' ? `$${(totalMxnCalc / TASA_USD).toFixed(2)} USD` : `$${totalMxnCalc} MXN`;
   }
 
   if (ofertaPendiente) {
     mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
+  } else if (recompensaCanjeada) {
+    mensaje = `Hola *Dxnzz ventas*, ¡quiero reclamar mi recompensa canjeada con puntos!\n\n🎮 *ID de Free Fire:* ${playerId}\n🎁 *Recompensa:* ${recompensaCanjeada.nombre}\n⭐ *(Puntos descontados: ${recompensaCanjeada.costo} Pts)*\n\n${instruccionComprobante}`;
   } else {
     let listaTexto = "";
     for (let prod in carrito) {
@@ -1393,7 +1594,6 @@ function ejecutarEnvioWhatsApp() {
         listaTexto += `\n- ${carrito[prod]}x ${prod} (${subtotalTexto})`;
       }
     }
-
     mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
   }
 
