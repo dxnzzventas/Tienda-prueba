@@ -1039,7 +1039,7 @@ const productosPrecios = {
 
 let carrito = {};
 let ofertaPendiente = null;
-let calificacionSeleccionada = 5; // Por defecto 5 estrellas
+let calificacionSeleccionada = 5;
 
 function cambiarMoneda(moneda) {
   monedaActual = moneda;
@@ -1155,12 +1155,11 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS CON LOCALSTORAGE
+// SISTEMA DE RESEÑAS CON LOCALSTORAGE (SOLO DIANA R. POR DEFECTO)
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
   spans.forEach((span, index) => {
-    // index 0 es 5 estrellas en orden visual por el RTL, ajustamos seleccion
     let valorEstrella = 5 - index;
     if (valorEstrella <= estrellas) {
       span.style.color = 'var(--gold)';
@@ -1172,8 +1171,7 @@ function seleccionarEstrellas(estrellas) {
 
 function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews')) || [
-    { nombre: "Alex G.", estrellas: 5, comentario: "¡Súper rápido y confiable! En menos de 5 minutos me llegaron mis diamantes.", fecha: "Hace 2 días" },
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_v2')) || [
     { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
   ];
 
@@ -1208,20 +1206,18 @@ function enviarReseña(event) {
     fecha: "Justo ahora"
   };
 
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews')) || [
-    { nombre: "Alex G.", estrellas: 5, comentario: "¡Súper rápido y confiable! En menos de 5 minutos me llegaron mis diamantes.", fecha: "Hace 2 días" },
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_v2')) || [
     { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
   ];
 
   reseñasGuardadas.unshift(nuevaReseña);
-  localStorage.setItem('dxnzz_reviews', JSON.stringify(reseñasGuardadas));
+  localStorage.setItem('dxnzz_reviews_v2', JSON.stringify(reseñasGuardadas));
 
   document.getElementById('reviewForm').reset();
   seleccionarEstrellas(5);
   cargarReseñas();
 }
 
-// Cargar reseñas al iniciar la página
 window.addEventListener('DOMContentLoaded', () => {
   cargarReseñas();
   seleccionarEstrellas(5);
