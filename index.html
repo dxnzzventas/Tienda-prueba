@@ -333,7 +333,6 @@ header {
   justify-content: space-between;
   gap: 15px;
   
-  /* Transición más lenta y fluida (0.9 segundos) */
   opacity: 0;
   visibility: hidden;
   transform: translateY(100%);
@@ -342,7 +341,6 @@ header {
               visibility 0.9s;
 }
 
-/* Clase que activa la barra con animación suave */
 .floating-cart.visible {
   opacity: 1;
   visibility: visible;
@@ -362,7 +360,7 @@ header {
   font-size: 0.95rem;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(223, 172, 56, 0.3);
-  display: none; /* Oculto inicialmente por completo */
+  display: none;
   align-items: center;
   gap: 8px;
   text-transform: uppercase;
@@ -374,6 +372,115 @@ header {
 }
 
 .checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+/* ESTILOS PARA RESEÑAS */
+.reviews-container {
+  max-width: 750px;
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+.review-form-card {
+  background: linear-gradient(135deg, var(--panel), var(--panel2));
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.review-form-card h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0a0a0a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+  transition: 0.3s;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(223, 172, 56, 0.2);
+}
+.star-rating-select {
+  display: flex;
+  gap: 8px;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.star-rating-select span {
+  color: #444;
+  transition: color 0.2s;
+}
+.star-rating-select span.selected,
+.star-rating-select span:hover,
+.star-rating-select span:hover ~ span {
+  color: var(--gold);
+}
+/* Invertir orden de hover para estrella única izquierda a derecha */
+.star-rating-select {
+  direction: rtl;
+  justify-content: flex-end;
+}
+.star-rating-select span {
+  direction: ltr;
+}
+
+.reviews-list {
+  display: grid;
+  gap: 16px;
+}
+.review-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.review-author {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1rem;
+}
+.review-stars {
+  color: var(--gold);
+  font-size: 1rem;
+}
+.review-comment {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.review-date {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 8px;
+}
 
 /* MODAL PERSONALIZADO */
 .modal-overlay {
@@ -480,6 +587,7 @@ footer {
       <a href="#ofertas">Primera Recarga</a>
       <a href="#metodos-pago">Pagos</a>
       <a href="#como-funciona">Cómo funciona</a>
+      <a href="#reseñas">Reseñas</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
     <div class="header-actions">
@@ -753,6 +861,47 @@ footer {
     </div>
   </section>
 
+  <!-- SECCIÓN DE RESEÑAS FUNCIONAL -->
+  <section class="section wrap" id="reseñas">
+    <div class="section-head">
+      <h2>Reseñas de Clientes</h2>
+      <p>Deja tu opinión y calificación sobre nuestro servicio.</p>
+    </div>
+
+    <div class="reviews-container">
+      <!-- Formulario para dejar reseña -->
+      <div class="review-form-card">
+        <h3>💬 Escribe tu reseña</h3>
+        <form id="reviewForm" onsubmit="enviarReseña(event)">
+          <div class="form-group">
+            <label for="reviewName">Tu Nombre o ID:</label>
+            <input type="text" id="reviewName" placeholder="Ej: Carlos M. o ID 192845" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label>Calificación (Estrellas):</label>
+            <div class="star-rating-select" id="starSelect">
+              <span onclick="seleccionarEstrellas(5)">★</span>
+              <span onclick="seleccionarEstrellas(4)">★</span>
+              <span onclick="seleccionarEstrellas(3)">★</span>
+              <span onclick="seleccionarEstrellas(2)">★</span>
+              <span onclick="seleccionarEstrellas(1)">★</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reviewComment">Comentario:</label>
+            <textarea id="reviewComment" rows="3" placeholder="Excelente servicio, entrega rápida..." required></textarea>
+          </div>
+          <button type="submit" class="btn" style="width: 100%;">⭐ Publicar Reseña</button>
+        </form>
+      </div>
+
+      <!-- Lista de Reseñas -->
+      <div class="reviews-list" id="reviewsList">
+        <!-- Las reseñas se cargan aquí dinámicamente -->
+      </div>
+    </div>
+  </section>
+
   <!-- CÓMO FUNCIONA -->
   <section class="section wrap" id="como-funciona">
     <div class="section-head">
@@ -890,6 +1039,7 @@ const productosPrecios = {
 
 let carrito = {};
 let ofertaPendiente = null;
+let calificacionSeleccionada = 5; // Por defecto 5 estrellas
 
 function cambiarMoneda(moneda) {
   monedaActual = moneda;
@@ -1004,6 +1154,78 @@ function calcularTotal() {
     btnFlotante.classList.remove('show-btn');
   }
 }
+
+// SISTEMA DE RESEÑAS CON LOCALSTORAGE
+function seleccionarEstrellas(estrellas) {
+  calificacionSeleccionada = estrellas;
+  const spans = document.querySelectorAll('#starSelect span');
+  spans.forEach((span, index) => {
+    // index 0 es 5 estrellas en orden visual por el RTL, ajustamos seleccion
+    let valorEstrella = 5 - index;
+    if (valorEstrella <= estrellas) {
+      span.style.color = 'var(--gold)';
+    } else {
+      span.style.color = '#444';
+    }
+  });
+}
+
+function cargarReseñas() {
+  const lista = document.getElementById('reviewsList');
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews')) || [
+    { nombre: "Alex G.", estrellas: 5, comentario: "¡Súper rápido y confiable! En menos de 5 minutos me llegaron mis diamantes.", fecha: "Hace 2 días" },
+    { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
+  ];
+
+  lista.innerHTML = "";
+  reseñasGuardadas.forEach(rev => {
+    let estrellasHtml = '★'.repeat(rev.estrellas) + '☆'.repeat(5 - rev.estrellas);
+    let item = document.createElement('div');
+    item.className = 'review-item';
+    item.innerHTML = `
+      <div class="review-header">
+        <span class="review-author">${rev.nombre}</span>
+        <span class="review-stars">${estrellasHtml}</span>
+      </div>
+      <p class="review-comment">${rev.comentario}</p>
+      <div class="review-date">${rev.fecha}</div>
+    `;
+    lista.appendChild(item);
+  });
+}
+
+function enviarReseña(event) {
+  event.preventDefault();
+  const nombre = document.getElementById('reviewName').value.trim();
+  const comentario = document.getElementById('reviewComment').value.trim();
+
+  if(!nombre || !comentario) return;
+
+  let nuevaReseña = {
+    nombre: nombre,
+    estrellas: calificacionSeleccionada,
+    comentario: comentario,
+    fecha: "Justo ahora"
+  };
+
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews')) || [
+    { nombre: "Alex G.", estrellas: 5, comentario: "¡Súper rápido y confiable! En menos de 5 minutos me llegaron mis diamantes.", fecha: "Hace 2 días" },
+    { nombre: "Diana R.", estrellas: 5, comentario: "Excelente atención por WhatsApp y muy buenos precios en la primera recarga.", fecha: "Hace 4 días" }
+  ];
+
+  reseñasGuardadas.unshift(nuevaReseña);
+  localStorage.setItem('dxnzz_reviews', JSON.stringify(reseñasGuardadas));
+
+  document.getElementById('reviewForm').reset();
+  seleccionarEstrellas(5);
+  cargarReseñas();
+}
+
+// Cargar reseñas al iniciar la página
+window.addEventListener('DOMContentLoaded', () => {
+  cargarReseñas();
+  seleccionarEstrellas(5);
+});
 
 // VERIFICACIÓN DE ID EN TIEMPO REAL CON MARCO VERDE / ROJO
 function verificarIdEnTiempoReal() {
