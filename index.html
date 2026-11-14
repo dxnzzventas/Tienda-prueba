@@ -823,7 +823,7 @@ footer {
         </div>
       </article>
 
-      <!-- PAQUETE MAESTRO (CON ETIQUETA POSICIONADA ARRIBA DEL TODO PARA NO TAPE EL DIAMANTE) -->
+      <!-- PAQUETE MAESTRO -->
       <article class="product featured" style="padding-top: 36px;">
         <span class="tag" style="top: 8px; right: 10px;">🔥 MÁS POPULAR</span>
         <div>
@@ -855,19 +855,20 @@ footer {
         </div>
       </article>
 
-      <!-- PAQUETE TITÁN (ETIQUETA ACOMODADA Y BOTONES AGRANDADOS) -->
+      <!-- PAQUETE TITÁN (PRECIO BAJO EL TÍTULO PARA EVITAR TRASLAPE) -->
       <article class="product featured" style="grid-column: 1 / -1; background: linear-gradient(160deg, #2b1f05, #141414); border: 2px solid var(--gold); padding: 14px 18px; position: relative;">
         <span class="tag" style="background: linear-gradient(45deg, #ff4500, var(--gold-light)); color: #000; top: 8px; right: 12px; font-size: 0.65rem; padding: 3px 8px;">⚡ MÁXIMO PODER</span>
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; width: 100%;">
           <div style="display: flex; align-items: center; gap: 12px; max-width: 320px;">
             <div class="diamond" style="font-size: 1.8rem; width: 44px; height: 44px; margin-bottom: 0; border-radius: 10px; flex-shrink: 0;">👑</div>
             <div>
-              <h3 style="margin: 0; font-size: 1rem; font-family: 'Cinzel', serif;">Paquete Titán</h3>
+              <h3 style="margin: 0 0 2px 0; font-size: 1rem; font-family: 'Cinzel', serif;">Paquete Titán</h3>
               <div class="qty" style="font-size: 0.8rem;">30,800 Diamantes</div>
+              <!-- PRECIO ABAJO DEL TÍTULO -->
+              <div class="price" data-mxn="3699" style="font-size: 1.3rem; margin: 4px 0 0 0; color: var(--gold);">$3,699 <small>MXN</small></div>
             </div>
           </div>
-          <div class="price" data-mxn="3699" style="font-size: 1.5rem; margin: 0; color: var(--gold);">$3,699 <small>MXN</small></div>
-          <!-- BOTONES AGRANDADOS Y CÓMODOS -->
+          <!-- BOTONES AGRANDADOS -->
           <div class="qty-controls" style="width: 160px; padding: 8px 14px; background: rgba(0,0,0,0.6);">
             <button class="qty-btn" style="width: 38px; height: 38px; font-size: 1.2rem; border-radius: 10px;" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', -1)">-</button>
             <span class="qty-num" id="qty-Paquete Titán — 30,800 Diamantes" style="font-size: 1.2rem;">0</span>
@@ -909,8 +910,9 @@ footer {
         <button class="btn" onclick="pedirDirecto('Primera Recarga — 2,398 Diamantes', 275)">Solicitar Oferta</button>
       </article>
 
-      <article class="product featured">
-        <span class="tag">MÁXIMO AHORRO</span>
+      <!-- MÁXIMO AHORRO (ETIQUETA AJUSTADA PARA QUE QUEPA DENTRO) -->
+      <article class="product featured" style="padding-top: 36px;">
+        <span class="tag" style="top: 8px; right: 10px; font-size: 0.6rem; padding: 3px 8px;">MÁXIMO AHORRO</span>
         <div>
           <div class="diamond">💎</div>
           <h3>Primera Recarga</h3>
