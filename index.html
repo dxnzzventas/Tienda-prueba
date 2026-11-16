@@ -762,6 +762,21 @@ footer {
     </div>
   
     <div class="products">
+      
+      <article class="product">
+        <div>
+          <div class="diamond">💎</div>
+          <h3>Paquete Inicial</h3>
+          <div class="qty">110 Diamantes</div>
+          <div class="price" data-mxn="16">$16 <small>MXN</small></div>
+          <p class="note">Recarga rápida de 110 diamantes.</p>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="cambiarCantidad('110 Diamantes', -1)">-</button>
+          <span class="qty-num" id="qty-110 Diamantes">0</span>
+          <button class="qty-btn" onclick="cambiarCantidad('110 Diamantes', 1)">+</button>
+        </div>
+      </article>
 
       <article class="product">
         <div>
@@ -1216,6 +1231,7 @@ const TASA_USD = 17.98;
 let monedaActual = 'MXN';
 
 const productosPrecios = {
+  "110 Diamantes": 16,
   "341 Diamantes": 49,
   "572 Diamantes": 79,
   "1,166 Diamantes (Regular)": 149,
