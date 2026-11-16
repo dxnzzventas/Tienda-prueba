@@ -1463,7 +1463,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS COMPACTAS
+// SISTEMA DE RESEÑAS CON RESEÑAS PREDETERMINADAS PARA TODOS
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1479,14 +1479,19 @@ function seleccionarEstrellas(estrellas) {
 
 function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1')) || [];
+  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1'));
 
-  lista.innerHTML = "";
-  if (reseñasGuardadas.length === 0) {
-    lista.innerHTML = `<div class="no-reviews" style="grid-column: 1 / -1;">Aún no hay reseñas registradas. ¡Sé el primero en dejarnos tu opinión!</div>`;
-    return;
+  // Si no hay reseñas guardadas en este navegador, cargamos estas por defecto para que todos las vean
+  if (!reseñasGuardadas || reseñasGuardadas.length === 0) {
+    reseñasGuardadas = [
+      { nombre: "Martín", estrellas: 5, comentario: "Buena atención y muy confiable, la verdad para las ofertas y descuentos que tiene está muy bueno..." },
+      { nombre: "David", estrellas: 5, comentario: "No confié mucho de primero pero la verdad es confiable, comprense más xd" },
+      { nombre: "José", estrellas: 5, comentario: "Confiable ⚡ gracias dxnzz" }
+    ];
+    localStorage.setItem('dxnzz_reviews_compact_v1', JSON.stringify(reseñasGuardadas));
   }
 
+  lista.innerHTML = "";
   reseñasGuardadas.forEach(rev => {
     let item = document.createElement('div');
     item.className = 'review-card-compact';
