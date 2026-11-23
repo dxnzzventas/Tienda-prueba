@@ -1219,7 +1219,7 @@ footer {
           Programa de Mini Influencers
         </h3>
         <p style="color: var(--muted); font-size: 0.86rem; margin: 0 auto 16px; max-width: 620px;">
-          ¿Te interesa? Escríbenos para postularte y conocer todos los detalles[span_3](start_span)[span_3](end_span). Obtén tu código especial y consulta tu nivel cuando estés registrado y confirmado.
+          ¿Te interesa? Escríbenos para postularte y conocer todos los detalles. Obtén tu código especial y consulta tu nivel cuando estés registrado y confirmado.
         </p>
 
         <div class="influencer-tabs">
@@ -1310,27 +1310,27 @@ footer {
           <div class="influencer-box">
             <h4>📌 Tareas</h4>
             <ul>
-              <li><strong>Crea videos:</strong> Graba contenido para TikTok / Reels mostrando que nuestra página es 100% confiable y recomendable[span_4](start_span)[span_4](end_span).</li>
-              <li><strong>Meta mínima:</strong> Consigue al menos 1 compra de un paquete de 572 diamantes referida por ti[span_5](start_span)[span_5](end_span).</li>
-              <li><strong>Promueve:</strong> Sube de 1 a 2 videos semanales (clips, consejos o promos) y pide a tus referidos que te mencionen al comprar[span_6](start_span)[span_6](end_span).</li>
+              <li><strong>Crea videos:</strong> Graba contenido para TikTok / Reels mostrando que nuestra página es 100% confiable y recomendable.</li>
+              <li><strong>Meta mínima:</strong> Consigue al menos 1 compra de un paquete de 572 diamantes referida por ti.</li>
+              <li><strong>Promueve:</strong> Sube de 1 a 2 videos semanales (clips, consejos o promos) y pide a tus referidos que te mencionen al comprar.</li>
             </ul>
           </div>
           <div class="influencer-box">
             <h4>🏆 Escalera Mensual</h4>
             <ul>
-              <li><strong>Nivel 1:</strong> Mínimo 1 venta de 572 diamantes = 110 diamantes gratis[span_7](start_span)[span_7](end_span).</li>
-              <li><strong>Nivel 2:</strong> 3 a 4 ventas al mes = Pase Booyah o bono extra[span_8](start_span)[span_8](end_span).</li>
-              <li><strong>Nivel 3:</strong> 5 a 9 ventas al mes = Paquete mayor de diamantes + mención[span_9](start_span)[span_9](end_span).</li>
-              <li><strong>Nivel 4:</strong> 10+ ventas al mes = Máxima recompensa mensual + prioridad[span_10](start_span)[span_10](end_span).</li>
+              <li><strong>Nivel 1:</strong> Mínimo 1 venta de 572 diamantes = 110 diamantes gratis.</li>
+              <li><strong>Nivel 2:</strong> 3 a 4 ventas al mes = Pase Booyah o bono extra.</li>
+              <li><strong>Nivel 3:</strong> 5 a 9 ventas al mes = Paquete mayor de diamantes + mención.</li>
+              <li><strong>Nivel 4:</strong> 10+ ventas al mes = Máxima recompensa mensual + prioridad.</li>
             </ul>
           </div>
           <div class="influencer-box">
             <h4>⚖️ Reglas</h4>
             <ul>
-              <li><strong>Ventas validadas:</strong> Solo cuentan compras pagadas y confirmadas[span_11](start_span)[span_11](end_span).</li>
-              <li><strong>Transparencia:</strong> Prohibido hacer promesas falsas o estafas[span_12](start_span)[span_12](end_span).</li>
-              <li><strong>Conteo mensual:</strong> Las ventas se reinician cada mes para los premios[span_13](start_span)[span_13](end_span).</li>
-              <li>¡Entre más ventas consigas, más diamantes ganas[span_14](start_span)[span_14](end_span)!</li>
+              <li><strong>Ventas validadas:</strong> Solo cuentan compras pagadas y confirmadas.</li>
+              <li><strong>Transparencia:</strong> Prohibido hacer promesas falsas o estafas.</li>
+              <li><strong>Conteo mensual:</strong> Las ventas se reinician cada mes para los premios.</li>
+              <li>¡Entre más ventas consigas, más diamantes ganas!</li>
             </ul>
           </div>
         </div>
@@ -1470,36 +1470,36 @@ function calcularNivelInfluencer(ventas, confirmado) {
   if (!confirmado) {
     return {
       nivel: "Pendiente de confirmación",
-      beneficio: "Una vez confirmado tu registro, se activará tu escalera mensual de recompensas[span_15](start_span)[span_15](end_span)."
+      beneficio: "Una vez confirmado tu registro, se activará tu escalera mensual de recompensas."
     };
   }
   if (ventas >= 10) {
     return {
       nivel: "Nivel 4 (10+ ventas/mes)",
-      beneficio: "Máxima recompensa mensual + prioridad[span_16](start_span)[span_16](end_span)."
+      beneficio: "Máxima recompensa mensual + prioridad."
     };
   }
   if (ventas >= 5) {
     return {
       nivel: "Nivel 3 (5 a 9 ventas/mes)",
-      beneficio: "Paquete mayor de diamantes + mención[span_17](start_span)[span_17](end_span)."
+      beneficio: "Paquete mayor de diamantes + mención."
     };
   }
   if (ventas >= 3) {
     return {
       nivel: "Nivel 2 (3 a 4 ventas/mes)",
-      beneficio: "Pase Booyah o bono extra[span_18](start_span)[span_18](end_span)."
+      beneficio: "Pase Booyah o bono extra."
     };
   }
   if (ventas >= 1) {
     return {
       nivel: "Nivel 1 (Mínimo 1 venta de 572 diamantes)",
-      beneficio: "110 diamantes gratis[span_19](start_span)[span_19](end_span)."
+      beneficio: "110 diamantes gratis."
     };
   }
   return {
     nivel: "Nivel Inicial (0 ventas validadas)",
-    beneficio: "Consigue al menos 1 compra de 572 diamantes referida para llegar al Nivel 1[span_20](start_span)[span_20](end_span)."
+    beneficio: "Consigue al menos 1 compra de 572 diamantes referida para llegar al Nivel 1."
   };
 }
 
