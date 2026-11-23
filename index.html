@@ -5,30 +5,30 @@
 <meta name="google-site-verification" content="09ksKIstJLDyFRB6Ega0lmu_wTK6OR1e9XJUNac7uGo" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#080808">
 <meta name="description" content="Tienda de recargas de diamantes para Free Fire. Elige tu paquete, ingresa tu ID y solicita tu pedido.">
 <title>Dxnzz ventas | Recargas Free Fire</title>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0a;
-  --panel: #141414;
-  --panel2: #1c1c1c;
+  --bg: #080808;
+  --panel: #111111;
+  --panel2: #171717;
   --text: #ffffff;
-  --muted: #aaaaaa;
-  --gold: #dfac38;
-  --gold-light: #fbe389;
-  --gold-dark: #b8860b;
-  --line: rgba(223, 172, 56, 0.25);
-  --line-strong: rgba(223, 172, 56, 0.5);
+  --muted: #b0b0b0;
+  --gold: #ffc81a;
+  --gold-light: #ffe680;
+  --gold-dark: #d99b00;
+  --line: rgba(255, 200, 26, 0.28);
+  --line-strong: rgba(255, 200, 26, 0.58);
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: radial-gradient(ellipse at 80% 0%, #221b08 0%, var(--bg) 60%), var(--bg);
+  background: radial-gradient(ellipse at 80% 0%, rgba(255, 196, 15, 0.14) 0%, var(--bg) 56%), var(--bg);
   color: var(--text);
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   padding-bottom: 120px;
@@ -41,7 +41,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(8, 8, 8, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -56,7 +56,7 @@ header {
   font-family: 'Cinzel', serif;
   font-weight: 800;
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   color: var(--text);
   white-space: nowrap;
 }
@@ -96,7 +96,7 @@ header {
 }
 .curr-btn.active {
   background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-  color: #000;
+  color: #080808;
 }
 
 /* BOTONES */
@@ -111,9 +111,9 @@ header {
   font-weight: 700;
   cursor: pointer;
   transition: .25s ease;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-  color: #000;
-  box-shadow: 0 4px 15px rgba(223, 172, 56, 0.2);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+  color: #080808;
+  box-shadow: 0 4px 18px rgba(255, 200, 26, 0.28);
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.5px;
@@ -121,12 +121,12 @@ header {
 }
 .btn:hover {
   transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(223, 172, 56, 0.35);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 24px rgba(255, 210, 40, 0.42);
 }
 .btn.secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-strong);
   box-shadow: none;
   color: var(--text);
 }
@@ -153,7 +153,7 @@ header {
   color: var(--gold-light);
   font-weight: 700;
   font-size: .82rem;
-  background: rgba(223, 172, 56, 0.08);
+  background: rgba(255, 200, 26, 0.1);
   letter-spacing: 1px;
 }
 .hero h1 {
@@ -164,7 +164,7 @@ header {
   margin: 22px 0;
 }
 .hero h1 span {
-  background: linear-gradient(90deg, var(--gold-light), var(--gold-dark));
+  background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -188,13 +188,13 @@ header {
   padding: 22px 26px;
   max-width: 620px;
   margin: 20px auto 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.65);
 }
 .player-box label { display: block; font-weight: 700; color: var(--gold-light); margin-bottom: 8px; font-size: 0.95rem; }
 .player-box input {
   width: 100%;
   padding: 14px 16px;
-  background: #0a0a0a;
+  background: #080808;
   border: 1px solid var(--line);
   border-radius: 12px;
   color: #fff;
@@ -203,11 +203,11 @@ header {
   font-family: inherit;
   transition: 0.3s ease;
 }
-.player-box input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(223, 172, 56, 0.25); }
+.player-box input:focus { border-color: var(--gold); box-shadow: 0 0 14px rgba(255, 200, 26, 0.3); }
 
 /* ERROR ID TEXTO */
 .error-msg {
-  color: #ff4444;
+  color: #ff4d4d;
   font-size: 0.85rem;
   font-weight: 600;
   margin-top: 8px;
@@ -226,7 +226,7 @@ header {
   font-family: 'Cinzel', serif;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   margin: 0 0 10px;
-  color: var(--gold-light);
+  color: var(--gold);
 }
 .section-head p { color: var(--muted); margin: 0; }
 
@@ -250,12 +250,12 @@ header {
 }
 .product:hover {
   border-color: var(--gold);
-  box-shadow: 0 8px 25px rgba(223, 172, 56, 0.2);
+  box-shadow: 0 8px 26px rgba(255, 200, 26, 0.24);
 }
 .product.featured {
   border: 2px solid var(--gold);
-  box-shadow: 0 8px 25px rgba(223, 172, 56, 0.25);
-  background: linear-gradient(160deg, #1f1807, var(--panel));
+  box-shadow: 0 8px 28px rgba(255, 200, 26, 0.28);
+  background: linear-gradient(160deg, #17150e, var(--panel));
 }
 .tag {
   position: absolute;
@@ -263,8 +263,8 @@ header {
   right: 10px;
   font-size: .65rem;
   font-weight: 900;
-  background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
-  color: #000;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+  color: #080808;
   border-radius: 99px;
   padding: 4px 10px;
   letter-spacing: 0.5px;
@@ -276,9 +276,9 @@ header {
   place-items: center;
   font-size: 1.5rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, #1f1a0a, #3b2e0c);
+  background: linear-gradient(135deg, #161616, #242012);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.55);
   margin-bottom: 10px;
 }
 .product h3 { margin: 0 0 4px; font-size: 1rem; font-family: 'Cinzel', serif; color: #fff; }
@@ -293,14 +293,14 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.45);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 6px 10px;
   margin-top: auto;
 }
 .qty-btn {
-  background: rgba(223, 172, 56, 0.15);
+  background: rgba(255, 200, 26, 0.16);
   border: 1px solid var(--line-strong);
   color: var(--gold-light);
   width: 28px;
@@ -313,7 +313,7 @@ header {
   place-items: center;
   transition: 0.2s;
 }
-.qty-btn:hover { background: var(--gold); color: #000; }
+.qty-btn:hover { background: var(--gold); color: #080808; }
 .qty-num { font-weight: 700; font-size: 1rem; color: #fff; }
 
 /* BARRA FLOTANTE DE COMPRA CON TRANSICIÓN LENTA (0.9s) */
@@ -322,12 +322,12 @@ header {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(14, 14, 14, 0.96);
+  background: rgba(10, 10, 10, 0.96);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--line-strong);
   padding: 16px 24px;
   z-index: 100;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.85);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -351,15 +351,15 @@ header {
 .cart-info b { color: var(--gold-light); font-size: 1.1rem; }
 .cart-total { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800; color: var(--gold); }
 .checkout-btn {
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-  color: #000;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+  color: #080808;
   border: none;
   border-radius: 12px;
   padding: 14px 26px;
   font-weight: 800;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(223, 172, 56, 0.3);
+  box-shadow: 0 4px 22px rgba(255, 200, 26, 0.35);
   display: none;
   align-items: center;
   gap: 8px;
@@ -371,11 +371,11 @@ header {
   display: inline-flex;
 }
 
-.checkout-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.checkout-btn:hover { filter: brightness(1.08); transform: translateY(-2px); }
 
 /* SECCIÓN VIP MINI (ARRIBA) */
 .vip-mini-bar {
-  background: linear-gradient(135deg, #1f1807, var(--panel));
+  background: linear-gradient(135deg, #17150e, var(--panel));
   border: 1px solid var(--gold);
   border-radius: 16px;
   padding: 14px 20px;
@@ -385,19 +385,19 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.5);
 }
 .vip-mini-bar span { font-size: 0.88rem; color: var(--gold-light); font-weight: 600; }
 
 /* SECCIÓN DE RECOMPENSAS VIP (ABAJO) */
 .points-full-card {
-  background: linear-gradient(135deg, #1f1807, var(--panel));
+  background: linear-gradient(135deg, #17150e, var(--panel));
   border: 1px solid var(--gold);
   border-radius: 20px;
   padding: 26px;
   max-width: 750px;
   margin: 0 auto 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
   text-align: center;
 }
 .points-full-card h3 {
@@ -417,7 +417,7 @@ header {
   width: 100%;
   max-width: 350px;
   padding: 12px 14px;
-  background: #0a0a0a;
+  background: #080808;
   border: 1px solid var(--line);
   border-radius: 10px;
   color: #fff;
@@ -439,7 +439,7 @@ header {
   border: 1px solid var(--line-strong);
   border-radius: 20px;
   padding: 26px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
 }
 .review-form-card h3 {
   font-family: 'Cinzel', serif;
@@ -461,7 +461,7 @@ header {
 .form-group input, .form-group textarea {
   width: 100%;
   padding: 12px 14px;
-  background: #0a0a0a;
+  background: #080808;
   border: 1px solid var(--line);
   border-radius: 10px;
   color: #fff;
@@ -472,7 +472,7 @@ header {
 }
 .form-group input:focus, .form-group textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 10px rgba(223, 172, 56, 0.2);
+  box-shadow: 0 0 12px rgba(255, 200, 26, 0.25);
 }
 .star-rating-select {
   display: flex;
@@ -483,7 +483,7 @@ header {
   justify-content: flex-end;
 }
 .star-rating-select span {
-  color: #444;
+  color: #3d3d3d;
   transition: color 0.2s;
   direction: ltr;
 }
@@ -504,7 +504,7 @@ header {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 12px 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -527,14 +527,79 @@ header {
   line-height: 1.35;
   margin: 0;
 }
-.no-reviews {
-  text-align: center;
-  color: var(--muted);
-  font-style: italic;
-  padding: 20px;
-  background: var(--panel);
-  border: 1px dashed var(--line);
+
+/* PROGRAMA MINI INFLUENCERS DISCRETO */
+.influencer-card {
+  background: linear-gradient(135deg, var(--panel), var(--panel2));
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 820px;
+  margin: 0 auto;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.65);
+}
+.influencer-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.influencer-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+.influencer-box {
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid var(--line);
   border-radius: 14px;
+  padding: 14px;
+}
+.influencer-box h4 {
+  margin: 0 0 8px;
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  font-size: 0.9rem;
+}
+.influencer-box ul {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.influencer-box li { margin-bottom: 5px; }
+.code-badge {
+  display: inline-block;
+  background: #080808;
+  border: 1px dashed var(--gold);
+  color: var(--gold-light);
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.status-confirmado {
+  background: rgba(46, 204, 113, 0.16);
+  color: #58e394;
+  border: 1px solid rgba(46, 204, 113, 0.45);
+}
+.status-pendiente {
+  background: rgba(255, 200, 26, 0.16);
+  color: var(--gold-light);
+  border: 1px solid var(--line-strong);
 }
 
 /* MODAL PERSONALIZADO */
@@ -544,7 +609,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(8px);
   display: none;
   place-items: center;
@@ -552,14 +617,14 @@ header {
   padding: 20px;
 }
 .modal-box {
-  background: linear-gradient(145deg, #18140a, #111111);
+  background: linear-gradient(145deg, #16140d, #0f0f0f);
   border: 1px solid var(--gold);
   border-radius: 20px;
   padding: 30px 24px;
   max-width: 400px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(223, 172, 56, 0.2);
+  box-shadow: 0 16px 42px rgba(0,0,0,0.92), 0 0 26px rgba(255, 200, 26, 0.24);
   animation: modalScale 0.25s ease;
 }
 @keyframes modalScale {
@@ -573,8 +638,8 @@ header {
 .modal-actions button { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.9rem; text-transform: uppercase; }
 .btn-cancel { background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: var(--text); }
 .btn-cancel:hover { background: rgba(255,255,255,0.12); }
-.btn-confirm { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); border: none; color: #000; box-shadow: 0 4px 15px rgba(223, 172, 56, 0.3); }
-.btn-confirm:hover { filter: brightness(1.1); }
+.btn-confirm { background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light)); border: none; color: #080808; box-shadow: 0 4px 18px rgba(255, 200, 26, 0.35); }
+.btn-confirm:hover { filter: brightness(1.08); }
 
 /* PASOS Y PREGUNTAS FRECUENTES */
 .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
@@ -589,7 +654,7 @@ header {
   place-items: center;
   width: 34px;
   height: 34px;
-  background: rgba(223, 172, 56, 0.15);
+  background: rgba(255, 200, 26, 0.16);
   color: var(--gold);
   border-radius: 10px;
   margin-bottom: 10px;
@@ -610,7 +675,7 @@ header {
 }
 .faq details[open] {
   border-color: var(--gold);
-  box-shadow: 0 5px 20px rgba(223, 172, 56, 0.15);
+  box-shadow: 0 6px 22px rgba(255, 200, 26, 0.18);
 }
 .faq summary {
   cursor: pointer;
@@ -648,7 +713,7 @@ footer {
   color: var(--muted);
   font-size: .85rem;
   line-height: 1.7;
-  background: #070707;
+  background: #050505;
 }
 .footerrow { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .disclaimer { max-width: 760px; }
@@ -656,6 +721,7 @@ footer {
 /* RESPONSIVE */
 @media(max-width:1024px){
   .steps { grid-template-columns: repeat(3, 1fr); }
+  .influencer-info-grid { grid-template-columns: 1fr; }
 }
 @media(max-width:760px){
   .navlinks { display: none; }
@@ -701,7 +767,7 @@ footer {
   <!-- HERO -->
   <section class="wrap hero" id="inicio">
     <div>
-      <div class="eyebrow">✦ RECARGAS OFICIALES FREE FIRE</div>
+      <div class="eyebrow">✦ RECARGAS FREE FIRE</div>
       <h1>RECARGAS.<br><span>FREE FIRE.</span></h1>
       <p>Selecciona tus paquetes, ingresa tu ID de jugador y envía tu pedido directamente a nuestro WhatsApp con cálculo automático.</p>
       <div class="hero-actions">
@@ -717,32 +783,39 @@ footer {
     <div style="margin-top: 25px;">
     <!-- Insignias de confianza estilo Grid -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px;">
-        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="color: #dfac38; font-size: 1.1rem;">🛡️</span>
+        <div style="background: #111111; border: 1px solid #ffc81a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #ffc81a; font-size: 1.1rem;">🛡️</span>
             <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">100% SEGURO</span>
         </div>
-        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="color: #dfac38; font-size: 1.1rem;">⚡</span>
+        <div style="background: #111111; border: 1px solid #ffc81a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #ffc81a; font-size: 1.1rem;">⚡</span>
             <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">ENTREGA EN MENOS DE 10 MIN.</span>
         </div>
-        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="color: #dfac38; font-size: 1.1rem;">👨‍💻</span>
+        <div style="background: #111111; border: 1px solid #ffc81a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #ffc81a; font-size: 1.1rem;">👨‍💻</span>
             <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">SOPORTE 24/7</span>
         </div>
-        <div style="background: #141414; border: 1px solid #dfac38; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
-            <span style="color: #dfac38; font-size: 1.1rem;">💳</span>
+        <div style="background: #111111; border: 1px solid #ffc81a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #ffc81a; font-size: 1.1rem;">💳</span>
             <span style="color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px;">PAGO CON TARJETA</span>
         </div>
     </div>
 </div>
   </section>
 
-  <!-- CAMPO ID DE JUGADOR -->
+  <!-- CAMPO ID DE JUGADOR + CÓDIGO OPCIONAL DE MINI INFLUENCER -->
   <section class="wrap">
     <div class="player-box" id="playerBoxSection">
       <label for="playerId">🎮 Ingresa tu ID de Free Fire (Mín. 8 dígitos):</label>
       <input type="text" id="playerId" placeholder="Ej: 1928458027" autocomplete="off" oninput="verificarIdEnTiempoReal()">
       <div id="playerIdError" class="error-msg">ID inválido o incorrecto</div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);">
+        <label for="influencerCodeInput" style="font-size: 0.84rem; color: var(--muted); margin-bottom: 6px;">
+          🎟️ Código de Mini Influencer (Opcional):
+        </label>
+        <input type="text" id="influencerCodeInput" placeholder="Ej: DXN-MINI123" autocomplete="off" style="padding: 10px 14px; font-size: 0.92rem; text-transform: uppercase;">
+      </div>
     </div>
   </section>
 
@@ -856,8 +929,8 @@ footer {
       </article>
 
       <!-- PAQUETE TITÁN -->
-      <article class="product featured" style="grid-column: 1 / -1; background: linear-gradient(160deg, #2b1f05, #141414); border: 2px solid var(--gold); padding: 14px 18px; position: relative;">
-        <span class="tag" style="background: linear-gradient(45deg, #ff4500, var(--gold-light)); color: #000; top: 8px; right: 12px; font-size: 0.65rem; padding: 3px 8px;">⚡ MÁXIMO PODER</span>
+      <article class="product featured" style="grid-column: 1 / -1; background: linear-gradient(160deg, #1a170c, #111111); border: 2px solid var(--gold); padding: 14px 18px; position: relative;">
+        <span class="tag" style="background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light)); color: #080808; top: 8px; right: 12px; font-size: 0.65rem; padding: 3px 8px;">⚡ MÁXIMO PODER</span>
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; width: 100%;">
           <div style="display: flex; align-items: center; gap: 12px; max-width: 320px;">
             <div class="diamond" style="font-size: 1.8rem; width: 44px; height: 44px; margin-bottom: 0; border-radius: 10px; flex-shrink: 0;">👑</div>
@@ -929,32 +1002,32 @@ footer {
       <h2>Métodos de Pago y Datos</h2>
       <p>Realiza tu pago de forma segura antes de terminar tu pedido.</p>
     </div>
-    <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 26px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div style="background: linear-gradient(135deg, var(--panel), var(--panel2)); border: 1px solid var(--line-strong); border-radius: 20px; padding: 26px; max-width: 700px; margin: 0 auto; text-align: center; box-shadow: 0 12px 32px rgba(0,0,0,0.65);">
       <div style="font-size: 2.2rem; margin-bottom: 10px;">🏦</div>
       
       <!-- CLABE LOCAL -->
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">CLABE Interbancaria Local</h3>
       <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">BBVA / Banco Azteca / BanCoppel, etc.</p>
-      <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
+      <div style="background: #080808; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
         170180016433075336
       </div>
 
       <!-- CLABE INTERNACIONAL -->
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">CLABE Internacional (países fuera de México)</h3>
       <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">Transferencias Internacionales / SWIFT</p>
-      <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 12px;">
+      <div style="background: #080808; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 12px;">
         170002404093481270
       </div>
 
       <!-- CÓDIGO BIC O SWIFT -->
       <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin: 0 0 6px;">Código BIC o SWIFT</h3>
       <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 10px;">Para transferencias internacionales</p>
-      <div style="background: #0a0a0a; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
+      <div style="background: #080808; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-family: monospace; font-size: 1.1rem; color: var(--gold-light); letter-spacing: 1px; user-select: all; margin-bottom: 20px;">
         REVOMXM2
       </div>
 
       <!-- NOTA DE CAPTURA DE COMPROBANTE -->
-      <div style="background: rgba(223, 172, 56, 0.1); border: 1px dashed var(--gold); border-radius: 12px; padding: 14px; margin-bottom: 20px; color: var(--gold-light); font-size: 0.88rem; font-weight: 600; line-height: 1.5;">
+      <div style="background: rgba(255, 200, 26, 0.1); border: 1px dashed var(--gold); border-radius: 12px; padding: 14px; margin-bottom: 20px; color: var(--gold-light); font-size: 0.88rem; font-weight: 600; line-height: 1.5;">
         📸 Nota: No olvides tomar captura de pantalla a tu comprobante de pago para enviarla al chatear con nosotros.
       </div>
       
@@ -1009,7 +1082,7 @@ footer {
     </div>
   </section>
 
-  <!-- SECCIÓN DE PUNTOS VIP / RECOMPENSAS (CASI ABAJO) -->
+  <!-- SECCIÓN DE PUNTOS VIP / RECOMPENSAS -->
   <section class="section wrap" id="puntos-section">
     <div class="section-head">
       <h2>⭐ Sistema de Puntos VIP</h2>
@@ -1136,6 +1209,134 @@ footer {
       </details>
     </div>
   </section>
+
+  <!-- PROGRAMA DE MINI INFLUENCERS (DISCRETO AL FINAL) -->
+  <section class="section wrap" id="mini-influencers">
+    <div class="influencer-card">
+      <div style="text-align: center;">
+        <div class="eyebrow" style="margin-bottom: 10px;">✦ CREADORES & REFERIDOS</div>
+        <h3 style="font-family: 'Cinzel', serif; color: var(--gold-light); margin: 0 0 6px; font-size: 1.35rem;">
+          Programa de Mini Influencers
+        </h3>
+        <p style="color: var(--muted); font-size: 0.86rem; margin: 0 auto 16px; max-width: 620px;">
+          ¿Te interesa? Escríbenos para postularte y conocer todos los detalles[span_3](start_span)[span_3](end_span). Obtén tu código especial y consulta tu nivel cuando estés registrado y confirmado.
+        </p>
+
+        <div class="influencer-tabs">
+          <button type="button" class="btn" id="btnTabPostular" onclick="mostrarVistaInfluencer('postular')">
+            📝 Postularme / Código
+          </button>
+          <button type="button" class="btn secondary" id="btnTabPanel" onclick="mostrarVistaInfluencer('panel')">
+            🏆 Mi Nivel y Estado
+          </button>
+          <button type="button" class="btn secondary" id="btnTabDetalles" onclick="mostrarVistaInfluencer('detalles')">
+            📋 Tareas, Niveles y Reglas
+          </button>
+        </div>
+      </div>
+
+      <!-- VISTA 1: POSTULACIÓN Y CÓDIGO ESPECIAL -->
+      <div id="vistaInfluencerPostular" style="max-width: 520px; margin: 0 auto;">
+        <form onsubmit="postularMiniInfluencer(event)">
+          <div class="form-group">
+            <label for="infNombre">Tu Nombre o Apodo:</label>
+            <input type="text" id="infNombre" placeholder="Ej: Mateo FF" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="infRed">Enlace o Usuario (TikTok / Reels):</label>
+            <input type="text" id="infRed" placeholder="Ej: @mateo.ff" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="infCodigoDeseado">Código Especial (Opcional, se genera automático si lo dejas vacío):</label>
+            <input type="text" id="infCodigoDeseado" placeholder="Ej: MATEO10" autocomplete="off" style="text-transform: uppercase;">
+          </div>
+          <button type="submit" class="btn" style="width: 100%;">🚀 Solicitar Código y Enviar Postulación</button>
+        </form>
+      </div>
+
+      <!-- VISTA 2: PANEL DE NIVEL Y PROGRESO (PARA REGISTRADOS Y CONFIRMADOS) -->
+      <div id="vistaInfluencerPanel" style="display: none; max-width: 600px; margin: 0 auto; text-align: center;">
+        <div id="infSinRegistro" style="display: none;">
+          <p style="color: var(--muted); font-size: 0.88rem; margin-bottom: 14px;">
+            Aún no tienes un registro de Mini Influencer guardado en este navegador. Postúlate para generar tu código especial.
+          </p>
+          <button type="button" class="btn" onclick="mostrarVistaInfluencer('postular')">Ir a Postularme</button>
+        </div>
+
+        <div id="infConRegistro" style="display: none;">
+          <div style="margin-bottom: 10px;">
+            <span id="infEstadoBadge" class="status-pill status-pendiente">Pendiente de Confirmación</span>
+          </div>
+          <p style="color: var(--muted); font-size: 0.85rem; margin: 4px 0;">
+            Creador: <strong id="infPanelNombre" style="color: var(--text);"></strong> (<span id="infPanelRed"></span>)
+          </p>
+          <div style="margin: 12px 0;">
+            <div style="font-size: 0.78rem; color: var(--muted); margin-bottom: 6px;">Tu Código Especial para Referidos:</div>
+            <span id="infPanelCodigo" class="code-badge"></span>
+            <button type="button" class="btn secondary" onclick="copiarCodigoInfluencer()" style="margin-left: 8px; padding: 8px 12px; font-size: 0.7rem;">
+              📋 Copiar
+            </button>
+          </div>
+
+          <div style="background: rgba(8,8,8,0.75); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 14px;">
+            <div style="font-size: 0.8rem; color: var(--muted);">Nivel Mensual Actual</div>
+            <div id="infPanelNivel" style="font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 800; color: var(--gold); margin: 4px 0;">
+              Sin nivel aún
+            </div>
+            <div id="infPanelBeneficio" style="font-size: 0.84rem; color: var(--gold-light); margin-bottom: 8px;"></div>
+            <div style="font-size: 0.82rem; color: var(--muted);">
+              Ventas validadas este mes: <strong id="infPanelVentas" style="color: var(--text);">0</strong>
+            </div>
+          </div>
+
+          <!-- Controles prácticos para probar o gestionar estado/ventas -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 14px;">
+            <button type="button" class="btn secondary" id="btnConfirmarInf" onclick="alternarConfirmacionInfluencer()" style="font-size: 0.7rem;">
+              ✓ Marcar Confirmado
+            </button>
+            <button type="button" class="btn secondary" onclick="ajustarVentasInfluencer(1)" style="font-size: 0.7rem;">
+              +1 Venta Validada
+            </button>
+            <button type="button" class="btn secondary" onclick="ajustarVentasInfluencer(-1)" style="font-size: 0.7rem;">
+              -1 Venta
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISTA 3: TAREAS, ESCALERA MENSUAL Y REGLAS -->
+      <div id="vistaInfluencerDetalles" style="display: none;">
+        <div class="influencer-info-grid">
+          <div class="influencer-box">
+            <h4>📌 Tareas</h4>
+            <ul>
+              <li><strong>Crea videos:</strong> Graba contenido para TikTok / Reels mostrando que nuestra página es 100% confiable y recomendable[span_4](start_span)[span_4](end_span).</li>
+              <li><strong>Meta mínima:</strong> Consigue al menos 1 compra de un paquete de 572 diamantes referida por ti[span_5](start_span)[span_5](end_span).</li>
+              <li><strong>Promueve:</strong> Sube de 1 a 2 videos semanales (clips, consejos o promos) y pide a tus referidos que te mencionen al comprar[span_6](start_span)[span_6](end_span).</li>
+            </ul>
+          </div>
+          <div class="influencer-box">
+            <h4>🏆 Escalera Mensual</h4>
+            <ul>
+              <li><strong>Nivel 1:</strong> Mínimo 1 venta de 572 diamantes = 110 diamantes gratis[span_7](start_span)[span_7](end_span).</li>
+              <li><strong>Nivel 2:</strong> 3 a 4 ventas al mes = Pase Booyah o bono extra[span_8](start_span)[span_8](end_span).</li>
+              <li><strong>Nivel 3:</strong> 5 a 9 ventas al mes = Paquete mayor de diamantes + mención[span_9](start_span)[span_9](end_span).</li>
+              <li><strong>Nivel 4:</strong> 10+ ventas al mes = Máxima recompensa mensual + prioridad[span_10](start_span)[span_10](end_span).</li>
+            </ul>
+          </div>
+          <div class="influencer-box">
+            <h4>⚖️ Reglas</h4>
+            <ul>
+              <li><strong>Ventas validadas:</strong> Solo cuentan compras pagadas y confirmadas[span_11](start_span)[span_11](end_span).</li>
+              <li><strong>Transparencia:</strong> Prohibido hacer promesas falsas o estafas[span_12](start_span)[span_12](end_span).</li>
+              <li><strong>Conteo mensual:</strong> Las ventas se reinician cada mes para los premios[span_13](start_span)[span_13](end_span).</li>
+              <li>¡Entre más ventas consigas, más diamantes ganas[span_14](start_span)[span_14](end_span)!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- BARRA FLOTANTE -->
@@ -1247,6 +1448,168 @@ let carrito = {};
 let ofertaPendiente = null;
 let recompensaCanjeada = null;
 let calificacionSeleccionada = 5;
+
+// PROGRAMA DE MINI INFLUENCERS (REGISTRO, CÓDIGO ESPECIAL Y NIVEL)
+let miniInfluencerData = JSON.parse(localStorage.getItem('dxnzz_mini_influencer_v1')) || null;
+
+function mostrarVistaInfluencer(vista) {
+  document.getElementById('vistaInfluencerPostular').style.display = vista === 'postular' ? 'block' : 'none';
+  document.getElementById('vistaInfluencerPanel').style.display = vista === 'panel' ? 'block' : 'none';
+  document.getElementById('vistaInfluencerDetalles').style.display = vista === 'detalles' ? 'block' : 'none';
+
+  document.getElementById('btnTabPostular').className = vista === 'postular' ? 'btn' : 'btn secondary';
+  document.getElementById('btnTabPanel').className = vista === 'panel' ? 'btn' : 'btn secondary';
+  document.getElementById('btnTabDetalles').className = vista === 'detalles' ? 'btn' : 'btn secondary';
+
+  if (vista === 'panel') {
+    actualizarPanelInfluencer();
+  }
+}
+
+function calcularNivelInfluencer(ventas, confirmado) {
+  if (!confirmado) {
+    return {
+      nivel: "Pendiente de confirmación",
+      beneficio: "Una vez confirmado tu registro, se activará tu escalera mensual de recompensas[span_15](start_span)[span_15](end_span)."
+    };
+  }
+  if (ventas >= 10) {
+    return {
+      nivel: "Nivel 4 (10+ ventas/mes)",
+      beneficio: "Máxima recompensa mensual + prioridad[span_16](start_span)[span_16](end_span)."
+    };
+  }
+  if (ventas >= 5) {
+    return {
+      nivel: "Nivel 3 (5 a 9 ventas/mes)",
+      beneficio: "Paquete mayor de diamantes + mención[span_17](start_span)[span_17](end_span)."
+    };
+  }
+  if (ventas >= 3) {
+    return {
+      nivel: "Nivel 2 (3 a 4 ventas/mes)",
+      beneficio: "Pase Booyah o bono extra[span_18](start_span)[span_18](end_span)."
+    };
+  }
+  if (ventas >= 1) {
+    return {
+      nivel: "Nivel 1 (Mínimo 1 venta de 572 diamantes)",
+      beneficio: "110 diamantes gratis[span_19](start_span)[span_19](end_span)."
+    };
+  }
+  return {
+    nivel: "Nivel Inicial (0 ventas validadas)",
+    beneficio: "Consigue al menos 1 compra de 572 diamantes referida para llegar al Nivel 1[span_20](start_span)[span_20](end_span)."
+  };
+}
+
+function actualizarPanelInfluencer() {
+  const sinReg = document.getElementById('infSinRegistro');
+  const conReg = document.getElementById('infConRegistro');
+
+  if (!miniInfluencerData) {
+    sinReg.style.display = 'block';
+    conReg.style.display = 'none';
+    return;
+  }
+
+  sinReg.style.display = 'none';
+  conReg.style.display = 'block';
+
+  document.getElementById('infPanelNombre').textContent = miniInfluencerData.nombre;
+  document.getElementById('infPanelRed').textContent = miniInfluencerData.red;
+  document.getElementById('infPanelCodigo').textContent = miniInfluencerData.codigo;
+  document.getElementById('infPanelVentas').textContent = miniInfluencerData.ventas;
+
+  const badge = document.getElementById('infEstadoBadge');
+  const btnConf = document.getElementById('btnConfirmarInf');
+  if (miniInfluencerData.confirmado) {
+    badge.textContent = "Confirmado y Activo";
+    badge.className = "status-pill status-confirmado";
+    btnConf.textContent = "Marcar Pendiente";
+  } else {
+    badge.textContent = "Pendiente de Confirmación";
+    badge.className = "status-pill status-pendiente";
+    btnConf.textContent = "✓ Marcar Confirmado";
+  }
+
+  const infoNivel = calcularNivelInfluencer(miniInfluencerData.ventas, miniInfluencerData.confirmado);
+  document.getElementById('infPanelNivel').textContent = infoNivel.nivel;
+  document.getElementById('infPanelBeneficio').textContent = infoNivel.beneficio;
+}
+
+function guardarInfluencerStorage() {
+  localStorage.setItem('dxnzz_mini_influencer_v1', JSON.stringify(miniInfluencerData));
+  const codeInput = document.getElementById('influencerCodeInput');
+  if (codeInput && miniInfluencerData && !codeInput.value.trim()) {
+    codeInput.value = miniInfluencerData.codigo;
+  }
+}
+
+function postularMiniInfluencer(event) {
+  event.preventDefault();
+  const nombre = document.getElementById('infNombre').value.trim();
+  const red = document.getElementById('infRed').value.trim();
+  let codigoDeseado = document.getElementById('infCodigoDeseado').value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+
+  if (!nombre || !red) return;
+
+  if (!codigoDeseado) {
+    const base = nombre.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6) || "MINI";
+    const randomNum = Math.floor(100 + Math.random() * 900);
+    codigoDeseado = `DXN-${base}${randomNum}`;
+  }
+
+  miniInfluencerData = {
+    nombre: nombre,
+    red: red,
+    codigo: codigoDeseado,
+    ventas: 0,
+    confirmado: false
+  };
+  guardarInfluencerStorage();
+
+  const mensaje =
+    `🌟 *POSTULACIÓN PROGRAMA MINI INFLUENCERS — DXNZZ VENTAS*\n\n` +
+    `👤 *Nombre:* ${nombre}\n` +
+    `📱 *Canal / Usuario:* ${red}\n` +
+    `🎟️ *Código especial solicitado:* ${codigoDeseado}\n\n` +
+    `Solicito revisión y confirmación de mi registro para activar mi nivel y seguimiento de referidos.`;
+
+  mostrarVistaInfluencer('panel');
+  mostrarAlertaPersonalizada(
+    "¡Postulación lista!",
+    `Tu código especial es ${codigoDeseado}. Se abrirá WhatsApp para enviar tu solicitud.`,
+    "🎟️"
+  );
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`,
+    '_blank',
+    'noopener'
+  );
+}
+
+function copiarCodigoInfluencer() {
+  if (!miniInfluencerData || !miniInfluencerData.codigo) return;
+  navigator.clipboard.writeText(miniInfluencerData.codigo).then(() => {
+    mostrarAlertaPersonalizada("Código copiado", `Copiaste ${miniInfluencerData.codigo} al portapapeles.`, "📋");
+  });
+}
+
+function alternarConfirmacionInfluencer() {
+  if (!miniInfluencerData) return;
+  miniInfluencerData.confirmado = !miniInfluencerData.confirmado;
+  guardarInfluencerStorage();
+  actualizarPanelInfluencer();
+}
+
+function ajustarVentasInfluencer(delta) {
+  if (!miniInfluencerData) return;
+  miniInfluencerData.ventas = Math.max(0, (miniInfluencerData.ventas || 0) + delta);
+  guardarInfluencerStorage();
+  actualizarPanelInfluencer();
+}
 
 // SISTEMA DE PUNTOS VIP (10 puntos por cada $15 MXN)
 let usuarioActual = JSON.parse(localStorage.getItem('dxnzz_user_session')) || null;
@@ -1463,7 +1826,7 @@ function calcularTotal() {
   }
 }
 
-// SISTEMA DE RESEÑAS CON RESEÑAS PREDETERMINADAS PARA TODOS
+// SISTEMA DE RESEÑAS + NOTIFICACIÓN POR WHATSAPP
 function seleccionarEstrellas(estrellas) {
   calificacionSeleccionada = estrellas;
   const spans = document.querySelectorAll('#starSelect span');
@@ -1472,7 +1835,7 @@ function seleccionarEstrellas(estrellas) {
     if (valorEstrella <= estrellas) {
       span.style.color = 'var(--gold)';
     } else {
-      span.style.color = '#444';
+      span.style.color = '#3d3d3d';
     }
   });
 }
@@ -1481,7 +1844,6 @@ function cargarReseñas() {
   const lista = document.getElementById('reviewsList');
   let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1'));
 
-  // Si no hay reseñas guardadas en este navegador, cargamos estas por defecto para que todos las vean
   if (!reseñasGuardadas || reseñasGuardadas.length === 0) {
     reseñasGuardadas = [
       { nombre: "Martín", estrellas: 5, comentario: "Buena atención y muy confiable, la verdad para las ofertas y descuentos que tiene está muy bueno..." },
@@ -1504,33 +1866,51 @@ function cargarReseñas() {
   });
 }
 
+function notificarResenaWhatsApp(nombre, estrellas, comentario) {
+  const estrellasVisuales = "⭐".repeat(estrellas);
+  const mensaje =
+    `⭐ *NUEVA RESEÑA EN DXNZZ VENTAS*\n\n` +
+    `👤 *Nombre o ID:* ${nombre}\n` +
+    `🌟 *Calificación:* ${estrellas}/5 (${estrellasVisuales})\n` +
+    `💬 *Comentario:* "${comentario}"`;
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`,
+    '_blank',
+    'noopener'
+  );
+}
+
 function enviarReseña(event) {
   event.preventDefault();
   const nombre = document.getElementById('reviewName').value.trim();
   const comentario = document.getElementById('reviewComment').value.trim();
+  const estrellas = calificacionSeleccionada;
 
-  if(!nombre || !comentario) return;
+  if (!nombre || !comentario) return;
 
-  let nuevaReseña = {
+  const nuevaReseña = {
     nombre: nombre,
-    estrellas: calificacionSeleccionada,
+    estrellas: estrellas,
     comentario: comentario
   };
 
-  let reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1')) || [];
-
+  const reseñasGuardadas = JSON.parse(localStorage.getItem('dxnzz_reviews_compact_v1')) || [];
   reseñasGuardadas.unshift(nuevaReseña);
   localStorage.setItem('dxnzz_reviews_compact_v1', JSON.stringify(reseñasGuardadas));
 
   document.getElementById('reviewForm').reset();
   seleccionarEstrellas(5);
   cargarReseñas();
+
+  notificarResenaWhatsApp(nombre, estrellas, comentario);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   cargarReseñas();
   seleccionarEstrellas(5);
   actualizarSesionUI();
+  actualizarPanelInfluencer();
 });
 
 // VERIFICACIÓN DE ID EN TIEMPO REAL
@@ -1564,8 +1944,8 @@ function validarPlayerId() {
   if (!playerId || playerId.length < 8) {
     document.getElementById('playerBoxSection').scrollIntoView({ behavior: 'smooth' });
     inputIdElem.focus();
-    inputIdElem.style.borderColor = "#ff4444";
-    inputIdElem.style.boxShadow = "0 0 15px rgba(255, 68, 68, 0.5)";
+    inputIdElem.style.borderColor = "#ff4d4d";
+    inputIdElem.style.boxShadow = "0 0 15px rgba(255, 77, 77, 0.5)";
     errorMsg.style.display = "block";
     return false;
   }
@@ -1668,6 +2048,12 @@ window.addEventListener('scroll', function() {
 
 function ejecutarEnvioWhatsApp() {
   const playerId = document.getElementById('playerId').value.trim();
+  const codigoInfluencer = document.getElementById('influencerCodeInput')
+    ? document.getElementById('influencerCodeInput').value.trim().toUpperCase()
+    : "";
+  const lineaCodigoInfluencer = codigoInfluencer
+    ? `\n🎟️ *Código de Mini Influencer:* ${codigoInfluencer}`
+    : "";
   const instruccionComprobante = "📄 *Comprobante de pago:* [Adjuntaré la foto de mi comprobante aquí en el chat]";
   let mensaje = "";
 
@@ -1689,9 +2075,9 @@ function ejecutarEnvioWhatsApp() {
   }
 
   if (ofertaPendiente) {
-    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, quiero aprovechar una oferta:\n\n🎮 *ID de Free Fire:* ${playerId}${lineaCodigoInfluencer}\n📦 *Paquete:* 1x ${ofertaPendiente.nombre}\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
   } else if (recompensaCanjeada) {
-    mensaje = `Hola *Dxnzz ventas*, ¡quiero reclamar mi recompensa canjeada con puntos!\n\n🎮 *ID de Free Fire:* ${playerId}\n🎁 *Recompensa:* ${recompensaCanjeada.nombre}\n⭐ *(Puntos descontados: ${recompensaCanjeada.costo} Pts)*\n\n${instruccionComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, ¡quiero reclamar mi recompensa canjeada con puntos!\n\n🎮 *ID de Free Fire:* ${playerId}${lineaCodigoInfluencer}\n🎁 *Recompensa:* ${recompensaCanjeada.nombre}\n⭐ *(Puntos descontados: ${recompensaCanjeada.costo} Pts)*\n\n${instruccionComprobante}`;
   } else {
     let listaTexto = "";
     for (let prod in carrito) {
@@ -1701,7 +2087,7 @@ function ejecutarEnvioWhatsApp() {
         listaTexto += `\n- ${carrito[prod]}x ${prod} (${subtotalTexto})`;
       }
     }
-    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
+    mensaje = `Hola *Dxnzz ventas*, quiero hacer el siguiente pedido:\n\n🎮 *ID de Free Fire:* ${playerId}${lineaCodigoInfluencer}\n📦 *Paquetes:*${listaTexto}\n\n💰 *Total a pagar:* ${precioFinalTexto}\n\n${instruccionComprobante}`;
   }
 
   cerrarModal();
