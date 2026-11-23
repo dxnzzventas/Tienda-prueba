@@ -135,6 +135,28 @@ header {
   color: var(--gold-light);
 }
 
+.mini-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 200, 26, 0.1);
+  color: var(--gold-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+.mini-help-btn:hover {
+  background: var(--gold);
+  color: #080808;
+  border-color: var(--gold);
+}
+
 /* HERO SECTION */
 .hero {
   padding: 76px 0 54px;
@@ -811,9 +833,15 @@ footer {
       <div id="playerIdError" class="error-msg">ID inválido o incorrecto</div>
 
       <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);">
-        <label for="influencerCodeInput" style="font-size: 0.84rem; color: var(--muted); margin-bottom: 6px;">
-          🎟️ Código de Mini Influencer (Opcional):
-        </label>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+          <label for="influencerCodeInput" style="font-size: 0.84rem; color: var(--muted); margin-bottom: 0;">
+            🎟️ Código de Mini Influencer (Opcional):
+          </label>
+          <a href="#faq-mini-influencer" class="mini-help-btn" onclick="abrirFaqMiniInfluencer()">¿Cómo funciona?</a>
+        </div>
+        <p style="font-size: 0.76rem; color: var(--muted); line-height: 1.45; margin: 0 0 8px;">
+          Sirve para apoyar a un mini creador de contenido. Conforme vaya subiendo de nivel, podrá dar descuento con su código por tiempo limitado o seguir dando descuento si continúa creciendo.
+        </p>
         <input type="text" id="influencerCodeInput" placeholder="Ej: DXN-MINI123" autocomplete="off" style="padding: 10px 14px; font-size: 0.92rem; text-transform: uppercase;">
       </div>
     </div>
@@ -1203,6 +1231,10 @@ footer {
         <summary>¿Cómo funcionan los puntos?</summary>
         <p>Inicia sesión con tu correo en la sección de Puntos VIP (al final de la página). Cada compra te otorga 10 puntos por cada $15 MXN gastados que puedes canjear por diamantes gratis.</p>
       </details>
+      <details id="faq-mini-influencer">
+        <summary>¿Cómo funciona el código de Mini Influencer?</summary>
+        <p>Colocar el código de un Mini Influencer sirve para apoyar a un mini creador de contenido en su crecimiento dentro de la tienda. Conforme el mini influencer vaya subiendo de nivel, tendrá la posibilidad de ofrecer descuento con su código por tiempo limitado o seguir dando descuento con su código si continúa creciendo y cumpliendo metas.</p>
+      </details>
       <details>
         <summary>¿Cómo obtengo ayuda con mi pedido?</summary>
         <p>Al terminar tu selección y confirmar tu pago, serás redirigido directamente a nuestro WhatsApp oficial de atención 24/7 con tu cotización lista.</p>
@@ -1448,6 +1480,11 @@ let carrito = {};
 let ofertaPendiente = null;
 let recompensaCanjeada = null;
 let calificacionSeleccionada = 5;
+
+function abrirFaqMiniInfluencer() {
+  const details = document.getElementById('faq-mini-influencer');
+  if (details) details.open = true;
+}
 
 // PROGRAMA DE MINI INFLUENCERS (REGISTRO, CÓDIGO ESPECIAL Y NIVEL)
 let miniInfluencerData = JSON.parse(localStorage.getItem('dxnzz_mini_influencer_v1')) || null;
