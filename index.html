@@ -65,13 +65,143 @@
       margin-top: 6px;
       display: none;
     }
+
+    /* GRID DE PAQUETES Y RECOMPENSAS (2 COLUMNAS COMO EN LA CAPTURA) */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 760px) {
+      .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .pkg-card {
+      background: #080808;
+      border: 1px solid rgba(255, 215, 0, 0.24);
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease;
+    }
+    .pkg-card:hover {
+      border-color: #FFD700;
+    }
+    .pkg-card.featured {
+      border: 1.5px solid #FFD700;
+      background: #0b0a04;
+    }
+    .pkg-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #FFD700;
+      color: #000000;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 999px;
+      line-height: 1;
+    }
+    .pkg-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #0d0d0d;
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+    .pkg-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin: 0 0 3px;
+    }
+    .pkg-qty {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #FFF066;
+      margin-bottom: 10px;
+    }
+    .pkg-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFD700;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .pkg-price span {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: #a3a3a3;
+      text-transform: uppercase;
+    }
+    .pkg-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: #a3a3a3;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .pkg-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #000000;
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      border-radius: 10px;
+      padding: 6px 10px;
+      margin-top: auto;
+    }
+    .pkg-step-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.45);
+      background: rgba(255, 215, 0, 0.08);
+      color: #FFF066;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .pkg-step-btn:hover {
+      background: #FFD700;
+      color: #000000;
+    }
+    .pkg-step-num {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
     .floating-cart {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #080808;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      background: #000000;
+      border-top: 1px solid rgba(255, 215, 0, 0.35);
       padding: 12px 20px;
       z-index: 40;
       display: flex;
@@ -315,141 +445,118 @@
         <span class="text-xs text-neutral-500">Máx. 10 paquetes</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+      <div class="packages-grid">
+        <!-- 1. Paquete Inicial -->
+        <article class="pkg-card">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-xs text-neutral-400">110 Diamantes</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Inicial</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Recarga rápida de 110 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="16">$16 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Inicial</h3>
+            <div class="pkg-qty">110 Diamantes</div>
+            <div class="pkg-price" data-mxn="16">$16 <span>MXN</span></div>
+            <p class="pkg-desc">Recarga rápida de 110 diamantes.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('110 Diamantes', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-110 Diamantes" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('110 Diamantes', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('110 Diamantes', -1)">-</button>
+            <span class="pkg-step-num" id="qty-110 Diamantes">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('110 Diamantes', 1)">+</button>
           </div>
         </article>
 
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <!-- 2. Paquete Básico -->
+        <article class="pkg-card">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-xs text-neutral-400">341 Diamantes</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Básico</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Recarga de 341 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="49">$49 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Básico</h3>
+            <div class="pkg-qty">341 Diamantes</div>
+            <div class="pkg-price" data-mxn="49">$49 <span>MXN</span></div>
+            <p class="pkg-desc">Recarga de 341 diamantes.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('341 Diamantes', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-341 Diamantes" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('341 Diamantes', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('341 Diamantes', -1)">-</button>
+            <span class="pkg-step-num" id="qty-341 Diamantes">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('341 Diamantes', 1)">+</button>
           </div>
         </article>
 
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <!-- 3. Paquete Popular -->
+        <article class="pkg-card">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-xs text-neutral-400">572 Diamantes</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Popular</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Recarga de 572 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="79">$79 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Popular</h3>
+            <div class="pkg-qty">572 Diamantes</div>
+            <div class="pkg-price" data-mxn="79">$79 <span>MXN</span></div>
+            <p class="pkg-desc">Recarga de 572 diamantes.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('572 Diamantes', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-572 Diamantes" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('572 Diamantes', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('572 Diamantes', -1)">-</button>
+            <span class="pkg-step-num" id="qty-572 Diamantes">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('572 Diamantes', 1)">+</button>
           </div>
         </article>
 
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <!-- 4. Paquete Experto -->
+        <article class="pkg-card">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-xs text-neutral-400">1,166 Diamantes</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Experto</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Precio de recarga regular.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="149">$149 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Experto</h3>
+            <div class="pkg-qty">1,166 Diamantes</div>
+            <div class="pkg-price" data-mxn="149">$149 <span>MXN</span></div>
+            <p class="pkg-desc">Precio de recarga regular.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('1,166 Diamantes (Regular)', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-1,166 Diamantes (Regular)" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('1,166 Diamantes (Regular)', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('1,166 Diamantes (Regular)', -1)">-</button>
+            <span class="pkg-step-num" id="qty-1,166 Diamantes (Regular)">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('1,166 Diamantes (Regular)', 1)">+</button>
           </div>
         </article>
 
-        <article class="bg-[#070707] border border-gold/60 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <!-- 5. Paquete Maestro -->
+        <article class="pkg-card featured">
+          <span class="pkg-badge">🔥 Más Popular</span>
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-[10px] uppercase tracking-widest bg-gold text-black font-semibold px-2 py-0.5 rounded">Más Popular</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Maestro · 2,398 Diamantes</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Precio de recarga regular.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="319">$319 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Maestro</h3>
+            <div class="pkg-qty">2,398 Diamantes</div>
+            <div class="pkg-price" data-mxn="319">$319 <span>MXN</span></div>
+            <p class="pkg-desc">Precio de recarga regular.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('2,398 Diamantes (Regular)', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-2,398 Diamantes (Regular)" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('2,398 Diamantes (Regular)', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('2,398 Diamantes (Regular)', -1)">-</button>
+            <span class="pkg-step-num" id="qty-2,398 Diamantes (Regular)">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('2,398 Diamantes (Regular)', 1)">+</button>
           </div>
         </article>
 
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <!-- 6. Paquete Máximo -->
+        <article class="pkg-card">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">💎</span>
-              <span class="text-xs text-neutral-400">6,160 Diamantes</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Máximo</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Recarga completa de 6,160 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-              <span class="text-base font-semibold text-gold" data-mxn="779">$779 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+            <div class="pkg-icon">💎</div>
+            <h3 class="pkg-title">Paquete Máximo</h3>
+            <div class="pkg-qty">6,160 Diamantes</div>
+            <div class="pkg-price" data-mxn="779">$779 <span>MXN</span></div>
+            <p class="pkg-desc">Recarga completa de 6,160 diamantes.</p>
           </div>
-          <div class="mt-4 flex items-center justify-between bg-black border border-white/10 rounded px-3 py-1.5">
-            <button type="button" onclick="cambiarCantidad('6,160 Diamantes', -1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-6,160 Diamantes" class="text-xs font-medium text-white">0</span>
-            <button type="button" onclick="cambiarCantidad('6,160 Diamantes', 1)" class="w-6 h-6 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('6,160 Diamantes', -1)">-</button>
+            <span class="pkg-step-num" id="qty-6,160 Diamantes">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('6,160 Diamantes', 1)">+</button>
           </div>
         </article>
 
-        <!-- Paquete Titán -->
-        <article class="sm:col-span-2 lg:col-span-3 bg-[#070707] border border-gold rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition">
-          <div class="flex items-center gap-4">
-            <span class="text-2xl">👑</span>
-            <div>
-              <span class="text-[10px] uppercase tracking-widest text-gold font-semibold block">Máximo Poder</span>
-              <h3 class="text-sm font-semibold text-white tracking-wide">Paquete Titán · 30,800 Diamantes</h3>
-              <span class="text-base font-semibold text-gold block mt-1" data-mxn="3699">$3,699 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-            </div>
+        <!-- 7. Paquete Titán -->
+        <article class="pkg-card featured" style="grid-column: 1 / -1;">
+          <span class="pkg-badge">⚡ Máximo Poder</span>
+          <div>
+            <div class="pkg-icon">👑</div>
+            <h3 class="pkg-title">Paquete Titán</h3>
+            <div class="pkg-qty">30,800 Diamantes</div>
+            <div class="pkg-price" data-mxn="3699">$3,699 <span>MXN</span></div>
+            <p class="pkg-desc">Recarga máxima de 30,800 diamantes.</p>
           </div>
-          <div class="flex items-center justify-between sm:justify-center gap-4 bg-black border border-white/10 rounded px-4 py-2">
-            <button type="button" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', -1)" class="w-7 h-7 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">-</button>
-            <span id="qty-Paquete Titán — 30,800 Diamantes" class="text-xs font-medium text-white w-5 text-center">0</span>
-            <button type="button" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', 1)" class="w-7 h-7 rounded border border-white/15 text-xs text-neutral-300 hover:border-gold hover:text-gold transition">+</button>
+          <div class="pkg-stepper">
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', -1)">-</button>
+            <span class="pkg-step-num" id="qty-Paquete Titán — 30,800 Diamantes">0</span>
+            <button type="button" class="pkg-step-btn" onclick="cambiarCantidad('Paquete Titán — 30,800 Diamantes', 1)">+</button>
           </div>
         </article>
       </div>
@@ -464,57 +571,45 @@
           <span class="text-xs text-neutral-500">Precio de estreno</span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <div class="offers-grid">
+          <article class="pkg-card featured">
+            <span class="pkg-badge">Oferta</span>
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-lg">💎</span>
-                <span class="text-[10px] uppercase tracking-widest border border-gold/50 text-gold px-2 py-0.5 rounded">Oferta</span>
-              </div>
-              <h3 class="text-sm font-semibold text-white tracking-wide">Primera Recarga · 1,166 Diamantes</h3>
-              <p class="text-xs text-neutral-400 mt-1 font-light">Precio especial exclusivo para primera recarga.</p>
-              <div class="mt-4 pt-3 border-t border-white/5">
-                <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-                <span class="text-base font-semibold text-gold" data-mxn="135">$135 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-              </div>
+              <div class="pkg-icon">💎</div>
+              <h3 class="pkg-title">Primera Recarga</h3>
+              <div class="pkg-qty">1,166 Diamantes</div>
+              <div class="pkg-price" data-mxn="135">$135 <span>MXN</span></div>
+              <p class="pkg-desc">Precio especial exclusivo para primera recarga.</p>
             </div>
-            <button type="button" onclick="pedirDirecto('Primera Recarga — 1,166 Diamantes', 135)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+            <button type="button" onclick="pedirDirecto('Primera Recarga — 1,166 Diamantes', 135)" class="w-full bg-gold hover:bg-gold-light text-black text-xs uppercase tracking-wider py-2 rounded font-semibold transition">
               Solicitar Oferta
             </button>
           </article>
 
-          <article class="bg-[#070707] border border-gold/60 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+          <article class="pkg-card featured">
+            <span class="pkg-badge">Mejor Precio</span>
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-lg">💎</span>
-                <span class="text-[10px] uppercase tracking-widest bg-gold text-black font-semibold px-2 py-0.5 rounded">Mejor Precio</span>
-              </div>
-              <h3 class="text-sm font-semibold text-white tracking-wide">Primera Recarga · 2,398 Diamantes</h3>
-              <p class="text-xs text-neutral-400 mt-1 font-light">Precio especial exclusivo para primera recarga.</p>
-              <div class="mt-4 pt-3 border-t border-white/5">
-                <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-                <span class="text-base font-semibold text-gold" data-mxn="275">$275 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-              </div>
+              <div class="pkg-icon">💎</div>
+              <h3 class="pkg-title">Primera Recarga</h3>
+              <div class="pkg-qty">2,398 Diamantes</div>
+              <div class="pkg-price" data-mxn="275">$275 <span>MXN</span></div>
+              <p class="pkg-desc">Precio especial exclusivo para primera recarga.</p>
             </div>
-            <button type="button" onclick="pedirDirecto('Primera Recarga — 2,398 Diamantes', 275)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+            <button type="button" onclick="pedirDirecto('Primera Recarga — 2,398 Diamantes', 275)" class="w-full bg-gold hover:bg-gold-light text-black text-xs uppercase tracking-wider py-2 rounded font-semibold transition">
               Solicitar Oferta
             </button>
           </article>
 
-          <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+          <article class="pkg-card featured">
+            <span class="pkg-badge">Máximo Ahorro</span>
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-lg">💎</span>
-                <span class="text-[10px] uppercase tracking-widest border border-gold/50 text-gold px-2 py-0.5 rounded">Máximo Ahorro</span>
-              </div>
-              <h3 class="text-sm font-semibold text-white tracking-wide">Primera Recarga · 6,160 Diamantes</h3>
-              <p class="text-xs text-neutral-400 mt-1 font-light">Precio especial exclusivo para primera recarga de 6,160 diamantes.</p>
-              <div class="mt-4 pt-3 border-t border-white/5">
-                <span class="text-[10px] uppercase tracking-wider text-neutral-500 block">Precio</span>
-                <span class="text-base font-semibold text-gold" data-mxn="695">$695 <span class="text-[10px] text-neutral-400 font-normal">MXN</span></span>
-              </div>
+              <div class="pkg-icon">💎</div>
+              <h3 class="pkg-title">Primera Recarga</h3>
+              <div class="pkg-qty">6,160 Diamantes</div>
+              <div class="pkg-price" data-mxn="695">$695 <span>MXN</span></div>
+              <p class="pkg-desc">Precio especial exclusivo para primera recarga de 6,160 diamantes.</p>
             </div>
-            <button type="button" onclick="pedirDirecto('Primera Recarga — 6,160 Diamantes', 695)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+            <button type="button" onclick="pedirDirecto('Primera Recarga — 6,160 Diamantes', 695)" class="w-full bg-gold hover:bg-gold-light text-black text-xs uppercase tracking-wider py-2 rounded font-semibold transition">
               Solicitar Oferta
             </button>
           </article>
@@ -636,48 +731,43 @@
         </button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+      <div class="packages-grid mt-8">
+        <article class="pkg-card">
           <div>
-            <span class="text-lg block mb-3">🎁</span>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Canje Inicial · 110 Diamantes</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Canjea tus puntos acumulados por 110 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-base font-semibold text-gold">500 <span class="text-[10px] text-neutral-400 font-normal">Puntos</span></span>
-            </div>
+            <div class="pkg-icon">🎁</div>
+            <h3 class="pkg-title">Canje Inicial</h3>
+            <div class="pkg-qty">110 Diamantes Gratis</div>
+            <div class="pkg-price">500 <span>Puntos</span></div>
+            <p class="pkg-desc">Canjea tus puntos acumulados por 110 diamantes.</p>
           </div>
-          <button type="button" onclick="canjearRecompensa('110 Diamantes Gratis', 500)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+          <button type="button" onclick="canjearRecompensa('110 Diamantes Gratis', 500)" class="w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
             Canjear Recompensa
           </button>
         </article>
 
-        <article class="bg-[#070707] border border-gold/60 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <article class="pkg-card featured">
+          <span class="pkg-badge">Popular</span>
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-lg">🎁</span>
-              <span class="text-[10px] uppercase tracking-widest bg-gold text-black font-semibold px-2 py-0.5 rounded">Popular</span>
-            </div>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Canje Básico · 341 Diamantes</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Canjea tus puntos acumulados por 341 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-base font-semibold text-gold">1,000 <span class="text-[10px] text-neutral-400 font-normal">Puntos</span></span>
-            </div>
+            <div class="pkg-icon">🎁</div>
+            <h3 class="pkg-title">Canje Básico</h3>
+            <div class="pkg-qty">341 Diamantes Gratis</div>
+            <div class="pkg-price">1,000 <span>Puntos</span></div>
+            <p class="pkg-desc">Canjea tus puntos acumulados por 341 diamantes.</p>
           </div>
-          <button type="button" onclick="canjearRecompensa('341 Diamantes Gratis', 1000)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+          <button type="button" onclick="canjearRecompensa('341 Diamantes Gratis', 1000)" class="w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
             Canjear Recompensa
           </button>
         </article>
 
-        <article class="bg-[#070707] border border-white/10 hover:border-gold rounded-lg p-5 flex flex-col justify-between transition">
+        <article class="pkg-card">
           <div>
-            <span class="text-lg block mb-3">🎁</span>
-            <h3 class="text-sm font-semibold text-white tracking-wide">Canje Popular · 572 Diamantes</h3>
-            <p class="text-xs text-neutral-400 mt-1 font-light">Canjea tus puntos acumulados por 572 diamantes.</p>
-            <div class="mt-4 pt-3 border-t border-white/5">
-              <span class="text-base font-semibold text-gold">3,000 <span class="text-[10px] text-neutral-400 font-normal">Puntos</span></span>
-            </div>
+            <div class="pkg-icon">🎁</div>
+            <h3 class="pkg-title">Canje Popular</h3>
+            <div class="pkg-qty">572 Diamantes Gratis</div>
+            <div class="pkg-price">3,000 <span>Puntos</span></div>
+            <p class="pkg-desc">Canjea tus puntos acumulados por 572 diamantes.</p>
           </div>
-          <button type="button" onclick="canjearRecompensa('572 Diamantes Gratis', 3000)" class="mt-5 w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
+          <button type="button" onclick="canjearRecompensa('572 Diamantes Gratis', 3000)" class="w-full bg-white text-black hover:bg-gold text-xs uppercase tracking-wider py-2 rounded font-medium transition">
             Canjear Recompensa
           </button>
         </article>
@@ -1227,9 +1317,9 @@
         const precioMxn = parseFloat(el.getAttribute('data-mxn'));
         if (moneda === 'USD') {
           const precioUsd = (precioMxn / TASA_USD).toFixed(2);
-          el.innerHTML = `$${precioUsd} <span class="text-[10px] text-neutral-400 font-normal">USD</span>`;
+          el.innerHTML = `$${precioUsd} <span>USD</span>`;
         } else {
-          el.innerHTML = `$${precioMxn.toLocaleString('es-MX')} <span class="text-[10px] text-neutral-400 font-normal">MXN</span>`;
+          el.innerHTML = `$${precioMxn.toLocaleString('es-MX')} <span>MXN</span>`;
         }
       });
       calcularTotal();
